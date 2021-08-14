@@ -1,9 +1,9 @@
-<html>
-    <link rel="stylesheet" href="/css/app.css">
-</html>
-<body>
-    <h1>Blog</h1>
-    <x-Layout>
-        <p>Test Layout</p>
-    </x-Layout>    
-</body>
+<x-Layout>
+    
+    <x-slot name="title">blog</x-slot>
+    <x-slot name="page_css"></x-slot>
+
+    <h1>Test Title</h1>
+    <p>Test Content</p>
+
+</x-Layout>    
