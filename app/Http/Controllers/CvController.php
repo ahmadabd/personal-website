@@ -12,10 +12,11 @@ interface Language{
 class Persian implements Language{
     public function lang($name, $resumeDir)
     {
-        $path = $resumeDir."/persian/";
+        $persianDir = "/persian/";
+        $path = $resumeDir.$persianDir;
         $file = $name.".pdf";
-        $pathToFile = $path.$file;
-
+        $resumePath = $path.$file;
+        return $resumePath;
     }
 }
 
@@ -42,7 +43,6 @@ class CvController extends Controller
         $resume = $persian->lang($user_name, $resumeDir);
         $result = response()->file($resume);
                 
-        
         return $result;
     }
 }
