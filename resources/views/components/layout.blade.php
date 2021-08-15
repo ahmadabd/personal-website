@@ -32,7 +32,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <!-- Get from Admin use -->
+                <!-- Get Picture from Database -->
                 <nav class="navbar navbar-light bg-light">
                     <div class="container">
                         <a class="navbar-brand" href="#">
@@ -41,7 +41,7 @@
                     </div>
                 </nav>
                 
-                <!-- Get from Admin use -->
+                <!-- Get name from Database -->
                 <a class="navbar-brand" href="">Ahmad Abdollahzadeh</a>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <div class="container">
@@ -53,10 +53,10 @@
                                 <a class="nav-link" aria-current="page" href="">Contact Me</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">CV</a>
+                                <a class="nav-link" target="_blank" href="{{ route('cv') }}">CV</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Weblog</a>
+                                <a class="nav-link" target="_blank" href="{{ route('weblog') }}">Weblog</a>
                             </li>
                         </ul>
                     </div>

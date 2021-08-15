@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PersonalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('blog');
 });
+
+
+Route::get('weblog', [PersonalController::class, "weblog"])->name("weblog");
+
+
+Route::get('cv', [PersonalController::class, 'resume'])->name('cv');
