@@ -42,12 +42,12 @@
                 </nav>
                 
                 <!-- Get name from Database -->
-                <a class="navbar-brand" href="">Ahmad Abdollahzadeh</a>
+                <a class="navbar-brand" href="{{ route('aboutMe') }}">Ahmad Abdollahzadeh</a>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <div class="container">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="">About Me</a>
+                                <a class="nav-link {{ (request()->routeIs('aboutMe')) ? 'active' : '' }}" aria-current="page" href="{{ route('aboutMe') }}">About Me</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="">Contact Me</a>

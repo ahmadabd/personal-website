@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\WeblogController;
+use App\Http\Controllers\BiographyController;
 
 
-Route::get('/', function () {
-    return view('blog');
-});
+Route::get('/', [BiographyController::class, 'show'])->name('aboutMe');
 
 
 Route::get('weblog', [WeblogController::class, "weblog"])->name("weblog");

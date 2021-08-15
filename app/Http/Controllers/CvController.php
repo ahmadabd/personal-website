@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 
 
 interface Language{
-    public function lang($name);
+    public function lang($name, $resumeDir);
 }
 
 class Persian implements Language{
-    public function lang($name)
+    public function lang($name, $resumeDir)
     {
-        $path = "CV/persian";
+        $path = $resumeDir."/persian/";
         $file = $name.".pdf";
-        $pathToFile = "CV/persian/".$file;
+        $pathToFile = $path.$file;
 
     }
 }
@@ -31,10 +31,15 @@ class CvController extends Controller
     {   
         // Get resume from DataBase
 
+        $resumeDir = "CV";
+
+        // Get from Database
+        $user_name = "Ahmad_Abdollahzadeh";
+
         // Get language from selectLanguage() method
         // If selectLanguage() result was persian:
         $persian = new Persian;
-        $resume = $persian->lang("Ahmad_Abdollahzadeh");
+        $resume = $persian->lang($user_name, $resumeDir);
         $result = response()->file($resume);
                 
         
