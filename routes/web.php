@@ -13,4 +13,4 @@ Route::get('/', function () {
 Route::get('weblog', [WeblogController::class, "weblog"])->name("weblog");
 
 
-Route::get('cv', [CvController::class, 'resume'])->name('cv');
+Route::get('cv', [CvController::class, 'getResume'])->name('cv');
