@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
 // Include FlashMessage.php file
@@ -12,6 +13,7 @@ class BiographyController extends Controller
 {
     public function show(Request $request)
     {
+        // Get it from Database
         $bio = "My full-name is Ahmad Abdollahzadeh. I was born in Shahrekord, Iran in 1996.";
 
         if ($bio == ""){

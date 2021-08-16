@@ -4,12 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\WeblogController;
 use App\Http\Controllers\BiographyController;
+use App\Http\Controllers\ContactController;
 
 
-Route::get('/', [BiographyController::class, 'show'])->name('aboutMe');
+Route::get('/', [BiographyController::class, 'show'])->name('about');
 
 
 Route::get('weblog', [WeblogController::class, "weblog"])->name("weblog");
 
 
 Route::get('cv', [CvController::class, 'getResume'])->name('cv');
+
+
+Route::get('contact', [ContactController::class, 'show'])->name('contact');
