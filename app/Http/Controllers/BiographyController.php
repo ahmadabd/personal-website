@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// Include FlashMessage.php file
-include "Modules/FlashMessage.php";
-use FlashMessage\Manage as FlashMessage;
+use App\Http\Controllers\FlashMessage\Manage;
+use App\Http\Controllers\FlashMessage\MakeSession;
 
 
 class BiographyController extends Controller
 {
+
     public function show(Request $request)
     {
         // Get it from Database
-        $bio = "My full-name is Ahmad Abdollahzadeh. I was born in Shahrekord, Iran in 1996.";
-
+        // $bio = "My full-name is Ahmad Abdollahzadeh. I was born in Shahrekord, Iran in 1996.";
+        $bio = "";
+        
         if ($bio == ""){
-            new FlashMessage($request, "failed", "There is no Registered biography.");
+            $failed = new MakeSession;
+            $flashMessage = new Manage($failed);
+            $flashMessage->run($request, "failed", "There is no Biography information.");
         }
 
         return view('aboutMe', ['bio' => $bio]);

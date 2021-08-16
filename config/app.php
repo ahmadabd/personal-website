@@ -174,7 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        // FlashMassage is my own Service Provider for app/Http/Controllers/Modules
+        App\Providers\FlashMessageServiceProvider::class,
     ],
 
     /*
