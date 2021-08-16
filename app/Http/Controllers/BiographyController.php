@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 // Include FlashMessage.php file
-include "FlashMessages/FlashMessage.php";
+include "Modules/FlashMessage.php";
 use FlashMessage\Manage as FlashMessage;
 
 
