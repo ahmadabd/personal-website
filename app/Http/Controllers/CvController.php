@@ -20,6 +20,7 @@ class Persian implements Language{
     }
 }
 
+
 class CvController extends Controller
 {
     public function selectLanguage()

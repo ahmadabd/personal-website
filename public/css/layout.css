@@ -1,11 +1,25 @@
-.profile {
+.title {
+  color: #333333;
+  font-family: optima;
+  padding-bottom: 25px;
+}
+
+.content {
+  color: #463030;
+  font-family: optima;
+  font-size: 17px;
+  text-align: left;
+  padding-top: 30px;
+}
+
+.profilePic {
   border-radius: 50%;
 }
 
-h1 {
-  color: #333333;
+.profileName {
+  font-family: Garamond;
 }
 
-p {
-  color: #533333;
+.block {
+  margin-top: 50px;
 }

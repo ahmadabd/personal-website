@@ -36,13 +36,13 @@
                 <nav class="navbar navbar-light bg-light">
                     <div class="container">
                         <a class="navbar-brand" href="#">
-                            <img class="profile" src="pics/profile.jpg" alt="" width="100" height="100">
+                            <img class="profilePic" src="pics/profile.jpg" alt="" width="100" height="100">
                         </a>
                     </div>
                 </nav>
                 
                 <!-- Get name from Database -->
-                <a class="navbar-brand" href="{{ route('aboutMe') }}">Ahmad Abdollahzadeh</a>
+                <a class="navbar-brand profileName" href="{{ route('aboutMe') }}">Ahmad Abdollahzadeh</a>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <div class="container">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
@@ -66,7 +66,7 @@
 
         <div class="container-fluid">
             <div class="container">
-                <div class="row contentCss" >
+                <div class="row block">
                     <div class="col"></div>
                     <div class="col-6">
                         {{ $slot }}

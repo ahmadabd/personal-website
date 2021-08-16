@@ -1,15 +1,57 @@
-$title: #333333;
-$paragraph: #533333;
 $profle_radius: 50%;
+$profile_font: Garamond;
+$block_marginTop: 50px;
 
-.profile{
+$title_paddingTop: 25px;
+$content_paddingTop: 30px;
+
+
+@mixin title_text($color, $font) {
+    color: $color;
+    font-family: $font;
+}
+
+
+@mixin content_text($color, $font, $size, $align) {
+    color: $color;
+    font-family: $font;
+    font-size: $size;
+    text-align: $align;
+}
+
+
+.title {
+    $title_color: #333333;
+    $title_font: optima;
+    
+    @include title_text($title_color, $title_font);
+    padding-bottom: $title_paddingTop;
+}
+
+
+.content {
+    $content_color: #463030;
+    $content_font: optima; 
+    $content_size: 17px;
+    $align: left;
+
+    @include content_text($content_color, $content_font, $content_size, $align);
+    padding-top: $content_paddingTop;
+}
+
+
+.profilePic {
     border-radius: $profle_radius;
 }
 
-h1{
-    color: $title;
-} 
-
-p{
-    color: $paragraph;
+.profileName {
+    font-family: $profile_font;
 }
+
+.block {
+    margin-top: $block_marginTop;
+}
+
+
+
+
