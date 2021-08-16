@@ -7,13 +7,13 @@ namespace FlashMessage{
     }
     
 
-    class Filter{
-        private $type = "success";
+    // class Filter{
+    //     private $type = "success";
 
-        public function filter($type){
-            return $type == $this->type;
-        }
-    }
+    //     public function filter($type){
+    //         return $type == $this->type;
+    //     }
+    // }
 
     
     class Failed implements Message{
