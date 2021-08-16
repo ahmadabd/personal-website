@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\FlashMessage\Manage;
-use App\Http\Controllers\FlashMessage\MakeSession;
+use App\Http\Controllers\FlashMessage\Failed;
 
 
 class ContactController extends Controller
@@ -17,7 +17,7 @@ class ContactController extends Controller
         $contact = "";
 
         if ($contact == ""){
-            $failed = new MakeSession;
+            $failed = new Failed;
             $flashMessage = new Manage($failed);
             $flashMessage->run($request, "failed", "There is no Contact information.");
         }

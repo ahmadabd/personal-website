@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\FlashMessage\Manage;
-use App\Http\Controllers\FlashMessage\MakeSession;
+use App\Http\Controllers\FlashMessage\Failed;
 
 
 class BiographyController extends Controller
@@ -18,7 +18,7 @@ class BiographyController extends Controller
         $bio = "";
         
         if ($bio == ""){
-            $failed = new MakeSession;
+            $failed = new Failed;
             $flashMessage = new Manage($failed);
             $flashMessage->run($request, "failed", "There is no Biography information.");
         }

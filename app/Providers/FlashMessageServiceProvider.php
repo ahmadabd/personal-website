@@ -15,7 +15,7 @@ class FlashMessageServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'App\Http\Controllers\FlashMessage\Message',
-            'App\Http\Controllers\FlashMessage\MakeSession'
+            'App\Http\Controllers\FlashMessage\Failed'
         );     
     }
 
