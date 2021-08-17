@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\FlashMessage\Manage;
-use App\Http\Controllers\FlashMessage\Failed;
+use App\Http\Controllers\FlashMessage\Message;
 
 
 class ContactController extends Controller
@@ -17,9 +16,11 @@ class ContactController extends Controller
         $contact = "";
 
         if ($contact == ""){
-            $failed = new Failed;
-            $flashMessage = new Manage($failed);
-            $flashMessage->run($request, "failed", "There is no Contact information.");
+            //$message = (new Message)->showMessage("failed", "There is no Contact information.");
+            // or
+            $message = Message::failedMessage("failed", "There is no Contact information.");
+            
+            $request->$message;
         }
 
         return view('contactMe', ['contact' => $contact]);   

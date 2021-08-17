@@ -5,7 +5,7 @@ namespace App\Http\Controllers\FlashMessage;
 use App\Http\Controllers\FlashMessage\MessageInterface;
 
 
-class Failed implements MessageInterface{
+class Success implements MessageInterface{
 
     public function message($type, $msg)
     {

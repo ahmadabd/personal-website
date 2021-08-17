@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\FlashMessage\Manage;
-use App\Http\Controllers\FlashMessage\Failed;
-
+use App\Http\Controllers\FlashMessage\Message;
 
 class BiographyController extends Controller
 {
@@ -18,9 +16,11 @@ class BiographyController extends Controller
         $bio = "";
         
         if ($bio == ""){
-            $failed = new Failed;
-            $flashMessage = new Manage($failed);
-            $flashMessage->run($request, "failed", "There is no Biography information.");
+            //$message = (new Message)->showMessage("failed", "There is no Biography information.");
+            // or
+            $message = Message::FailedMessage("failed", "There is no Biography information.");
+
+            $request->$message;
         }
 
         return view('aboutMe', ['bio' => $bio]);
