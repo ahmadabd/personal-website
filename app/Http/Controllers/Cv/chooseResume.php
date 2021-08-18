@@ -7,23 +7,27 @@ use App\Http\Controllers\Cv\Persian;
 
 class chooseResume{
 
-    private $langs = [
+    private static $langs = [
         'persian' => Persian::class,
     ];
 
     public function choose($lang, $username)
     {
-        if (!array_key_exists($lang, $this->langs)){
+        if (!array_key_exists($lang, self::$langs)){
             return false;
         }
 
-        $resumePath = (new $this->langs[$lang])->language($lang, $username);
+        $resumePath = (new self::$langs[$lang])->language($lang, $username);
 
         return $resumePath;
     }
 
     public static function __callStatic($name, $arguments)
     {
-        return (new chooseResume)->choose($arguments[0], $arguments[1]);
+        if (!array_key_exists($name, self::$langs)){
+            return false;
+        }
+
+        return (new chooseResume)->choose($name, $arguments[0]);
     }
 }

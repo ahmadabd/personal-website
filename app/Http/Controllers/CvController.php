@@ -24,7 +24,7 @@ class CvController extends Controller
         $user_name = "Ahmad_Abdollahzadeh";
 
         // Get language from selectLanguage() method
-        $resume = chooseResume::resume("persian", $user_name);
+        $resume = chooseResume::persian($user_name);
 
         $result = response()->file($resume);
                 
