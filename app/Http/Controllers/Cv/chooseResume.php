@@ -6,7 +6,6 @@ use App\Http\Controllers\Cv\Persian;
 
 
 class chooseResume{
-    private $resumeDir = "CV";
 
     private $langs = [
         'persian' => Persian::class,
@@ -18,12 +17,13 @@ class chooseResume{
             return false;
         }
 
-        $resumePath = (new $this->langs[$lang])->language($lang, $username, $this->resumeDir);
+        $resumePath = (new $this->langs[$lang])->language($lang, $username);
+
         return $resumePath;
     }
 
     public static function __callStatic($name, $arguments)
     {
-        (new chooseResume)->choose($arguments[0], $arguments[1]);
+        return (new chooseResume)->choose($arguments[0], $arguments[1]);
     }
 }

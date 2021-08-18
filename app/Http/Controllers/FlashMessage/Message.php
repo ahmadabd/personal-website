@@ -24,6 +24,6 @@ class Message{
 
     public static function __callStatic($name, $arguments)
     {
-        (new Message)->showMessage($arguments[0], $arguments[1]);
+        return (new Message)->showMessage($arguments[0], $arguments[1]);
     }
 }

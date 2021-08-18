@@ -14,7 +14,7 @@ Route::get('/', [BiographyController::class, 'show'])->name('about');
 Route::get('weblog', [WeblogController::class, "weblog"])->name("weblog");
 
 
-Route::get('cv', [CvController::class, 'getResume'])->name('cv');
+Route::get('resume', [CvController::class, 'getResume'])->name('cv');
 
 
 Route::get('contact', [ContactController::class, 'show'])->name('contact');

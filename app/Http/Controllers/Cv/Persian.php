@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Cv;
 
-use App\Http\Controllers\Cv\LanguageInterface;
+use App\Http\Controllers\Cv\LanguageAbstract;
 
 
-class Persian implements LanguageInterface{
+class Persian extends LanguageAbstract{
 
     private $persianDir = "/persian/";
 
-    public function language($lang, $username, $resumeDir) : string
+    public function language($lang, $username) : string
     {
-        $path = $resumeDir.$this->persianDir;
+        $path = $this->resumeDir.$this->persianDir;
         $file = $username.".pdf";
         $resumePath = $path.$file;
         return $resumePath;
