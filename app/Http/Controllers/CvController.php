@@ -4,21 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-interface Language{
-    public function lang($name, $resumeDir);
-}
-
-class Persian implements Language{
-    public function lang($name, $resumeDir)
-    {
-        $persianDir = "/persian/";
-        $path = $resumeDir.$persianDir;
-        $file = $name.".pdf";
-        $resumePath = $path.$file;
-        return $resumePath;
-    }
-}
+use App\Http\Controllers\Cv\chooseResume;
 
 
 class CvController extends Controller
@@ -33,15 +19,13 @@ class CvController extends Controller
     {   
         // Get resume from DataBase
 
-        $resumeDir = "CV";
 
         // Get from Database
         $user_name = "Ahmad_Abdollahzadeh";
 
         // Get language from selectLanguage() method
-        // If selectLanguage() result was persian:
-        $persian = new Persian;
-        $resume = $persian->lang($user_name, $resumeDir);
+        $resume = chooseResume::resume("persian", $user_name);
+
         $result = response()->file($resume);
                 
         return $result;
