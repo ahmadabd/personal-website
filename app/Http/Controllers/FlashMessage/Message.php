@@ -15,16 +15,15 @@ class Message{
 
     public function showMessage($type, $msg)
     {
-        if(!array_key_exists($type, self::$classes)){
-            return false;
-        }
         $class = new self::$classes[$type];
+     
         return $class->message($type, $msg);
     }
 
     public static function __callStatic($name, $arguments)
     {
         if (!array_key_exists($name, self::$classes)){
+            // return an Exception
             return false;
         }
 

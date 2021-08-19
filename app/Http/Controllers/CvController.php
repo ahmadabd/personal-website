@@ -20,7 +20,7 @@ class CvController extends Controller
         // Get resume from DataBase
 
 
-        // Get from Database
+        // Remove it by storing resume by hash named
         $user_name = "Ahmad_Abdollahzadeh";
 
         // Get language from selectLanguage() method

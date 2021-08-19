@@ -16,8 +16,7 @@ class ContactController extends Controller
         $contact = "";
 
         if ($contact == ""){
-            //$message = (new Message)->showMessage("failed", "There is no Contact information.");
-            // or
+            
             $message = Message::failed("There is no Contact information.");
             
             $request->$message;

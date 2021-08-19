@@ -16,8 +16,7 @@ class BiographyController extends Controller
         $bio = "";
         
         if ($bio == ""){
-            //$message = (new Message)->showMessage("failed", "There is no Biography information.");
-            // or
+           
             $message = Message::failed("There is no Biography information.");
 
             $request->$message;
