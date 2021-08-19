@@ -13,7 +13,7 @@ class Message{
         'failed'  => Failed::class 
     ];
 
-    public function showMessage($type, $msg)
+    private function showMessage($type, $msg)
     {
         $class = new self::$classes[$type];
      

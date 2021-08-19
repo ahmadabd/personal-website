@@ -11,7 +11,7 @@ class chooseResume{
         'persian' => Persian::class,
     ];
 
-    public function choose($lang, $username)
+    private function choose($lang, $username)
     {
         $resumePath = (new self::$langs[$lang])->language($lang, $username);
 
