@@ -7,8 +7,8 @@ use App\Http\Controllers\FlashMessage\MessageInterface;
 
 class Failed implements MessageInterface{
 
-    public function message($type, $msg)
+    public function message($messageTypeName, $messageValueToShow)
     {
-        return session()->flash($type, $msg);
+        return session()->flash($messageTypeName, $messageValueToShow);
     }
 }

@@ -8,21 +8,23 @@ use App\Http\Controllers\FlashMessage\Success;
 
 class Message{
     
-    private static $classes = [
+    private static $messageTypeNames = [
         'success' => Success::class,
         'failed'  => Failed::class 
     ];
 
-    private function showMessage($type, $msg)
+    private function showMessage($messageTypeName, $messageValueToShow)
     {
-        $class = new self::$classes[$type];
-     
-        return $class->message($type, $msg);
+        // Call message method of the Selected Message Class
+        $sessionObjectOfMessage = (new self::$messageTypeNames[$messageTypeName])->message($messageTypeName, $messageValueToShow);
+        
+        return $sessionObjectOfMessage;
     }
 
     public static function __callStatic($name, $arguments)
     {
-        if (!array_key_exists($name, self::$classes)){
+        // Check if selected MessageType is not in $messageTypeNames return an Exception
+        if (!array_key_exists($name, self::$messageTypeNames)){
             // return an Exception
             return false;
         }
