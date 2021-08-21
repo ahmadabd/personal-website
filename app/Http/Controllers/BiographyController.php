@@ -14,32 +14,32 @@ class BiographyController extends Controller
 
     public function show_biography_to_client(Request $request)
     {
-        $bio = "";
+        $biographyData = "";
 
         // If there is no Biography stored in DataBase, Call failed FlashMessage
         if (Bio::count() == 0){
-            $message = Message::failed("There is no Biography information.");
-            $request->$message;            
+            $failedToGetBiographyMessage = Message::failed("There is no Biography information.");
+            $request->$failedToGetBiographyMessage;            
         }
         else{
             // get biography from table
-            $bio = Bio::get('biography')[0]['biography'];
+            $biographyData = Bio::get('biography')[0]['biography'];
         }
 
-        return view('aboutMe', ['bio' => $bio]);
+        return view('aboutMe', ['bio' => $biographyData]);
     }
 
 
     public function show_biography_editPage_to_admin()
     {
-        $value = "";
+        $lastStoredBiography = "";
 
-        // If there is Biography in DataBase, puts it as default value in dashboard view
+        // If there is stored Biography in DataBase, puts it as default value in dashboard textarea
         if (Bio::count() >= 1){
-            $value = Bio::get('biography')[0]['biography'];
+            $lastStoredBiography = Bio::get('biography')[0]['biography'];
         }
 
-        return view('dashboard', ["value" => $value]);
+        return view('dashboard', ["lastStoredBiography" => $lastStoredBiography]);
     }
 
 

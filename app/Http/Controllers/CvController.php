@@ -21,13 +21,13 @@ class CvController extends Controller
 
 
         // Remove it by storing resume by hash named
-        $user_name = "Ahmad_Abdollahzadeh";
+        $resumeName = "Ahmad_Abdollahzadeh";
 
         // Get language from selectLanguage() method
-        $resume = chooseResume::persian($user_name);
+        $resumeAddress = chooseResume::persian($resumeName);
 
-        $result = response()->file($resume);
+        $resumeFile = response()->file($resumeAddress);
                 
-        return $result;
+        return $resumeFile;
     }
 }

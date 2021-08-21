@@ -13,15 +13,15 @@ class ContactController extends Controller
     {
         // Get it from Database
         // $contact = "phone: 123465";
-        $contact = "";
+        $contactMe = "";
 
-        if ($contact == ""){
+        if ($contactMe == ""){
             
             $message = Message::failed("There is no Contact information.");
             
             $request->$message;
         }
 
-        return view('contactMe', ['contact' => $contact]);   
+        return view('contactMe', ['contact' => $contactMe]);   
     }
 }
