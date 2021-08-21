@@ -14,11 +14,20 @@
         </nav>
         
         <!-- Get name from Database -->
-        <a class="navbar-brand profileName" href="{{ route('about') }}">Ahmad Abdollahzadeh</a>
+        <a class="navbar-brand profileName" href="{{ route('dashboard') }}">Ahmad Abdollahzadeh</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
                     @auth
+                        <li class="nav-item">
+                            <a class="nav-link {{ (request()->routeIs('dashboard')) ? 'active' : '' }}" aria-current="page" href="{{ route('dashboard') }}">About Me</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="">Contact Me</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="">CV</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('logout') }}">logout</a>
                         </li>

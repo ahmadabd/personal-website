@@ -20,9 +20,10 @@ Route::get('resume', [CvController::class, 'getResume'])->name('cv');
 Route::get('contact', [ContactController::class, 'show'])->name('contact');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(["auth"])->group(function() {
+    Route::get('/dashboard', [BiographyController::class, 'storeForm'])->name('dashboard');
+    Route::post('/dashboard', [BiographyController::class, 'store'])->name('aboutStore');
+});
 
 
 require __DIR__.'/auth.php';
