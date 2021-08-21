@@ -7,24 +7,26 @@ use App\Http\Controllers\Cv\Persian;
 
 class chooseResume{
 
-    private static $langs = [
+    private static $resumeLanguages = [
         'persian' => Persian::class,
     ];
 
-    private function choose($lang, $username)
+    private function choose_resume_language($selectedLanguage, $resumeFileName)
     {
-        $resumePath = (new self::$langs[$lang])->language($lang, $username);
+        // Call language method of the Selected Language Class
+        $resumeDirectoryAddress = (new self::$resumeLanguages[$selectedLanguage])->language($resumeFileName);
 
-        return $resumePath;
+        return $resumeDirectoryAddress;
     }
 
     public static function __callStatic($name, $arguments)
     {
-        if (!array_key_exists($name, self::$langs)){
+        // Check if selected language is not in $resumeLanguages return an Exception
+        if (!array_key_exists($name, self::$resumeLanguages)){
             // return an Exception
             return false;
         }
 
-        return (new chooseResume)->choose($name, $arguments[0]);
+        return (new chooseResume)->choose_resume_language($name, $arguments[0]);
     }
 }

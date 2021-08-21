@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Cv;
 
 abstract class LanguageAbstract{
     
-    protected $resumeDir = "CV";
+    protected $resumeDirectory = "CV";
     
-    abstract public function language($lang, $username) : string; 
+    abstract public function language($resumeFileName) : string; 
 }

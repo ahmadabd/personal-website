@@ -7,13 +7,14 @@ use App\Http\Controllers\Cv\LanguageAbstract;
 
 class Persian extends LanguageAbstract{
 
-    private $persianDir = "/persian/";
+    private $persianDirectory = "/persian/";
 
-    public function language($lang, $username) : string
+    public function language($resumeName) : string
     {
-        $path = $this->resumeDir.$this->persianDir;
-        $file = $username.".pdf";
-        $resumePath = $path.$file;
-        return $resumePath;
+        $resumeDirectoryAddress = $this->resumeDirectory.$this->persianDirectory;
+        $file = $resumeName.".pdf";
+        $resumeFileAddress = $resumeDirectoryAddress.$file;
+        
+        return $resumeFileAddress;
     }
 }   
