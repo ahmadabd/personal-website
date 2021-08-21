@@ -7,7 +7,7 @@
     <hr>
     <p class="content">
         @isset($bio)
-            {{ $bio }}
+            {!! str_replace("\\","<br>",$bio) !!}
         @endisset
 
         @empty($bio)
