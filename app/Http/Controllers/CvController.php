@@ -15,7 +15,7 @@ class CvController extends Controller
     }
     
 
-    public function getResume(Request $request)
+    public function show_resume_to_client(Request $request)
     {   
         // Get resume from DataBase
 

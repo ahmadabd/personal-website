@@ -26,7 +26,7 @@
     </head>
     <body>
 
-        @if ( Route::is('dashboard') )
+        @if ( Route::is('edit_biography') )
             <x-dashboard-nav />
         @else
             <x-Nav />

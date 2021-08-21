@@ -12,7 +12,7 @@ use App\Models\Bio;
 class BiographyController extends Controller
 {
 
-    public function show(Request $request)
+    public function show_biography_to_client(Request $request)
     {
         $bio = "";
 
@@ -30,7 +30,7 @@ class BiographyController extends Controller
     }
 
 
-    public function storeForm()
+    public function show_biography_editPage_to_admin()
     {
         $value = "";
 
@@ -43,7 +43,7 @@ class BiographyController extends Controller
     }
 
 
-    public function store(BiographyRequest $request)
+    public function store_biography_to_database(BiographyRequest $request)
     {
         $userId = auth()->user()->id;
 
@@ -62,6 +62,6 @@ class BiographyController extends Controller
             ]);    
         }
         
-        return redirect()->Route('dashboard');
+        return redirect()->route('edit_biography');
     }
 }

@@ -9,7 +9,7 @@ use App\Http\Controllers\FlashMessage\Message;
 
 class ContactController extends Controller
 {
-    public function show(Request $request)
+    public function show_contactMe_to_client(Request $request)
     {
         // Get it from Database
         // $contact = "phone: 123465";

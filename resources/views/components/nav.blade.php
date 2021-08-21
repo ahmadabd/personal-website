@@ -14,21 +14,21 @@
         </nav>
         
         <!-- Get name from Database -->
-        <a class="navbar-brand profileName" href="{{ route('about') }}">Ahmad Abdollahzadeh</a>
+        <a class="navbar-brand profileName" href="{{ route('show_biography') }}">Ahmad Abdollahzadeh</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->routeIs('about')) ? 'active' : '' }}" aria-current="page" href="{{ route('about') }}">About Me</a>
+                        <a class="nav-link {{ (request()->routeIs('show_biography')) ? 'active' : '' }}" aria-current="page" href="{{ route('show_biography') }}">About Me</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->routeIs('contact')) ? 'active' : '' }}" aria-current="page" href="{{ route('contact') }}">Contact Me</a>
+                        <a class="nav-link {{ (request()->routeIs('show_contactMe')) ? 'active' : '' }}" aria-current="page" href="{{ route('show_contactMe') }}">Contact Me</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="{{ route('cv') }}">CV</a>
+                        <a class="nav-link" target="_blank" href="{{ route('show_cv') }}">CV</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="{{ route('weblog') }}">Weblog</a>
+                        <a class="nav-link" target="_blank" href="{{ route('show_weblog') }}">Weblog</a>
                     </li>
                 </ul>
             </div>

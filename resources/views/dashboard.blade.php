@@ -11,7 +11,7 @@
             <br>       
         @enderror
 
-        <form action="{{ route('aboutStore') }}" method="POST">
+        <form action="{{ route('store_biography') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="bio">Write your biography</label>
