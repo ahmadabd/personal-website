@@ -4,7 +4,8 @@ namespace App\Http\Controllers\FlashMessage;
     
 use App\Http\Controllers\FlashMessage\Failed;
 use App\Http\Controllers\FlashMessage\Success;
-
+use Error;
+use ErrorException;
 
 class Message{
     
@@ -25,8 +26,8 @@ class Message{
     {
         // Check if selected MessageType is not in $messageTypeNames return an Exception
         if (!array_key_exists($name, self::$messageTypeNames)){
-            // return an Exception
-            return false;
+            
+            dd("{$name} is Invalid method");
         }
 
         return (new Message)->showMessage($name, $arguments[0]);

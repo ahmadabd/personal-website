@@ -23,8 +23,8 @@ class chooseResume{
     {
         // Check if selected language is not in $resumeLanguages return an Exception
         if (!array_key_exists($name, self::$resumeLanguages)){
-            // return an Exception
-            return false;
+            
+            dd("{$name} is Invalid method");
         }
 
         return (new chooseResume)->choose_resume_language($name, $arguments[0]);
