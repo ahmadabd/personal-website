@@ -4,8 +4,7 @@ namespace App\Http\Controllers\FlashMessage;
     
 use App\Http\Controllers\FlashMessage\Failed;
 use App\Http\Controllers\FlashMessage\Success;
-use Error;
-use ErrorException;
+
 
 class Message{
     
