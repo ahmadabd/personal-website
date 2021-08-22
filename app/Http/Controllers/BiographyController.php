@@ -8,6 +8,8 @@ use App\Http\Controllers\FlashMessage\Message;
 use App\Http\Requests\BiographyRequest;
 use App\Models\Bio;
 
+use Illuminate\Support\Facades\Auth;
+
 
 class BiographyController extends Controller
 {
@@ -36,7 +38,7 @@ class BiographyController extends Controller
 
         // If there is stored Biography in DataBase, puts it as default value in dashboard textarea
         if (Bio::count() >= 1){
-            $lastStoredBiography = Bio::get('biography')[0]['biography'];
+            $lastStoredBiography = Auth::user()->bio()->get('biography')[0]['biography'];
         }
 
         return view('dashboard', ["lastStoredBiography" => $lastStoredBiography]);
