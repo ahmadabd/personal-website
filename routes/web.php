@@ -28,7 +28,7 @@ Route::middleware(["auth"])->group(function() {
 
     Route::get('/profile', [ProfileNameController::class, 'show_profileName_editPage'])
         ->name('change_profileName');
-    Route::post('/profile', [ProfileNameController::class, 'store_profileName'])
+    Route::post('/profile', [ProfileNameController::class, 'store_new_profileName'])
         ->name('store_profileName');
 });
 

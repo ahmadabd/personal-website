@@ -17,7 +17,7 @@ class ProfileNameController extends Controller
         return view('profileName', ['profileName' => $profileName]);
     }
 
-    public function store_profileName(ChangeProfileRequest $request)
+    public function store_new_profileName(ChangeProfileRequest $request)
     {
         $userId = auth()->user()->id;
 
