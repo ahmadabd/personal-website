@@ -7,13 +7,13 @@
         <!-- Get Picture from Database -->
         <nav class="navbar navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ route('change_profilePic') }}">
                     <img class="profilePic" src="pics/profile.jpg" alt="" width="100" height="100">
+                    <h6>Click to change</h6>
                 </a>
             </div>
         </nav>
         
-        <!-- Get name from Database -->
         <a class="navbar-brand profileName {{ (request()->routeIs('change_profileName')) ? 'active' : '' }}" href="{{ route('change_profileName') }}">{{ $profileName ?? "Profile Name" }}</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="container">

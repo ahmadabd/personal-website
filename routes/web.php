@@ -26,10 +26,15 @@ Route::middleware(["auth"])->group(function() {
     Route::post('/dashboard', [BiographyController::class, 'store_biography'])
         ->name('store_biography');
 
-    Route::get('/profile', [ProfileController::class, 'show_profileName_editPage'])
+    Route::get('/profileName', [ProfileController::class, 'show_profileName_editPage'])
         ->name('change_profileName');
-    Route::post('/profile', [ProfileController::class, 'store_new_profileName'])
-        ->name('store_profileName');
+    Route::post('/profileName', [ProfileController::class, 'store_new_profileName'])->
+        name('store_profileName');
+
+    Route::get('/profilePic', [ProfileController::class, 'show_profilePic_editPage'])
+        ->name('change_profilePic');
+    Route::post('/profilePic', [ProfileController::class, 'store_new_profilePic'])
+        ->name('store_profilePic');
 });
 
 
