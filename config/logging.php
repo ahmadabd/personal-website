@@ -35,6 +35,14 @@ return [
     */
 
     'channels' => [
+
+        'routeAccess' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/login_register_routeAccess_check.log'),
+            'level' => 'warning',
+
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
