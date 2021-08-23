@@ -6,7 +6,7 @@ use App\Http\Controllers\CvController;
 use App\Http\Controllers\WeblogController;
 use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\ContactController;
- 
+use App\Http\Controllers\ProfileNameController;
 
 Route::get('/', [BiographyController::class, 'show_biography_to_client'])->name('show_biography');
 
@@ -21,8 +21,15 @@ Route::get('contact', [ContactController::class, 'show_contactMe_to_client'])->n
 
 
 Route::middleware(["auth"])->group(function() {
-    Route::get('/dashboard', [BiographyController::class, 'show_biography_editPage_to_admin'])->name('edit_biography');
-    Route::post('/dashboard', [BiographyController::class, 'store_biography_to_database'])->name('store_biography');
+    Route::get('/dashboard', [BiographyController::class, 'show_biography_editPage'])
+        ->name('edit_biography');
+    Route::post('/dashboard', [BiographyController::class, 'store_biography'])
+        ->name('store_biography');
+
+    Route::get('/profile', [ProfileNameController::class, 'show_profileName_editPage'])
+        ->name('change_profileName');
+    Route::post('/profile', [ProfileNameController::class, 'store_profileName'])
+        ->name('store_profileName');
 });
 
 

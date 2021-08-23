@@ -26,11 +26,11 @@
     </head>
     <body>
 
-        @if ( Route::is('edit_biography') )
+        @auth
             <x-Dashboardnav />
         @else
-            <x-Nav />
-        @endif
+            <x-Nav />                
+        @endauth
 
         <div class="container-fluid">
             <div class="container">

@@ -32,7 +32,7 @@ class BiographyController extends Controller
     }
 
 
-    public function show_biography_editPage_to_admin()
+    public function show_biography_editPage()
     {
         $lastStoredBiography = "";
 
@@ -45,7 +45,7 @@ class BiographyController extends Controller
     }
 
 
-    public function store_biography_to_database(BiographyRequest $request)
+    public function store_biography(BiographyRequest $request)
     {
         $userId = auth()->user()->id;
 
