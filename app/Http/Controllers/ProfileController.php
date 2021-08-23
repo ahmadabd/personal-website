@@ -8,7 +8,7 @@ use App\Http\Requests\ChangeProfileRequest;
 use Illuminate\Support\Facades\Auth;
 
 
-class ProfileNameController extends Controller
+class ProfileController extends Controller
 {
     public function show_profileName_editPage()
     {
