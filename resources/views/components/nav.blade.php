@@ -14,7 +14,7 @@
         </nav>
         
         <!-- Get name from Database -->
-        <a class="navbar-brand profileName" href="{{ route('show_biography') }}">Ahmad Abdollahzadeh</a>
+        <a class="navbar-brand profileName" href="{{ route('show_biography') }}">{{ $profileName ?? "Profile Name" }}</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">   

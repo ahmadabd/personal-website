@@ -27,7 +27,7 @@
     <body>
 
         @if ( Route::is('edit_biography') )
-            <x-dashboard-nav />
+            <x-Dashboardnav />
         @else
             <x-Nav />
         @endif
