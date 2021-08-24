@@ -68,7 +68,7 @@ class ProfileController extends Controller
             
             File::create([
                 'name' => $fileName,
-                'file_path' => $filePath,
+                'file_path' => 'storage/'.$filePath,
                 'file_type' => 'img'
             ]);
         }
