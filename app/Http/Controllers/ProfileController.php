@@ -45,16 +45,19 @@ class ProfileController extends Controller
             
             $fileName = Str::random(10).'.'.$fileFormat;
             
+
+            // We want this for CV too, make an interface for that
             // delete old profile picture
             if(File::where('file_type', 'img')->count() > 0){
             
                 $oldProfilePath = File::where('file_type', 'img')->get()[0]['file_path'];
                 
-                // Delete last profile picture from Database
+                // Delete old profile picture from Database
                 File::where('file_path', $oldProfilePath)->delete();
 
                 if (Storage::disk('public')->exists($oldProfilePath)){
-                    // Delete last profile picture from storage/public/profile
+                    
+                    // Delete old profile picture from storage/public/profile
                     Storage::disk('public')->delete($oldProfilePath);   
                 }
             }
