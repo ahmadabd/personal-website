@@ -27,6 +27,10 @@ class CvController extends Controller
         $resumeAddress = chooseResume::persian($resumeName);
 
         $resumeFile = response()->file($resumeAddress);
+
+        if (! $resumeFile ){
+            abort(404);
+        }
                 
         return $resumeFile;
     }

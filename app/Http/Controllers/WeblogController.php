@@ -10,6 +10,11 @@ class WeblogController extends Controller
     {
         // Get weblog address from DataBase
         $weblogAddress = "https://virgool.io/@ahmadabd13741112";
+
+        if (! $weblogAddress ){
+            abort(404);
+        }
+
         return redirect()->away($weblogAddress);
     }
 }
