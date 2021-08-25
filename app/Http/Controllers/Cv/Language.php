@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Cv;
 
-abstract class Language {
+interface Language {
     
-    protected $resumeDirectory = "CV";
-    
-    abstract public function language($resumeFileName) : string; 
+    public function language() : string; 
 }

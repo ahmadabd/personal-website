@@ -1,13 +1,13 @@
 <x-Layout>
     
-    <x-slot name="title">Change profile Picture</x-slot>
+    <x-slot name="title">Add new resume</x-slot>
     <x-slot name="page_css"></x-slot>
 
-    <h1 class="title">Profile Picture</h1>
+    <h1 class="title">Add your new resume</h1>
     <hr>
     <p class="content">
         <!-- Validation Errors --> 
-        @error('profilePic')
+        @error('resumeFile')
             <div class="alert alert-danger">{{ $message }}</div>
             <br>       
         @enderror
@@ -16,11 +16,11 @@
             <p class="alert alert-success">{{ Session::get("success") }}</p>
         @endif
 
-        <form action="{{ route('store_profilePic') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('store_resume') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <label class="form-label" for="profilePic">Upload Profile Picture:(100x100 px)|(Max size: 10 MB)</label>
-            <input type="file" class="form-control" id="profilePic" name="profilePic" />
+            <label class="form-label" for="resumeFile">Upload Your new resume (pdf)|(Max size: 10MB):</label>
+            <input type="file" class="form-control" id="resumeFile" name="resumeFile" />
             <br>
             <button name="submit" class="btn btn-success">upload</button>
         </form>

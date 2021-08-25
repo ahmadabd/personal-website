@@ -35,6 +35,11 @@ Route::middleware(["auth"])->group(function() {
         ->name('change_profilePic');
     Route::post('/profilePic', [ProfileController::class, 'store_new_profilePic'])
         ->name('store_profilePic');
+
+    Route::get('cv_edit', [CvController::class, 'show_resume_editPage'])
+        ->name('resume_editPage');
+    Route::post('cv_edit', [CvController::class, 'store_new_resume'])
+        ->name('store_resume');
 });
 
 

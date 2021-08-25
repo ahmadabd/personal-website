@@ -6,15 +6,13 @@ use App\Models\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-
-class ProfilePicture implements Uploader {
-
-    private $FileStorePath = 'profile';
-    private $fileType = "img";
+class PersianResume implements Uploader{
+    
+    private $FileStorePath = 'cv';
+    private $fileType = "persian_pdf";
 
     public function remove_old_file(){
-
-        // delete old profile picture
+        // delete old resume
         if(File::where('file_type', $this->fileType)->count() > 0){
             
             $oldProfilePath = File::where('file_type', $this->fileType)->get()[0]['file_path'];
@@ -29,9 +27,8 @@ class ProfilePicture implements Uploader {
             }
         }
     }
-
+    
     public function add_new_file($file){
-
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
         

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\UploadFile;
 
 use App\Http\Controllers\UploadFile\ProfilePicture;
+use App\Http\Controllers\UploadFile\PersianResume;
+
 
 class UploadManager {
     private static $uploaderClasses = [
-        'profile_picture' => ProfilePicture::class
+        'profile_picture' => ProfilePicture::class,
+        'persian_resume'  => PersianResume::class
     ];
 
     public function choose_uploader_class($selectedClass, $file)

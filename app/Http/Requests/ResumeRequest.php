@@ -5,8 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-
-class ProfilePicRequest extends FormRequest
+class ResumeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +25,7 @@ class ProfilePicRequest extends FormRequest
     public function rules()
     {
         return [
-            'profilePic' => 'required|image|max:10240'
+            'resumeFile' => 'required|mimes:pdf|max:10240'
         ];
     }
 }

@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Cv;
 
 use App\Http\Controllers\Cv\Language;
+use app\Models\File;
 
+class Persian implements Language{
 
-class Persian extends Language{
+    private $fileType = "persian_pdf";
 
-    private $persianDirectory = "/persian/";
-
-    public function language($resumeName) : string
+    public function language() : string
     {
-        $resumeDirectoryAddress = $this->resumeDirectory.$this->persianDirectory;
-        $file = $resumeName.".pdf";
-        $resumeFileAddress = $resumeDirectoryAddress.$file;
         
-        return $resumeFileAddress;
+        // Get persian resume from File Model
+        if(File::where('file_type', $this->fileType)->count() > 0){
+            
+            $profilePicturePath = File::where('file_type', $this->fileType)->get()[0]['file_path'];
+            $profilePicture = 'storage/'.$profilePicturePath;
+            
+            return $profilePicture;
+        }
     }
 }   

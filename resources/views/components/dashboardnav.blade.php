@@ -26,7 +26,7 @@
                             <a class="nav-link" aria-current="page" href="">Contact Me</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="">CV</a>
+                            <a class="nav-link {{ (request()->routeIs('resume_editPage')) ? 'active' : '' }}" aria-current="page" href="{{ route('resume_editPage') }}">CV</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('logout') }}">logout</a>
