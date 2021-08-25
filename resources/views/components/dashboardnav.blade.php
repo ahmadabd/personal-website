@@ -8,7 +8,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('change_profilePic') }}">
-                    <img class="profilePic" src="{{ asset($profilePicture) ?? "pics/default_profile.jpg" }}" alt="" width="100" height="100">
+                    <img class="profilePic" src="{{ $profilePicture ?? "pics/default_profile.jpg" }}" alt="" width="100" height="100">
                     <h6>Click to change</h6>
                 </a>
             </div>

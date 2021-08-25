@@ -8,7 +8,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img class="profilePic" src="{{ asset($profilePicture) ?? "pics/default_profile.jpg" }}" alt="" width="100" height="100">
+                    <img class="profilePic" src="{{ $profilePicture ?? "pics/default_profile.jpg" }}" alt="" width="100" height="100">
                 </a>
             </div>
         </nav>

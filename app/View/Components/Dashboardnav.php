@@ -18,7 +18,7 @@ class DashboardNav extends Component
         // Get profile Picture from File Model
         if(File::where('file_type', 'img')->count() > 0){
             $profilePicturePath = File::where('file_type', 'img')->get()[0]['file_path'];
-            $this->profilePicture = $profilePicturePath;
+            $this->profilePicture = 'storage/'.$profilePicturePath;
         }
     }
 
