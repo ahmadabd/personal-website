@@ -63,6 +63,8 @@ class BiographyController extends Controller
                 'biography' => $request->biography,
             ]);    
         }
+
+        Message::success("Biography Successfully Changed.");
         
         return redirect()->route('edit_biography');
     }

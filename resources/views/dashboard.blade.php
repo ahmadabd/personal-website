@@ -12,6 +12,10 @@
             <br>       
         @enderror
 
+        @if ( Session::get("success") )
+            <p class="alert alert-success">{{ Session::get("success") }}</p>
+        @endif
+
         <form action="{{ route('store_biography') }}" method="POST">
             @csrf
             <div class="form-group">

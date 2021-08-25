@@ -6,7 +6,8 @@ use App\Models\User;
 use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\ProfilePicRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UploadFile\ProfilePicture;
+use App\Http\Controllers\UploadFile\UploadManager;
+use App\Http\Controllers\FlashMessage\Message;
 
 
 class ProfileController extends Controller
@@ -26,6 +27,8 @@ class ProfileController extends Controller
             'name' => $request->profileName,
         ]);
 
+        Message::success("Profile Name Successfully Changed.");
+
         return redirect()->route('change_profileName');
     }
 
@@ -37,9 +40,8 @@ class ProfileController extends Controller
     public function store_new_profilePic(ProfilePicRequest $request)
     {
         if ($request->file()){
-            $profilePic = new ProfilePicture();
-            $profilePic->remove_old_file("img");
-            $profilePic->add_new_file($request->file('profilePic'), "img");
+            $fileUploaded = UploadManager::profile_picture($request->file('profilePic'));
+            Message::success("Profile Picture Successfully Changed.");
         }
         return redirect()->route('change_profilePic');
     }

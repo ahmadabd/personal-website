@@ -11,7 +11,11 @@
             <div class="alert alert-danger">{{ $message }}</div>
             <br>       
         @enderror
-        
+
+        @if ( Session::get("success") )
+            <p class="alert alert-success">{{ Session::get("success") }}</p>
+        @endif
+
         <form action="{{ route('store_profilePic') }}" method="POST" enctype="multipart/form-data">
             @csrf
 

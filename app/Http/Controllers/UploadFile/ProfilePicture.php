@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Storage;
 class ProfilePicture implements Uploader {
 
     private $profilePicturePath = 'profile';
+    private $fileType = "img";
 
-    public function remove_old_file($fileType){
+    public function remove_old_file(){
 
         // delete old profile picture
-        if(File::where('file_type', $fileType)->count() > 0){
+        if(File::where('file_type', $this->fileType)->count() > 0){
             
-            $oldProfilePath = File::where('file_type', $fileType)->get()[0]['file_path'];
+            $oldProfilePath = File::where('file_type', $this->fileType)->get()[0]['file_path'];
             
             // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();
@@ -24,17 +25,18 @@ class ProfilePicture implements Uploader {
             if (Storage::disk('public')->exists($oldProfilePath)){
                     
                 // Delete old profile picture from storage/public/profile
-                Storage::disk('public')->delete($oldProfilePath);   
+                Storage::disk('public')->delete($oldProfilePath);
             }
         }
     }
 
-    public function add_new_file($file, $fileType){
+    public function add_new_file($file){
 
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
         
-        $fileName = Str::random(10).'.'.$fileFormat;
+        $randomFileName = Str::random(10);
+        $fileName = $randomFileName.'.'.$fileFormat;
 
         // Picture stores in /storage/public/profile
         $filePath = $file->storeAs($this->profilePicturePath, $fileName, 'public');
@@ -42,7 +44,7 @@ class ProfilePicture implements Uploader {
         File::create([
             'name' => $fileName,
             'file_path' => $filePath,
-            'file_type' => $fileType
+            'file_type' => $this->fileType
         ]);
     }
 }

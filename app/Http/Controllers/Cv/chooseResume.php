@@ -21,7 +21,7 @@ class chooseResume{
 
     public static function __callStatic($name, $arguments)
     {
-        // Check if selected language is not in $resumeLanguages return an Exception
+        // Check if selected language is not in $resumeLanguages return an Error
         if (!array_key_exists($name, self::$resumeLanguages)){
             
             dd("{$name} is Invalid method");
