@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Cv;
 
-abstract class LanguageAbstract{
+abstract class Language {
     
     protected $resumeDirectory = "CV";
     

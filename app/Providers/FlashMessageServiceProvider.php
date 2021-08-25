@@ -14,11 +14,11 @@ class FlashMessageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Http\Controllers\FlashMessage\MessageInterface',
+            'App\Http\Controllers\FlashMessage\FlashMessage',
             'App\Http\Controllers\FlashMessage\Failed'
         ); 
         $this->app->bind(
-            'App\Http\Controllers\FlashMessage\MessageInterface',
+            'App\Http\Controllers\FlashMessage\FlashMessage',
             'App\Http\Controllers\FlashMessage\Success'
         );     
     }

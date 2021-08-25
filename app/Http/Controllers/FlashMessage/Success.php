@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\FlashMessage;
     
-use App\Http\Controllers\FlashMessage\MessageInterface;
+use App\Http\Controllers\FlashMessage\FlashMessage;
 
 
-class Success implements MessageInterface{
+class Success implements FlashMessage{
 
     public function message($messageTypeName, $messageValueToShow)
     {

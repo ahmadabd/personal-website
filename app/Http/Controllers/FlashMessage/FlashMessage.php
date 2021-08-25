@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\FlashMessage;
 
-interface MessageInterface{
+interface FlashMessage{
     public function message($messageTypeName, $messageValueToShow);
 }
     

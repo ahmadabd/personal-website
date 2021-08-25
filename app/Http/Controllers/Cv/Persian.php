@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Cv;
 
-use App\Http\Controllers\Cv\LanguageAbstract;
+use App\Http\Controllers\Cv\Language;
 
 
-class Persian extends LanguageAbstract{
+class Persian extends Language{
 
     private $persianDirectory = "/persian/";
 
