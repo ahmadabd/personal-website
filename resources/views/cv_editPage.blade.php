@@ -19,7 +19,7 @@
         <form action="{{ route('store_resume') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <label class="form-label" for="resumeFile">Upload Your new resume (pdf)|(Max size: 10MB):</label>
+            <label class="form-label" for="resumeFile">Upload Your New Resume (pdf)|(Max size: 10MB):</label>
             <input type="file" class="form-control" id="resumeFile" name="resumeFile" />
             <br>
             <button name="submit" class="btn btn-success">upload</button>

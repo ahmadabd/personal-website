@@ -41,7 +41,7 @@ class CvController extends Controller
     {
         if ($request->file()){
             $fileUploaded = UploadManager::persian_resume($request->file('resumeFile'));
-            Message::success("New Resume Successfully Changed.");
+            Message::success("New Resume Successfully Added.");
         }
         
         return redirect()->route('resume_editPage');
