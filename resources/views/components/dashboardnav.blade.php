@@ -28,6 +28,17 @@
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->routeIs('resume_editPage')) ? 'active' : '' }}" aria-current="page" href="{{ route('resume_editPage') }}">CV</a>
                         </li>
+
+                        {{-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              CV
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item {{ (request()->routeIs('resume_editPage')) ? 'active' : '' }}" aria-current="page" href="{{ route('resume_editPage') }}">Persian Cv</a>
+                              <a class="dropdown-item" href="#">English Cv</a>
+                            </div>
+                        </li> --}}
+
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('logout') }}">logout</a>
                         </li>

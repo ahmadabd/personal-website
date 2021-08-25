@@ -23,6 +23,7 @@
 
         <!-- Other Page Css -->
         <link rel="stylesheet" href="/css/{{ $page_css }}">
+
     </head>
     <body>
 
