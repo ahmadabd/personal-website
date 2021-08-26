@@ -6,7 +6,7 @@ use App\Models\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class PersianResume implements Uploader{
+class PersianResume implements FileImp {
     
     private $FileStorePath = 'cv';
     private $fileType = "persian_pdf";

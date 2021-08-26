@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 
-class ProfilePicture implements Uploader {
+class ProfilePicture implements FileImp {
 
     private $FileStorePath = 'profile';
     private $fileType = "img";
