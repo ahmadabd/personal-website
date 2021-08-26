@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Cv;
 
 use App\Http\Controllers\Cv\Language;
-use app\Models\File;
+use App\Models\File;
 
 class Persian implements Language{
 

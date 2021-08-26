@@ -8,13 +8,13 @@ use App\Http\Controllers\Cv\Persian;
 class chooseResume{
 
     private static $resumeLanguages = [
-        'persian' => Persian::class,
+        'persian_resume' => Persian::class,
     ];
 
-    private function choose_resume_language($selectedLanguage, $resumeFileName)
+    private function choose_resume_language($selectedLanguage)
     {
         // Call language method of the Selected Language Class
-        $resumeDirectoryAddress = (new self::$resumeLanguages[$selectedLanguage])->language($resumeFileName);
+        $resumeDirectoryAddress = (new self::$resumeLanguages[$selectedLanguage])->language();
 
         return $resumeDirectoryAddress;
     }
@@ -27,6 +27,6 @@ class chooseResume{
             dd("{$name} is Invalid method");
         }
 
-        return (new chooseResume)->choose_resume_language($name, $arguments[0]);
+        return (new chooseResume)->choose_resume_language($name);
     }
 }

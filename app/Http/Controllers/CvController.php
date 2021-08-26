@@ -12,16 +12,10 @@ use App\Http\Controllers\FlashMessage\Message;
 
 class CvController extends Controller
 {
-    public function selectLanguage()
-    {
-        # Show page to Select between language do you need to see resume??? 
-    }
-    
-
     public function show_resume_to_client(Request $request)
     {   
         // Get language from selectLanguage() method
-        $resumeAddress = chooseResume::persian();
+        $resumeAddress = chooseResume::persian_resume();
 
         $resumeFile = response()->file($resumeAddress);
 
@@ -34,7 +28,7 @@ class CvController extends Controller
 
     public function show_resume_editPage()
     {
-        return view('cv_editPage');
+        return view('resume_editPage');
     }
 
     public function store_new_resume(ResumeRequest $request)
