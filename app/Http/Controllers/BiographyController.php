@@ -53,7 +53,7 @@ class BiographyController extends Controller
         if (Bio::count() >= 1){
             $wallet = Bio::where('user_id', $userId)->update([
                 'user_id'  => $userId,
-                'biography' => $request->biography,
+                'biography' => $request->validated()["biography"],
             ]);
         }
         else{

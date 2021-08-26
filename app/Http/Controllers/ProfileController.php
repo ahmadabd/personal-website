@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $userId = auth()->user()->id;
 
         $profile = User::where('id', $userId)->update([
-            'name' => $request->profileName,
+            'name' => $request->validated()["profileName"],
         ]);
 
         Message::success("Profile Name Successfully Changed.");
