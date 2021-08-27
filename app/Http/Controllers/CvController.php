@@ -34,7 +34,8 @@ class CvController extends Controller
     public function store_new_resume(ResumeRequest $request)
     {
         if ($request->file()){
-            $fileUploaded = UploadManager::persian_resume($request->file('resumeFile'));
+            $resumeFile = $request->file('resumeFile');
+            UploadManager::persian_resume($resumeFile);
             Message::success("New Resume Successfully Added.");
         }
         

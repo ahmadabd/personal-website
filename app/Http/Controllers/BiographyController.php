@@ -49,18 +49,20 @@ class BiographyController extends Controller
     {
         $userId = auth()->user()->id;
 
+        $biography = $request->validated()["biography"];
+
         // If there is Biography in DataBase, update old biogaphy by new one
         if (Bio::count() >= 1){
             $wallet = Bio::where('user_id', $userId)->update([
                 'user_id'  => $userId,
-                'biography' => $request->validated()["biography"],
+                'biography' => $biography,
             ]);
         }
         else{
             // If there is no Biography stored in DataBase, Create new one
             $wallet = Bio::create([
                 'user_id'  => $userId,
-                'biography' => $request->biography,
+                'biography' => $biography,
             ]);    
         }
 

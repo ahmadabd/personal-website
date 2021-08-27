@@ -23,8 +23,10 @@ class ProfileController extends Controller
     {
         $userId = auth()->user()->id;
 
-        $profile = User::where('id', $userId)->update([
-            'name' => $request->validated()["profileName"],
+        $profileName = $request->validated()["profileName"];
+
+        User::where('id', $userId)->update([
+            'name' => $profileName,
         ]);
 
         Message::success("Profile Name Successfully Changed.");
@@ -40,7 +42,8 @@ class ProfileController extends Controller
     public function store_new_profilePic(ProfilePicRequest $request)
     {
         if ($request->file()){
-            $fileUploaded = UploadManager::profile_picture($request->file('profilePic'));
+            $profilePic = $request->file('profilePic');
+            UploadManager::profile_picture($profilePic);
             Message::success("Profile Picture Successfully Changed.");
         }
         return redirect()->route('change_profilePic');
