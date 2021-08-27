@@ -7,7 +7,7 @@ use App\Http\Requests\WeblogRequest;
 use Illuminate\Http\Request;
 use App\Models\Weblog;
 use App\Http\Controllers\FlashMessage\Message;
-
+use Illuminate\Support\Facades\Auth;
 
 class WeblogController extends Controller
 {
@@ -29,7 +29,13 @@ class WeblogController extends Controller
 
     public function show_weblog_editPage()
     {
-        return view('weblog_edit');
+        $lastWeblogUrl = "";
+        $userId = auth()->user()->id;
+        
+        if (Weblog::where('user_id', $userId)->count() > 0){
+            $lastWeblogUrl = Auth::user()->weblog()->get('weblog_address')[0]['weblog_address'];
+        }
+        return view('weblog_edit', ['lastWeblogUrl' => $lastWeblogUrl]);
     }
 
     public function store_weblog_url(WeblogRequest $request)

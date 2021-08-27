@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Weblog::class);
     }
+
+    public function file()
+    {
+        return $this->hasMany(File::class);
+    }
 }

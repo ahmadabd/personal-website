@@ -41,9 +41,11 @@ class ProfileController extends Controller
 
     public function store_new_profilePic(ProfilePicRequest $request)
     {
+        $userId = auth()->user()->id;
+
         if ($request->file()){
             $profilePic = $request->file('profilePic');
-            UploadManager::profile_picture($profilePic);
+            UploadManager::profile_picture($profilePic, $userId);
             Message::success("Profile Picture Successfully Changed.");
         }
         return redirect()->route('change_profilePic');

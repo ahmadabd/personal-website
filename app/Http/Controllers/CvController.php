@@ -34,9 +34,11 @@ class CvController extends Controller
 
     public function store_new_resume(ResumeRequest $request)
     {
+        $userId = auth()->user()->id;
+
         if ($request->file()){
             $resumeFile = $request->file('resumeFile');
-            UploadManager::persian_resume($resumeFile);
+            UploadManager::persian_resume($resumeFile, $userId);
             Message::success("New Resume Successfully Added.");
         }
         

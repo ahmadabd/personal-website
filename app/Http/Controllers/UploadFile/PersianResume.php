@@ -11,11 +11,12 @@ class PersianResume implements FileImp {
     private $FileStorePath = 'cv';
     private $fileType = "persian_pdf";
 
-    public function remove_old_file(){
+    public function remove_old_file($userId){
         // delete old resume
         if(File::where('file_type', $this->fileType)->count() > 0){
             
-            $oldProfilePath = File::where('file_type', $this->fileType)->get()[0]['file_path'];
+            $oldProfilePath = File::where('user_id', $userId)
+                ->where('file_type', $this->fileType)->get()[0]['file_path'];
             
             // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();
@@ -28,7 +29,7 @@ class PersianResume implements FileImp {
         }
     }
     
-    public function add_new_file($file){
+    public function add_new_file($file, $userId){
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
         
@@ -39,6 +40,7 @@ class PersianResume implements FileImp {
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
         
         File::create([
+            'user_id' => $userId,
             'name' => $fileName,
             'file_path' => $filePath,
             'file_type' => $this->fileType

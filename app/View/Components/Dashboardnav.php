@@ -12,12 +12,15 @@ class DashboardNav extends Component
     public $profilePicture;
     public function __construct()
     {
+        $userId = auth()->user()->id;
+
         // Get profile Name from User.name Model
-        $this->profileName = User::get('name')[0]['name'];
+        $this->profileName = User::findorFail($userId)->get('name')[0]['name'];
     
         // Get profile Picture from File Model
-        if(File::where('file_type', 'img')->count() > 0){
-            $profilePicturePath = File::where('file_type', 'img')->get()[0]['file_path'];
+        if(File::where('user_id', $userId)->where('file_type', 'img')->count() > 0){
+            $profilePicturePath = File::where('user_id', $userId)->
+                where('file_type', 'img')->get()[0]['file_path'];
             $this->profilePicture = 'storage/'.$profilePicturePath;
         }
     }

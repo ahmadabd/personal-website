@@ -36,8 +36,10 @@ class BiographyController extends Controller
     {
         $lastStoredBiography = "";
 
+        $userId = auth()->user()->id;
+
         // If there is stored Biography in DataBase, puts it as default value in dashboard textarea
-        if (Bio::count() >= 1){
+        if (Bio::where('user_id', $userId)->count() >= 1){
             $lastStoredBiography = Auth::user()->bio()->get('biography')[0]['biography'];
         }
 
