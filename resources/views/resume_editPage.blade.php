@@ -20,7 +20,7 @@
             @csrf
 
             <label class="form-label" for="resumeFile">Upload Your New Resume (pdf)|(Max size: 10MB):</label>
-            <input type="file" class="form-control" id="resumeFile" name="resumeFile" />
+            <input type="file" class="form-control" id="resumeFile" name="resumeFile" required />
             <br>
             <button name="submit" class="btn btn-success">upload</button>
         </form>

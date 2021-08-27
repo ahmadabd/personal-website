@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Bio::class);
     }
+
+    public function weblog()
+    {
+        return $this->hasOne(Weblog::class);
+    }
 }

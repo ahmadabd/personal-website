@@ -40,6 +40,10 @@
                         </li> --}}
 
                         <li class="nav-item">
+                            <a class="nav-link {{ (request()->routeIs('weblog_edit')) ? 'active' : '' }}" aria-current="page" href="{{ route('weblog_edit') }}">weblog</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('logout') }}">logout</a>
                         </li>
                     @endauth

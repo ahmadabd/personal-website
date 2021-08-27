@@ -20,7 +20,7 @@
             @csrf
 
             <label class="form-label" for="profilePic">Upload Profile Picture:(100x100 px)|(Max size: 10 MB)</label>
-            <input type="file" class="form-control" id="profilePic" name="profilePic" />
+            <input type="file" class="form-control" id="profilePic" name="profilePic" required />
             <br>
             <button name="submit" class="btn btn-success">upload</button>
         </form>

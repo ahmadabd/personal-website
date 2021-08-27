@@ -40,6 +40,11 @@ Route::middleware(["auth"])->group(function() {
         ->name('resume_editPage');
     Route::post('resume_edit', [CvController::class, 'store_new_resume'])
         ->name('store_resume');
+
+    Route::get('weblog_edit', [WeblogController::class, 'show_weblog_editPage'])
+        ->name('weblog_edit');
+    Route::post('weblog_edit', [WeblogController::class, 'store_weblog_url'])
+        ->name('store_weblog');
 });
 
 
