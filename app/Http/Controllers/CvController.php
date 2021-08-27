@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ResumeException;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Cv\chooseResume;
@@ -17,12 +18,12 @@ class CvController extends Controller
         // Get language from selectLanguage() method
         $resumeAddress = chooseResume::persian_resume();
 
-        $resumeFile = response()->file($resumeAddress);
-
-        if (! $resumeFile ){
-            abort(404);
+        try{
+            $resumeFile = response()->file($resumeAddress);
+        } catch(\Exception $exception){
+            throw new ResumeException();
         }
-                
+        
         return $resumeFile;
     }
 

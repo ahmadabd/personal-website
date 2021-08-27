@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\WeblogException;
 use Illuminate\Http\Request;
 
 class WeblogController extends Controller
@@ -11,10 +12,10 @@ class WeblogController extends Controller
         // Get weblog address from DataBase
         $weblogAddress = "https://virgool.io/@ahmadabd13741112";
 
-        if (! $weblogAddress ){
-            abort(404);
+        try{
+            return redirect()->away($weblogAddress);
+        } catch(\Exception $exception){
+            throw new WeblogException();
         }
-
-        return redirect()->away($weblogAddress);
     }
 }

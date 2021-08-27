@@ -23,3 +23,7 @@
 .block {
   margin-top: 50px;
 }
+
+.exception {
+  color: red;
+}

@@ -5,6 +5,7 @@ $block_marginTop: 50px;
 $title_paddingTop: 25px;
 $content_paddingTop: 30px;
 
+$exceptionColor: red;
 
 @mixin title_text($color, $font) {
     color: $color;
@@ -52,4 +53,6 @@ $content_paddingTop: 30px;
     margin-top: $block_marginTop;
 }
 
-
+.exception {
+    color: $exceptionColor;
+}
