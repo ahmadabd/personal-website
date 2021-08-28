@@ -8,7 +8,7 @@ use App\Http\Controllers\FlashMessage\Message;
 use App\Http\Requests\ContactMeRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Expr\AssignOp\Concat;
+
 
 class ContactController extends Controller
 {
@@ -40,6 +40,7 @@ class ContactController extends Controller
             'telegram' => null
         ];
 
+        // Get data from database to show as value in input tag if exist
         if (Contact::where('user_id', $userId)->count() > 0){
             $databseValues = Auth::user()->contact()->get()[0];
     
@@ -69,11 +70,14 @@ class ContactController extends Controller
         ];
 
         // Value of input lists should not be same
+
+        // store validated data as value in contactMeList array
         foreach($validated as $contactWay){
             $validatedKey = array_keys($validated, $contactWay)[0];             
             $contactMeList[$validatedKey] = $contactWay;
         }
 
+        // delete old data from Contact model if exist
         if (Contact::where('user_id', $userId)->count() > 0){
             Contact::where('user_id', $userId)->delete();
         }  
