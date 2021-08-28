@@ -13,7 +13,9 @@ class Nav extends Component
     public function __construct()
     {
         // Get profile Name from User.name Model
-        $this->profileName = User::get('name')[0]['name'];
+        if (User::count() > 0){
+            $this->profileName = User::get('name')[0]['name'];
+        }
 
         // Get profile Picture from File Model
         if(File::where('file_type', 'img')->count() > 0){

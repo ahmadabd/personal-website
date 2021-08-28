@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\WeblogException;
 use App\Http\Requests\WeblogRequest;
-use Illuminate\Http\Request;
 use App\Models\Weblog;
 use App\Http\Controllers\FlashMessage\Message;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +16,7 @@ class WeblogController extends Controller
         $weblogAddress = "";
 
         if (Weblog::count() > 0){
-            $weblogAddress = Weblog::get('weblog_address')[0]['weblog_address'];
+            $weblogAddress = Weblog::get()[0]['weblog_address'];
         }
 
         try{
@@ -30,10 +29,11 @@ class WeblogController extends Controller
     public function show_weblog_editPage()
     {
         $lastWeblogUrl = "";
-        $userId = auth()->user()->id;
         
-        if (Weblog::where('user_id', $userId)->count() > 0){
-            $lastWeblogUrl = Auth::user()->weblog()->get('weblog_address')[0]['weblog_address'];
+        $weblogObject = Auth::user()->weblog();
+        $numberOfWeblogDBRows = $weblogObject->count();
+        if ($numberOfWeblogDBRows > 0){
+            $lastWeblogUrl = $weblogObject->get()[0]['weblog_address'];
         }
         return view('weblog_edit', ['lastWeblogUrl' => $lastWeblogUrl]);
     }

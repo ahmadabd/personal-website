@@ -19,10 +19,7 @@ class ContactController extends Controller
         $contactMe = "";
 
         if ($contactMe == ""){
-            
-            $message = Message::failed("There is no Contact information.");
-            
-            $request->$message;
+            Message::failed("There is no Contact information.");
         }
 
         return view('contactMe', ['contact' => $contactMe]);   
@@ -30,7 +27,6 @@ class ContactController extends Controller
 
     public function show_contactMe_edit()
     {
-        $userId = auth()->user()->id;
         $laststoredContact = [
             'email' => null, 
             'linkedin' => null, 
@@ -41,8 +37,10 @@ class ContactController extends Controller
         ];
 
         // Get data from database to show as value in input tag if exist
-        if (Contact::where('user_id', $userId)->count() > 0){
-            $databseValues = Auth::user()->contact()->get()[0];
+        $contactsObject = Auth::user()->contact();
+        $numberOfContactDBrows = $contactsObject->count();
+        if ($numberOfContactDBrows > 0){
+            $databseValues = $contactsObject->get()[0];
     
             $laststoredContact['email'] = $databseValues['email'];
             $laststoredContact['linkedin'] = $databseValues['linkedin'];
@@ -78,8 +76,9 @@ class ContactController extends Controller
         }
 
         // delete old data from Contact model if exist
-        if (Contact::where('user_id', $userId)->count() > 0){
-            Contact::where('user_id', $userId)->delete();
+        $contactObject = Contact::where('user_id', $userId);
+        if ($contactObject->count() > 0){
+            $contactObject->delete();
         }  
 
         $contactMe = Contact::create([

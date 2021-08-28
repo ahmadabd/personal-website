@@ -9,7 +9,7 @@ class Persian implements Language{
 
     private $fileType = "persian_pdf";
 
-    public function language() : string
+    public function language()
     {
         
         // Get persian resume from File Model
