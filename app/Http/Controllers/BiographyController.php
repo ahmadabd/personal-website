@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class BiographyController extends Controller
 {
 
-    public function show_biography_to_client(Request $request)
+    public function show_biography_to_client()
     {
         $biographyData = "";
 
