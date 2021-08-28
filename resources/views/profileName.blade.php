@@ -20,7 +20,7 @@
             @csrf
             <div class="form-group">
                 <label for="profileName">Write your biography</label>
-                <input name="profileName" value="{{ $profileName }}" class="form-control" id="profileName" required />
+                <input type="text" name="profileName" value="{{ $profileName }}" class="form-control" id="profileName" required />
             </div>
 
             <button name="submit" class="btn btn-success">save</button>

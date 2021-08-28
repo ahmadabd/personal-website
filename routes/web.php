@@ -45,6 +45,11 @@ Route::middleware(["auth"])->group(function() {
         ->name('weblog_edit');
     Route::post('weblog_edit', [WeblogController::class, 'store_weblog_url'])
         ->name('store_weblog');
+
+    Route::get('contact_edit', [ContactController::class, 'show_contactMe_edit'])
+        ->name('show_contactMe_edit');
+    Route::post('contact_edit', [ContactController::class, 'store_contactMe'])
+        ->name('store_contactMe');
 });
 
 

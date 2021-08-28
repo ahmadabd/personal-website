@@ -23,7 +23,7 @@
                             <a class="nav-link {{ (request()->routeIs('edit_biography')) ? 'active' : '' }}" aria-current="page" href="{{ route('edit_biography') }}">About Me</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="">Contact Me</a>
+                            <a class="nav-link {{ (request()->routeIs('show_contactMe_edit')) ? 'active' : '' }}" aria-current="page" href="{{ route('show_contactMe_edit') }}">Contact Me</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->routeIs('resume_editPage')) ? 'active' : '' }}" aria-current="page" href="{{ route('resume_editPage') }}">CV</a>
