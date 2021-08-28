@@ -7,10 +7,16 @@
     <hr>
     <p class="content">
         <!-- Validation Errors --> 
-        @error('resumeFile')
-            <div class="alert alert-danger">{{ $message }}</div>
-            <br>       
-        @enderror
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
 
         @if ( Session::get("success") )
             <p class="alert alert-success">{{ Session::get("success") }}</p>
