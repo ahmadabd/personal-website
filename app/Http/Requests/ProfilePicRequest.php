@@ -29,4 +29,11 @@ class ProfilePicRequest extends FormRequest
             'profilePic' => 'required|image|max:10240'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'profilePic.max' => 'The resume file must not be greater than 10 MB' 
+        ];
+    }
 }

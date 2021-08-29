@@ -28,4 +28,11 @@ class ResumeRequest extends FormRequest
             'resumeFile' => 'required|mimes:pdf|max:10240'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'resumeFile.max' => 'The resume file must not be greater than 10 MB' 
+        ];
+    }
 }
