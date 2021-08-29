@@ -43,17 +43,16 @@ class WeblogController extends Controller
         $weblog_url = $request->validated()['weblogUrl'];
         $userId = auth()->user()->id;
 
-        if ($weblog_url){
-            if (Weblog::count() > 0){
-                Weblog::where('user_id', $userId)->delete();
-            }    
-            Weblog::create([
-                'user_id' => $userId,
-                'weblog_address' => $weblog_url
-            ]);
-        
-            Message::success('Weblog address successfully stored in DataBase.');
-        }
+        if (Weblog::count() > 0){
+            Weblog::where('user_id', $userId)->delete();
+        }    
+        Weblog::create([
+            'user_id' => $userId,
+            'weblog_address' => $weblog_url
+        ]);
+    
+        Message::success('Weblog address successfully stored in DataBase.');
+    
 
         return redirect()->route('weblog_edit');
     }
