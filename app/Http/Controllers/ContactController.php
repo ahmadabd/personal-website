@@ -17,7 +17,7 @@ class ContactController extends Controller
         $icons = [
             'linkedin' => 'entypo-linkedin-with-circle',
             'email' => 'gmdi-email',
-            'telegram' => 'bi-telegram',
+            'telegram' => 'forkawesome-telegram',
             'instagram' => 'fab-instagram-square',
             'twitter' => 'antdesign-twitter-circle',
             'github' => 'bytesize-github'

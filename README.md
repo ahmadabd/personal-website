@@ -33,8 +33,10 @@
 
 ------
 
+##### Contact Me Icons are from https://blade-ui-kit.com/blade-icons website. 
 
+------
 
-Author: Ahmad Abdollahzadeh
+Programmer: Ahmad Abdollahzadeh
 
 Email: ahmadabdollahzade74@gmail.com
