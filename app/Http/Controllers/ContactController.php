@@ -12,17 +12,36 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
-    public function show_contactMe_to_client(Request $request)
+    public function show_contactMe_to_client()
     {
-        // Get it from Database
-        // $contact = "phone: 123465";
-        $contactMe = "";
+        $icons = [
+            'linkedin' => 'entypo-linkedin-with-circle',
+            'email' => 'gmdi-email',
+            'telegram' => 'bi-telegram',
+            'instagram' => 'fab-instagram-square',
+            'twitter' => 'antdesign-twitter-circle',
+            'github' => 'bytesize-github'
+        ];
 
-        if ($contactMe == ""){
+        $availableContactLinks = [];
+
+        // Get data from database
+        $numberOfContactDBrows = Contact::count();
+        if ($numberOfContactDBrows > 0){
+            $databseValues = Contact::get()[0];
+
+            foreach ($icons as $icon){
+                $contactName = array_keys($icons, $icon)[0];
+                if ($databseValues[$contactName]){
+                    $availableContactLinks[$contactName] = [$icon, $databseValues[$contactName]];
+                }
+            }
+        }
+        else {
             Message::failed("There is no Contact information.");
         }
 
-        return view('contactMe', ['contact' => $contactMe]);   
+        return view('contactMe', ['availableContactLinks' => $availableContactLinks]);   
     }
 
     public function show_contactMe_edit()

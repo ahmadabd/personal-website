@@ -6,10 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "codeat3/blade-ant-design-icons": "^1.1",
+        "codeat3/blade-bytesize-icons": "^1.1",
+        "codeat3/blade-google-material-design-icons": "^1.2",
+        "davidhsianturi/blade-bootstrap-icons": "^1.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "owenvoke/blade-entypo": "^1.5",
+        "owenvoke/blade-fontawesome": "^1.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

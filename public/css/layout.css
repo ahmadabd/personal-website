@@ -27,3 +27,15 @@
 .exception {
   color: red;
 }
+
+.icons {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  color: #464343;
+}
+
+.iconUrl {
+  display: inline-block;
+  font-size: 18px;
+}
