@@ -29,7 +29,7 @@
 
 5. Config .env file for DataBase.
 
-   
+6. Remove /storage/logs/login_register_routeAccess_check.log
 
 ------
 
