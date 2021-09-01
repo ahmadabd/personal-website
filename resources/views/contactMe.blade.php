@@ -6,15 +6,15 @@
     <h1 class="title">Contact Me</h1>
     <hr>
     <div class="content">
-        @isset($availableContactLinks)
-            @foreach ($availableContactLinks as $contactLink)
-                <p class="icons">{{ svg($contactLink[0]) }}</p>
-                <p class="iconUrl">{{ $contactLink[1] }}</p>
+        @isset($contactLinks)
+            @foreach ($contactLinks as $link)
+                <p class="icons">{{ svg($link[0]) }}</p>
+                <p class="iconUrl">{{ $link[1] }}</p>
                 <br>
             @endforeach
         @endisset
 
-        @empty($availableContactLinks)
+        @empty($contactLinks)
             <p class="alert alert-danger">{{ Session::get("failed") }}</p>
         @endempty
     </div>
