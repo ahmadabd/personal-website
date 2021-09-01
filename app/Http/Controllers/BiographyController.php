@@ -13,54 +13,59 @@ class BiographyController extends Controller
 
     public function show_biography_to_client()
     {
-        $biographyData = "";
+        /**
+         * Show biography to clients
+         */
 
-        // If there is no Biography stored in DataBase, Call failed FlashMessage
-        if (Bio::count() == 0){
+        $biography = "";
+
+        if (!Bio::exists()){
+            // If there is no Biography stored in DataBase make a failed message
             Message::failed("There is no Biography information.");       
         }
         else{
-            // get biography from table
-            $biographyData = Bio::get()[0]['biography'];
+            // Get biography from DataBase
+            $biography = Bio::get()[0]['biography'];
         }
 
-        return view('aboutMe', ['bio' => $biographyData]);
+        return view('aboutMe', ['bio' => $biography]);
     }
 
 
     public function show_biography_editPage()
     {
-        $lastStoredBiography = "";
-
-        // If there is stored Biography in DataBase, puts it as default value in dashboard textarea
-        $BioObject = Auth::user()->bio();
-        $numberOfBioDBrows = $BioObject->count();
-        if ($numberOfBioDBrows >= 1){
-            $lastStoredBiography = $BioObject->get()[0]['biography'];
+        /**
+         * Get biography from DB and send it to dashboard view (biography_edit_page)
+         */
+        $biography = "";
+        $bioObj = Auth::user()->bio();
+        
+        if ($bioObj->exists()){
+            // Get biography from DB
+            $biography = $bioObj->get()[0]['biography'];
         }
 
-        return view('dashboard', ["lastStoredBiography" => $lastStoredBiography]);
+        return view('dashboard', ["biography" => $biography]);
     }
 
 
     public function store_biography(BiographyRequest $request)
     {
-        $userId = auth()->user()->id;
-
+        /**
+         * Store or Update new biography
+         */
         $biography = $request->validated()["biography"];
+        $bioObject = Auth::user()->bio();
 
-        // If there is Biography in DataBase, update old biogaphy by new one
-        $numberOfBioDBrows = Bio::where('user_id', $userId)->count();
-        if ($numberOfBioDBrows >= 1){
-            $wallet = Bio::where('user_id', $userId)->update([
-                'user_id'  => $userId,
+        if ($bioObject->exists()){
+            // Update last biography
+            $bioObject->update([
                 'biography' => $biography,
             ]);
         }
         else{
-            // If there is no Biography stored in DataBase, Create new one
-            $wallet = Bio::create([
-                'user_id'  => $userId,
+            // Store new biography
+            $bioObject->create([
                 'biography' => $biography,
             ]);    
         }
