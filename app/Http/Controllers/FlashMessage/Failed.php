@@ -9,6 +9,6 @@ class Failed implements FlashMessage{
 
     public function message($messageTypeName, $messageValueToShow)
     {
-        return session()->flash($messageTypeName, $messageValueToShow);
+        return session()->now($messageTypeName, $messageValueToShow);
     }
 }

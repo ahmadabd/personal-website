@@ -27,6 +27,7 @@ class ContactController extends Controller
 
         // Get data from database
         $numberOfContactDBrows = Contact::count();
+
         if ($numberOfContactDBrows > 0){
             $databseValues = Contact::get()[0];
 
@@ -37,7 +38,7 @@ class ContactController extends Controller
                 }
             }
         }
-        else {
+        if (count($availableContactLinks) == 0) {
             Message::failed("There is no Contact information.");
         }
 
