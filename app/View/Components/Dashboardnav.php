@@ -17,8 +17,8 @@ class DashboardNav extends Component
 
         // Get profile Picture from File Model
         $fileObject = Auth::user()->file()->where('file_type', 'img');
-        $numberOfProfilePic = $fileObject->count();
-        if($numberOfProfilePic > 0){
+        
+        if($fileObject->exists()){
             $profilePicturePath = $fileObject->get()[0]['file_path'];
             $this->profilePicture = 'storage/'.$profilePicturePath;
         }

@@ -18,8 +18,10 @@ class Nav extends Component
         }
 
         // Get profile Picture from File Model
-        if(File::where('file_type', 'img')->count() > 0){
-            $profilePicturePath = File::where('file_type', 'img')->get()[0]['file_path'];
+        $fileObject = File::where('file_type', 'img');
+
+        if($fileObject->exists()){
+            $profilePicturePath = $fileObject->get()[0]['file_path'];
             $this->profilePicture = 'storage/'.$profilePicturePath;
         }
     }
