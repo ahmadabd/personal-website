@@ -19,8 +19,8 @@
         <form action="{{ route('store_weblog') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <label class="form-label" for="weblogUrl">Add your weblog url: (https://...)</label>
-            <input type="text" class="form-control" value="{{ $lastWeblogUrl }}" id="weblogUrl" name="weblogUrl" required />
+            <label class="form-label" for="weblogUrl">Add your weblog url</label>
+            <input type="text" placeholder="https://..." class="form-control" value="{{ $lastWeblogUrl }}" id="weblogUrl" name="weblogUrl" required />
             <br>
             <button name="submit" class="btn btn-success">store</button>
         </form>

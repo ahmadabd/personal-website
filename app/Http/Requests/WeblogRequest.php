@@ -16,7 +16,7 @@ class WeblogRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->id == Weblog::get()[0]['user_id'];
+        return Auth::user();
     }
 
     /**

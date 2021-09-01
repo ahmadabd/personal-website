@@ -16,8 +16,8 @@ class ProfilePicture implements FileImp {
 
         // delete old profile picture
         $fileObjects = File::where('file_type', $this->fileType);
-        $numberOfFileDBRows = $fileObjects->count();
-        if($numberOfFileDBRows > 0){
+        
+        if($fileObjects->exists()){
             
             $oldProfilePath = $fileObjects->where('user_id', $userId)->get()[0]['file_path'];
             
@@ -31,6 +31,7 @@ class ProfilePicture implements FileImp {
             }
         }
     }
+    
 
     public function add_new_file($file, $userId){
 

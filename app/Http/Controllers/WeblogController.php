@@ -15,7 +15,7 @@ class WeblogController extends Controller
 
         $weblogAddress = "";
 
-        if (Weblog::count() > 0){
+        if (Weblog::exists()){
             $weblogAddress = Weblog::get()[0]['weblog_address'];
         }
 
@@ -26,33 +26,37 @@ class WeblogController extends Controller
         }
     }
 
+
     public function show_weblog_editPage()
     {
         $lastWeblogUrl = "";
         
         $weblogObject = Auth::user()->weblog();
-        $numberOfWeblogDBRows = $weblogObject->count();
-        if ($numberOfWeblogDBRows > 0){
+
+        if ($weblogObject->exists()){
             $lastWeblogUrl = $weblogObject->get()[0]['weblog_address'];
         }
         return view('weblog_edit', ['lastWeblogUrl' => $lastWeblogUrl]);
     }
 
+
     public function store_weblog_url(WeblogRequest $request)
     {
         $weblog_url = $request->validated()['weblogUrl'];
-        $userId = auth()->user()->id;
+        $weblogObject = Auth::user()->weblog();
 
-        if (Weblog::count() > 0){
-            Weblog::where('user_id', $userId)->delete();
+        if ($weblogObject->exists()){
+            $weblogObject->update([
+                'weblog_address' => $weblog_url
+            ]);
         }    
-        Weblog::create([
-            'user_id' => $userId,
-            'weblog_address' => $weblog_url
-        ]);
+        else{
+            $weblogObject->create([
+                'weblog_address' => $weblog_url
+            ]);
+        }
     
         Message::success('Weblog address successfully stored in DataBase.');
-    
 
         return redirect()->route('weblog_edit');
     }

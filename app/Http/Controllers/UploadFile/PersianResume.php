@@ -14,8 +14,8 @@ class PersianResume implements FileImp {
     public function remove_old_file($userId){
         // delete old resume
         $fileObjects = File::where('file_type', $this->fileType);
-        $numberOfFileDBRows = $fileObjects->count();
-        if($numberOfFileDBRows > 0){
+
+        if($fileObjects->exists()){
             
             $oldProfilePath = $fileObjects->where('user_id', $userId)->get()[0]['file_path'];
             
@@ -30,7 +30,9 @@ class PersianResume implements FileImp {
         }
     }
     
+    
     public function add_new_file($file, $userId){
+
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
         

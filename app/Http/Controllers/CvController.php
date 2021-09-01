@@ -16,10 +16,10 @@ class CvController extends Controller
     public function show_resume_to_client(Request $request)
     {   
         // Get language from selectLanguage() method
-        $resumeAddress = chooseResume::persian_resume();
+        $resumeFilePath = chooseResume::persian_resume();
 
         try{
-            $resumeFile = response()->file($resumeAddress);
+            $resumeFile = response()->file($resumeFilePath);
         } catch(\Exception $exception){
             throw new ResumeException();
         }
