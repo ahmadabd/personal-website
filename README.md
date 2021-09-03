@@ -2,14 +2,14 @@
 
 
 
-#### This is a website for some goals:
+#### Website goals:
 
-1. Displaying Personal Biography of User.
+1. Displaying user's Biography.
 
-2. Displaying users CV file and preparing it for download.
+2. Displaying  and preparing user's CV to download.
 
-3. Redirecting to Weblog Page.
-4. Showing Contact Me ways.
+3. Displaying weblog.
+4. Displaying user's social media accounts.
 
 
 
@@ -21,13 +21,13 @@
 
 1. Remove  /public directory from /storage directory.
 
-2. Remove 'selenium' and 'meilisearch' Config from docker-compose.yml file.
+2. Remove 'selenium' and 'meilisearch' from 'docker-compose.yml'.
 
-3. Compile mix for making css from scss file.
+3. Compile mix for making 'css' from 'scss' file if 'css' file doesn't exists.
 
-4. Change program port to 80 in docker-compose.yml file.
+4. Change website port from 8080 to 80 in 'docker-compose.yml'. 
 
-5. Config .env file for DataBase.
+5. Make and config '.env' file for DataBase.
 
 6. Remove /storage/logs/login_register_routeAccess_check.log
 
@@ -37,6 +37,6 @@
 
 ------
 
-Programmer: Ahmad Abdollahzadeh
+Programmer's name: Ahmad Abdollahzadeh.
 
-Email: ahmadabdollahzade74@gmail.com
+Programmer's email: ahmadabdollahzade74@gmail.com
