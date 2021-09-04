@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Weblog;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-
 
 class WeblogRequest extends FormRequest
 {
@@ -16,7 +13,7 @@ class WeblogRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user();
+        return true;
     }
 
     /**

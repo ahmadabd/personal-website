@@ -14,15 +14,22 @@ class ProfileController extends Controller
 {
     public function show_profileName_editPage()
     {
-        $profileName = Auth::user()->name;
+        /**
+         * Show profileName edit page to admin
+         */
+        $username = Auth::user()->name;
 
-        return view('profileName', ['profileName' => $profileName]);
+        return view('profileName', ['profileName' => $username]);
     }
+
 
     public function store_new_profileName(ChangeProfileRequest $request)
     {
-        $userId = auth()->user()->id;
+        /**
+         * store new profile name in User.name field
+         */
 
+        $userId = auth()->user()->id;
         $profileName = $request->validated()["profileName"];
 
         User::where('id', $userId)->update([
@@ -34,13 +41,21 @@ class ProfileController extends Controller
         return redirect()->route('change_profileName');
     }
 
+
     public function show_profilePic_editPage()
     {
+        /**
+         * show profile picture edit page to admin
+         */
         return view('profilePic');
     }
 
+
     public function store_new_profilePic(ProfilePicRequest $request)
     {
+        /**
+         * store profile picture in database
+         */
         $userId = auth()->user()->id;
 
         if ($request->file()){

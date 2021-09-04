@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class ChangeProfileRequest extends FormRequest
 {
@@ -14,7 +14,7 @@ class ChangeProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user();
+        return true;
     }
 
     /**

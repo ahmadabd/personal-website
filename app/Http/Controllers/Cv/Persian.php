@@ -11,12 +11,12 @@ class Persian implements Language{
 
     public function language()
     {
-        $fileObject = File::where('file_type', $this->fileType);
+        $file = File::where('file_type', $this->fileType);
 
         // Get persian resume from File Model
-        if($fileObject->exists()){
+        if($file->exists()){
             
-            $profilePicturePath = $fileObject->get()[0]->file_path;
+            $profilePicturePath = $file->get()[0]->file_path;
             $profilePicture = 'storage/'.$profilePicturePath;
             
             return $profilePicture;

@@ -3,13 +3,13 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class ResumeRequest extends FormRequest
 {
     public function authorize()
     {
-        return Auth::user();
+        return true;
     }
 
     public function rules()

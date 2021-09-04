@@ -13,17 +13,16 @@ class PersianResume implements FileImp {
 
     public function remove_old_file($userId){
         // delete old resume
-        $fileObjects = File::where('file_type', $this->fileType);
+        $file = File::where('file_type', $this->fileType);
 
-        if($fileObjects->exists()){
+        if($file->exists()){
             
-            $oldProfilePath = $fileObjects->where('user_id', $userId)->get()[0]->file_path;
+            $oldProfilePath = $file->where('user_id', $userId)->get()[0]->file_path;
             
             // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();
             
             if (Storage::disk('public')->exists($oldProfilePath)){
-                    
                 // Delete old profile picture from storage/public/profile
                 Storage::disk('public')->delete($oldProfilePath);
             }

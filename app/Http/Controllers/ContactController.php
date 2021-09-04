@@ -35,26 +35,26 @@ class ContactController extends Controller
          * Show ContactMe data to clients
          */
 
-        $contactLinks = [];
+        $contactMeLinks = [];
 
         if (Contact::exists()){
             // Get data from database
 
-            $databseValues = Contact::get()[0];
+            $contact = Contact::get()[0];
 
             foreach ($this->icons as $icon){
-                $contactName = array_keys($this->icons, $icon)[0];
-                if ($databseValues[$contactName]){
-                    $contactLinks[$contactName] = [$icon, $databseValues[$contactName]];
+                $contactMeKey = array_keys($this->icons, $icon)[0];
+                if ($contact->$contactMeKey){
+                    $contactMeLinks[$contactMeKey] = [$icon, $contact->$contactMeKey];
                 }
             }
         }
-        if (count($contactLinks) == 0) {
+        if (count($contactMeLinks) == 0) {
             // We want to show failed message for when null stored contactMe 
             Message::failed("There is no Contact information.");
         }
 
-        return view('contactMe', ['contactLinks' => $contactLinks]);   
+        return view('contactMe', ['contactLinks' => $contactMeLinks]);   
     }
 
 
@@ -64,17 +64,17 @@ class ContactController extends Controller
          * Get data from database to show as value in input tag if exist 
          */ 
 
-        $contactsObject = Auth::user()->contact();
+        $contacts = Auth::user()->contact();
         
-        if ($contactsObject->exists()){
-            $databseValues = $contactsObject->get()[0];
+        if ($contacts->exists()){
+            $contactMe = $contacts->get()[0];
 
-            $this->contactMeList['email']     = $databseValues->email;
-            $this->contactMeList['linkedin']  = $databseValues->linkedin;
-            $this->contactMeList['twitter']   = $databseValues->twitter;
-            $this->contactMeList['instagram'] = $databseValues->instagram;
-            $this->contactMeList['github']    = $databseValues->github;
-            $this->contactMeList['telegram']  = $databseValues->telegram;
+            $this->contactMeList['email']     = $contactMe->email;
+            $this->contactMeList['linkedin']  = $contactMe->linkedin;
+            $this->contactMeList['twitter']   = $contactMe->twitter;
+            $this->contactMeList['instagram'] = $contactMe->instagram;
+            $this->contactMeList['github']    = $contactMe->github;
+            $this->contactMeList['telegram']  = $contactMe->telegram;
         }
 
         return view('contactMe_edit', ["values" => $this->contactMeList]);
@@ -95,10 +95,10 @@ class ContactController extends Controller
             $this->contactMeList[$validatedKey] = $contactWay;
         }
 
-        $contactObject = Auth::user()->contact();
+        $contact = Auth::user()->contact();
 
-        if ($contactObject->exists()){
-            $contactMe = $contactObject->update([
+        if ($contact->exists()){
+            $contactMe = $contact->update([
                 'email'     => $this->contactMeList['email'],
                 'linkedin'  => $this->contactMeList['linkedin'],
                 'twitter'   => $this->contactMeList['twitter'],
@@ -115,7 +115,7 @@ class ContactController extends Controller
             }
         }  
         else{
-            $contactMe = $contactObject->create([
+            $contactMe = $contact->create([
                 'email'     => $this->contactMeList['email'],
                 'linkedin'  => $this->contactMeList['linkedin'],
                 'twitter'   => $this->contactMeList['twitter'],

@@ -8,11 +8,14 @@ use App\Models\Weblog;
 use App\Http\Controllers\FlashMessage\Message;
 use Illuminate\Support\Facades\Auth;
 
+
 class WeblogController extends Controller
 {
     public function show_weblog_to_client()
     {
-
+        /**
+         * send client to weblog page
+         */
         $weblogAddress = "";
 
         if (Weblog::exists()){
@@ -29,12 +32,15 @@ class WeblogController extends Controller
 
     public function show_weblog_editPage()
     {
+        /**
+         * show weblog edit page to admin
+         */
         $lastWeblogUrl = "";
         
-        $weblogObject = Auth::user()->weblog();
+        $weblog = Auth::user()->weblog();
 
-        if ($weblogObject->exists()){
-            $lastWeblogUrl = $weblogObject->get()[0]->weblog_address;
+        if ($weblog->exists()){
+            $lastWeblogUrl = $weblog->get()[0]->weblog_address;
         }
         return view('weblog_edit', ['lastWeblogUrl' => $lastWeblogUrl]);
     }
@@ -42,17 +48,20 @@ class WeblogController extends Controller
 
     public function store_weblog_url(WeblogRequest $request)
     {
-        $weblog_url = $request->validated()['weblogUrl'];
-        $weblogObject = Auth::user()->weblog();
+        /**
+         * store new weblog url to database
+         */
+        $weblogUrl = $request->validated()['weblogUrl'];
+        $weblog = Auth::user()->weblog();
 
-        if ($weblogObject->exists()){
-            $weblogObject->update([
-                'weblog_address' => $weblog_url
+        if ($weblog->exists()){
+            $weblog->update([
+                'weblog_address' => $weblogUrl
             ]);
         }    
         else{
-            $weblogObject->create([
-                'weblog_address' => $weblog_url
+            $weblog->create([
+                'weblog_address' => $weblogUrl
             ]);
         }
     

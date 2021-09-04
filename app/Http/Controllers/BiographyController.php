@@ -38,11 +38,11 @@ class BiographyController extends Controller
          * Get biography from DB and send it to dashboard view (biography_edit_page)
          */
         $biography = "";
-        $bioObj = Auth::user()->bio();
+        $bio = Auth::user()->bio();
         
-        if ($bioObj->exists()){
+        if ($bio->exists()){
             // Get biography from DB
-            $biography = $bioObj->get()[0]->biography;
+            $biography = $bio->get()[0]->biography;
         }
 
         return view('dashboard', ["biography" => $biography]);
@@ -55,17 +55,17 @@ class BiographyController extends Controller
          * Store or Update new biography
          */
         $biography = $request->validated()["biography"];
-        $bioObject = Auth::user()->bio();
+        $bio = Auth::user()->bio();
 
-        if ($bioObject->exists()){
+        if ($bio->exists()){
             // Update last biography
-            $bioObject->update([
+            $bio->update([
                 'biography' => $biography,
             ]);
         }
         else{
             // Store new biography
-            $bioObject->create([
+            $bio->create([
                 'biography' => $biography,
             ]);    
         }
