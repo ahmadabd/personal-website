@@ -19,7 +19,7 @@ class ProfilePicture implements FileImp {
         
         if($fileObjects->exists()){
             
-            $oldProfilePath = $fileObjects->where('user_id', $userId)->get()[0]['file_path'];
+            $oldProfilePath = $fileObjects->where('user_id', $userId)->get()[0]->file_path;
             
             // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();

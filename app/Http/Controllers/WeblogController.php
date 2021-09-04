@@ -16,7 +16,7 @@ class WeblogController extends Controller
         $weblogAddress = "";
 
         if (Weblog::exists()){
-            $weblogAddress = Weblog::get()[0]['weblog_address'];
+            $weblogAddress = Weblog::get()[0]->weblog_address;
         }
 
         try{
@@ -34,7 +34,7 @@ class WeblogController extends Controller
         $weblogObject = Auth::user()->weblog();
 
         if ($weblogObject->exists()){
-            $lastWeblogUrl = $weblogObject->get()[0]['weblog_address'];
+            $lastWeblogUrl = $weblogObject->get()[0]->weblog_address;
         }
         return view('weblog_edit', ['lastWeblogUrl' => $lastWeblogUrl]);
     }

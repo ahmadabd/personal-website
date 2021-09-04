@@ -25,7 +25,7 @@ class BiographyController extends Controller
         }
         else{
             // Get biography from DataBase
-            $biography = Bio::get()[0]['biography'];
+            $biography = Bio::get()[0]->biography;
         }
 
         return view('aboutMe', ['bio' => $biography]);
@@ -42,7 +42,7 @@ class BiographyController extends Controller
         
         if ($bioObj->exists()){
             // Get biography from DB
-            $biography = $bioObj->get()[0]['biography'];
+            $biography = $bioObj->get()[0]->biography;
         }
 
         return view('dashboard', ["biography" => $biography]);

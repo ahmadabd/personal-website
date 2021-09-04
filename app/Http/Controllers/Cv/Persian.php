@@ -16,7 +16,7 @@ class Persian implements Language{
         // Get persian resume from File Model
         if($fileObject->exists()){
             
-            $profilePicturePath = $fileObject->get()[0]['file_path'];
+            $profilePicturePath = $fileObject->get()[0]->file_path;
             $profilePicture = 'storage/'.$profilePicturePath;
             
             return $profilePicture;

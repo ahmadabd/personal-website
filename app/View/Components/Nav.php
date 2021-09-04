@@ -14,14 +14,14 @@ class Nav extends Component
     {
         // Get profile Name from User.name Model
         if (User::count() > 0){
-            $this->profileName = User::get('name')[0]['name'];
+            $this->profileName = User::get()[0]->name;
         }
 
         // Get profile Picture from File Model
         $fileObject = File::where('file_type', 'img');
 
         if($fileObject->exists()){
-            $profilePicturePath = $fileObject->get()[0]['file_path'];
+            $profilePicturePath = $fileObject->get()[0]->file_path;
             $this->profilePicture = 'storage/'.$profilePicturePath;
         }
     }

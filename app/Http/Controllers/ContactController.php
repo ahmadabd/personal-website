@@ -69,12 +69,12 @@ class ContactController extends Controller
         if ($contactsObject->exists()){
             $databseValues = $contactsObject->get()[0];
 
-            $this->contactMeList['email'] = $databseValues['email'];
-            $this->contactMeList['linkedin'] = $databseValues['linkedin'];
-            $this->contactMeList['twitter'] = $databseValues['twitter'];
-            $this->contactMeList['instagram'] = $databseValues['instagram'];
-            $this->contactMeList['github'] = $databseValues['github'];
-            $this->contactMeList['telegram'] = $databseValues['telegram'];
+            $this->contactMeList['email']     = $databseValues->email;
+            $this->contactMeList['linkedin']  = $databseValues->linkedin;
+            $this->contactMeList['twitter']   = $databseValues->twitter;
+            $this->contactMeList['instagram'] = $databseValues->instagram;
+            $this->contactMeList['github']    = $databseValues->github;
+            $this->contactMeList['telegram']  = $databseValues->telegram;
         }
 
         return view('contactMe_edit', ["values" => $this->contactMeList]);
