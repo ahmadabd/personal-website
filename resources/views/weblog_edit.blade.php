@@ -8,7 +8,7 @@
     <p class="content">
         <!-- Validation Errors --> 
         @error('weblogUrl')
-            <div class="alert alert-success">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             <br>       
         @enderror
 
@@ -20,7 +20,7 @@
             @csrf
 
             <label class="form-label" for="weblogUrl">Add your weblog url</label>
-            <input type="text" placeholder="https://..." class="form-control" value="{{ $lastWeblogUrl }}" id="weblogUrl" name="weblogUrl" required />
+            <input type="text" placeholder="https://..." class="form-control" value="{{ $lastWeblogUrl }}" id="weblogUrl" name="weblogUrl" />
             <br>
             <button name="submit" class="btn btn-success">store</button>
         </form>

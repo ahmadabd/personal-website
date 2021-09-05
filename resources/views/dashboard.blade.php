@@ -20,7 +20,7 @@
             @csrf
             <div class="form-group">
                 <label for="bio">Write your biography</label>
-                <textarea name="biography" class="form-control" id="bio" rows="8" placeholder="End each line with: \ For example:Im Ahmad Abdollahzade.\" required>{{ $biography }}</textarea>
+                <textarea name="biography" class="form-control" id="bio" rows="8" placeholder="End each line with: \ For example:Im Ahmad Abdollahzade.\">{{ $biography }}</textarea>
             </div>
 
             <button name="submit" class="btn btn-success">store</button>

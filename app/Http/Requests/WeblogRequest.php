@@ -24,7 +24,7 @@ class WeblogRequest extends FormRequest
     public function rules()
     {
         return [
-            'weblogUrl' => 'required|url'
+            'weblogUrl' => 'nullable|url'
         ];
     }
 }

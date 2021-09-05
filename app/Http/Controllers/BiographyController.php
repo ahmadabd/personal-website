@@ -19,8 +19,8 @@ class BiographyController extends Controller
 
         $biography = "";
 
-        if (!Bio::exists()){
-            // If there is no Biography stored in DataBase make a failed message
+        if (!Bio::exists() || !Bio::get()[0]->biography){
+            // If there is no Biography stored or biography field is null make a failed message
             Message::failed("There is no Biography information.");       
         }
         else{

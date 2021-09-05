@@ -18,7 +18,7 @@ class WeblogController extends Controller
          */
         $weblogAddress = "";
 
-        if (Weblog::exists()){
+        if (Weblog::exists() && Weblog::get()[0]->weblog_address){
             $weblogAddress = Weblog::get()[0]->weblog_address;
         }
 

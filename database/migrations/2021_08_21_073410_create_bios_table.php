@@ -19,7 +19,7 @@ class CreateBiosTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->text('biography');
+            $table->text('biography')->nullable();
             $table->timestamps();
         });
     }

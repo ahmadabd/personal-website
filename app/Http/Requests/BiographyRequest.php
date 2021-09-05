@@ -25,7 +25,7 @@ class BiographyRequest extends FormRequest
     public function rules()
     {
         return [
-            'biography' => 'required|between:10,500'
+            'biography' => 'between:0,500'
         ];
     }
 }
