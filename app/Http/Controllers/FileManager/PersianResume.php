@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\UploadFile;
+namespace App\Http\Controllers\FileManager;
 
 use App\Models\File;
 use Illuminate\Support\Str;

@@ -38,7 +38,7 @@
         <hr>
         <br>
 
-        @if ($resume != "")
+        @if ($isResume)
             <div>
                 <h3 class="title">Delete old resume</h3>
                 <p>if dont want to have resume to show, press Delete.</p>

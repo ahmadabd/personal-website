@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\UploadFile;
+namespace App\Http\Controllers\FileManager;
 
-use App\Http\Controllers\UploadFile\ProfilePicture;
-use App\Http\Controllers\UploadFile\PersianResume;
+use App\Http\Controllers\FileManager\ProfilePicture;
+use App\Http\Controllers\FileManager\PersianResume;
 
 
 class UploadManager {

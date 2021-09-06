@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\UploadFile;
+namespace App\Http\Controllers\FileManager;
 
 interface FileImp {
     public function remove_old_file($userId);

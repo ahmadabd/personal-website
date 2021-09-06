@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\ProfilePicRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UploadFile\UploadManager;
+use App\Http\Controllers\FileManager\UploadManager;
 use App\Http\Controllers\FlashMessage\Message;
 
 

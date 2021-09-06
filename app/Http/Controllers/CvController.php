@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Exceptions\ResumeException;
 use App\Http\Controllers\Cv\chooseResume;
 use App\Http\Requests\ResumeRequest;
-use App\Http\Controllers\UploadFile\UploadManager;
-use App\Http\Controllers\UploadFile\DeleteManager;
+use App\Http\Controllers\FileManager\UploadManager;
+use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\FlashMessage\Message;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,19 +33,12 @@ class CvController extends Controller
     public function show_resume_editPage()
     {
         /**
-         * Show resume edit page to admin
+         * Show resume edit page to admin.
+         * if old resume exists isResume equals to true else false
          */
+        $isResume = Auth::user()->file()->exists("persian_pdf");
 
-        $resume= "";
-        $files = Auth::user()->file()->get();
-
-        foreach ($files as $file){
-            if ($file->file_type == "persian_pdf"){
-               $resume = $file->file_path; 
-            }
-        }
-
-        return view('resume_editPage', ['resume' => $resume]);
+        return view('resume_editPage', ['isResume' => $isResume]);
     }
 
 
