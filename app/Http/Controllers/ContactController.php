@@ -5,6 +5,7 @@ use App\Http\Controllers\FlashMessage\Message;
 use App\Http\Requests\ContactMeRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Classes\ContactClass;
 
 
 class ContactController extends Controller
@@ -88,6 +89,7 @@ class ContactController extends Controller
          */
 
         $validated = $request->validated();
+        $contact = Auth::user()->contact();
 
         // store validated data as value in this->contactMeList array
         foreach($validated as $contactWay){
@@ -95,41 +97,13 @@ class ContactController extends Controller
             $this->contactMeList[$validatedKey] = $contactWay;
         }
 
-        $contact = Auth::user()->contact();
-
         if ($contact->exists()){
-            $contactMe = $contact->update([
-                'email'     => $this->contactMeList['email'],
-                'linkedin'  => $this->contactMeList['linkedin'],
-                'twitter'   => $this->contactMeList['twitter'],
-                'instagram' => $this->contactMeList['instagram'],
-                'github'    => $this->contactMeList['github'],
-                'telegram'  => $this->contactMeList['telegram']
-            ]);
-
-            if ($contactMe){
-                Message::success("Data successfully updated.");
-            }
-            else{
-                Message::failed("Cant update data");
-            }
+            // Update Contact Model if there are stored value in DataBase
+            ContactClass::update($contact, $this->contactMeList);
         }  
         else{
-            $contactMe = $contact->create([
-                'email'     => $this->contactMeList['email'],
-                'linkedin'  => $this->contactMeList['linkedin'],
-                'twitter'   => $this->contactMeList['twitter'],
-                'instagram' => $this->contactMeList['instagram'],
-                'github'    => $this->contactMeList['github'],
-                'telegram'  => $this->contactMeList['telegram']
-            ]);
-
-            if ($contactMe){
-                Message::success("Data successfully stored.");
-            }
-            else{
-                Message::failed("Cant update data");
-            }
+            // Store data in DataBase
+            ContactClass::create($contact, $this->contactMeList);
         }
         
         return redirect()->route('show_contactMe_edit');
