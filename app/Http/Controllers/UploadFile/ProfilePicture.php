@@ -15,11 +15,11 @@ class ProfilePicture implements FileImp {
     public function remove_old_file($userId){
 
         // delete old profile picture
-        $file = File::where('file_type', $this->fileType);
+        $file = File::where('user_id', $userId)->where('file_type', $this->fileType);
         
         if($file->exists()){
             
-            $oldProfilePath = $file->where('user_id', $userId)->get()[0]->file_path;
+            $oldProfilePath = $file->get()[0]->file_path;
             
             // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();

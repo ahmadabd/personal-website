@@ -6,8 +6,9 @@ use App\Exceptions\ResumeException;
 use App\Http\Controllers\Cv\chooseResume;
 use App\Http\Requests\ResumeRequest;
 use App\Http\Controllers\UploadFile\UploadManager;
+use App\Http\Controllers\UploadFile\DeleteManager;
 use App\Http\Controllers\FlashMessage\Message;
-
+use Illuminate\Support\Facades\Auth;
 
 class CvController extends Controller
 {
@@ -51,6 +52,25 @@ class CvController extends Controller
             Message::success("New Resume Successfully Added.");
         }
         
+        return redirect()->route('resume_editPage');
+    }
+
+
+    public function delete_old_resume()
+    {
+        $files = Auth::user()->file()->get();
+        $userId = auth()->user()->id;
+
+        foreach ($files as $file){
+            if ($file->file_type == "persian_pdf"){
+                DeleteManager::persian_resume($userId);
+                Message::success("Resume successfully deleted.");
+            }
+            else{
+                Message::failed("You dont have any resume to delete.");
+            }
+        }
+
         return redirect()->route('resume_editPage');
     }
 }

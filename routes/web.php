@@ -8,15 +8,10 @@ use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 
+/* Routes for show bio, weblog, resume and contactMe to client */
 Route::get('/', [BiographyController::class, 'show_biography_to_client'])->name('show_biography');
-
-
 Route::get('weblog', [WeblogController::class, "show_weblog_to_client"])->name("show_weblog");
-
-
 Route::get('resume', [CvController::class, 'show_resume_to_client'])->name('show_cv');
-
-
 Route::get('contact', [ContactController::class, 'show_contactMe_to_client'])->name('show_contactMe');
 
 
@@ -44,6 +39,8 @@ Route::middleware(["auth"])->group(function() {
         ->name('resume_editPage');
     Route::post('resume_edit', [CvController::class, 'store_new_resume'])
         ->name('store_resume');
+    Route::delete('delete_resume', [CvController::class, 'delete_old_resume'])
+        ->name('delete_resume');
 
     /* Routes for add or edit weblog url address */
     Route::get('weblog_edit', [WeblogController::class, 'show_weblog_editPage'])
