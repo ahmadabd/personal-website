@@ -35,7 +35,17 @@ class CvController extends Controller
         /**
          * Show resume edit page to admin
          */
-        return view('resume_editPage');
+
+        $resume= "";
+        $files = Auth::user()->file()->get();
+
+        foreach ($files as $file){
+            if ($file->file_type == "persian_pdf"){
+               $resume = $file->file_path; 
+            }
+        }
+
+        return view('resume_editPage', ['resume' => $resume]);
     }
 
 
@@ -58,18 +68,10 @@ class CvController extends Controller
 
     public function delete_old_resume()
     {
-        $files = Auth::user()->file()->get();
         $userId = auth()->user()->id;
 
-        foreach ($files as $file){
-            if ($file->file_type == "persian_pdf"){
-                DeleteManager::persian_resume($userId);
-                Message::success("Resume successfully deleted.");
-            }
-            else{
-                Message::failed("You dont have any resume to delete.");
-            }
-        }
+        DeleteManager::persian_resume($userId);
+        Message::success("Resume successfully deleted.");
 
         return redirect()->route('resume_editPage');
     }
