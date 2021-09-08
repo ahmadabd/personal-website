@@ -99,11 +99,19 @@ class ContactController extends Controller
 
         if ($contact->exists()){
             // Update Contact Model if there are stored value in DataBase
-            ContactClass::update($contact, $this->contactMeList);
+            $storedContact = ContactClass::update($contact, $this->contactMeList);
         }  
         else{
             // Store data in DataBase
-            ContactClass::create($contact, $this->contactMeList);
+            $storedContact = ContactClass::create($contact, $this->contactMeList);
+        }
+
+        // Send Success or Failed Message
+        if ($storedContact){
+            Message::success("Data successfully stored.");
+        }
+        else{
+            Message::failed("Cant store data.");
         }
         
         return redirect()->route('show_contactMe_edit');

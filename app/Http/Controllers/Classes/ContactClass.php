@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Classes;
-use App\Http\Controllers\FlashMessage\Message;
-
 
 class ContactClass {
     public static function Update($contact, $contactMeList)
@@ -16,12 +14,7 @@ class ContactClass {
             'telegram'  => $contactMeList['telegram']
         ]);
 
-        if ($updateContact){
-            Message::success("Data successfully updated.");
-        }
-        else{
-            Message::failed("Cant update data");
-        }
+       return $updateContact;
     }
 
     public static function Create($contact, $contactMeList)
@@ -35,11 +28,6 @@ class ContactClass {
             'telegram'  => $contactMeList['telegram']
         ]);
 
-        if ($createContact){
-            Message::success("Data successfully stored.");
-        }
-        else{
-            Message::failed("Cant update data");
-        }
+       return $createContact;
     }
 }
