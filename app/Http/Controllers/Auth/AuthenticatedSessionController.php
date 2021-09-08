@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Mail\MailSender;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -32,7 +33,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        //dd(Auth::user()->name);
+        // Send Notification Email when user login
+        $name = Auth::user()->name;
+        $email = Auth::user()->email;
+        MailSender::LoginNotify($name, $email);
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
