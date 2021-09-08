@@ -10,6 +10,6 @@ class LoginNotify implements MailImp{
         $date = date("Y/m/d H:i:s");
         $data = array( 'name' => $name, 'date' => $date );
         
-        Mail::to($email)->send(new LoginNotificationMail($data));
+        Mail::to($email)->queue(new LoginNotificationMail($data));
     }
 }
