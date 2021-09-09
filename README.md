@@ -31,6 +31,8 @@
 
 6. Remove /storage/logs/login_register_routeAccess_check.log
 
+7. Email sends in queue so run "php artisan queue:Work"
+
 ------
 
 ##### Contact Me Icons are from https://blade-ui-kit.com/blade-icons website. 
