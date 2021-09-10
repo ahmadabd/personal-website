@@ -7,7 +7,6 @@ use App\Http\Requests\WeblogRequest;
 use App\Models\Weblog;
 use App\Http\Controllers\FlashMessage\Message;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Classes\WeblogStoreClass;
 
 
 class WeblogController extends Controller
@@ -52,13 +51,12 @@ class WeblogController extends Controller
         /**
          * store new weblog url to database
          */
-        $weblogUrl = $request->validated()['weblogUrl'];
         $weblog = Auth::user()->weblog();
 
         // Update weblog Model if there are stored value in DataBase else Create
         $storedWeblog = ($weblog->exists())
-        ? WeblogStoreClass::update($weblog, $weblogUrl)
-        : WeblogStoreClass::create($weblog, $weblogUrl);
+        ? $weblog->update($request->validated())
+        : $weblog->create($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message        
         ($storedWeblog)

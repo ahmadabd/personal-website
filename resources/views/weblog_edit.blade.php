@@ -7,7 +7,7 @@
     <hr>
     <p class="content">
         <!-- Validation Errors --> 
-        @error('weblogUrl')
+        @error('weblog_address')
             <div class="alert alert-danger">{{ $message }}</div>
             <br>       
         @enderror
@@ -21,8 +21,8 @@
         <form action="{{ route('store_weblog') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <label class="form-label" for="weblogUrl">Add your weblog url</label>
-            <input type="text" placeholder="https://..." class="form-control" value="{{ $lastWeblogUrl }}" id="weblogUrl" name="weblogUrl" />
+            <label class="form-label" for="weblog_address">Add your weblog url</label>
+            <input type="text" placeholder="https://..." class="form-control" value="{{ $lastWeblogUrl }}" id="weblog_address" name="weblog_address" />
             <br>
             <button name="submit" class="btn btn-success">store</button>
         </form>
