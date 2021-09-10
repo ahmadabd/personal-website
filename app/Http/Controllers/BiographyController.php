@@ -57,10 +57,12 @@ class BiographyController extends Controller
         $biography = $request->validated()["biography"];
         $bio = Auth::user()->bio();
 
+        // Update bio Model if there are stored value in DataBase else Create
         $storedBio = ($bio->exists()) 
         ? BiographyStoreClass::update($bio, $biography)
         : BiographyStoreClass::create($bio, $biography);
 
+        // if data has successfully stored in DB Send Success else send Failed Message
         ($storedBio)
         ? Message::success("Biography Successfully Changed.")
         : Message::failed("Biography cant store in DataBase.");

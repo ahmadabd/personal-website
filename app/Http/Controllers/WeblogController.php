@@ -7,6 +7,7 @@ use App\Http\Requests\WeblogRequest;
 use App\Models\Weblog;
 use App\Http\Controllers\FlashMessage\Message;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Classes\WeblogStoreClass;
 
 
 class WeblogController extends Controller
@@ -54,18 +55,15 @@ class WeblogController extends Controller
         $weblogUrl = $request->validated()['weblogUrl'];
         $weblog = Auth::user()->weblog();
 
-        if ($weblog->exists()){
-            $weblog->update([
-                'weblog_address' => $weblogUrl
-            ]);
-        }    
-        else{
-            $weblog->create([
-                'weblog_address' => $weblogUrl
-            ]);
-        }
-    
-        Message::success('Weblog address successfully stored in DataBase.');
+        // Update weblog Model if there are stored value in DataBase else Create
+        $storedWeblog = ($weblog->exists())
+        ? WeblogStoreClass::update($weblog, $weblogUrl)
+        : WeblogStoreClass::create($weblog, $weblogUrl);
+
+        // if data has successfully stored in DB Send Success else send Failed Message        
+        ($storedWeblog)
+        ? Message::success('Weblog address successfully stored in DataBase.')
+        : Message::failed('Weblog address cant store in DataBase.');
 
         return redirect()->route('weblog_edit');
     }
