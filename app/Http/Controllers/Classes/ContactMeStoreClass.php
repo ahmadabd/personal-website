@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Classes;
 
-class ContactClass {
+class ContactMeStoreClass {
     public static function Update($contact, $contactMeList)
     {
         $updateContact = $contact->update([

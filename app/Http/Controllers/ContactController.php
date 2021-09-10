@@ -5,7 +5,7 @@ use App\Http\Controllers\FlashMessage\Message;
 use App\Http\Requests\ContactMeRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Classes\ContactClass;
+use App\Http\Controllers\Classes\ContactMeStoreClass;
 
 
 class ContactController extends Controller
@@ -50,7 +50,7 @@ class ContactController extends Controller
                 }
             }
         }
-        if (count($contactMeLinks) == 0) {
+        if (empty($contactMeLinks)) {
             // We want to show failed message for when null stored contactMe 
             Message::failed("There is no Contact information.");
         }
@@ -99,8 +99,8 @@ class ContactController extends Controller
 
         // Update Contact Model if there are stored value in DataBase else Create new Contact Model
         $storedContact = ($contact->exists())
-            ? ContactClass::update($contact, $this->contactMeList)
-            : ContactClass::create($contact, $this->contactMeList);
+            ? ContactMeStoreClass::update($contact, $this->contactMeList)
+            : ContactMeStoreClass::create($contact, $this->contactMeList);
 
         // if storedContact == true Send Success else send Failed Message
         ($storedContact) 
