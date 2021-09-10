@@ -15,7 +15,7 @@ Route::get('/resume', [CvController::class, 'show_resume_to_client'])->name('sho
 Route::get('/contact', [ContactController::class, 'show_contactMe_to_client'])->name('show_contactMe');
 
 
-Route::group(["middleware" => "auth"], function() {
+Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
     /* Routes for add or edit Biography */
     Route::get('/dashboard', [BiographyController::class, 'show_biography_editPage'])
         ->name('edit_biography');
