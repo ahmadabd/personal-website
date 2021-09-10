@@ -14,7 +14,9 @@
 
         @if ( Session::get("success") )
             <p class="alert alert-success">{{ Session::get("success") }}</p>
-        @endif
+        @elseif( Session::get("failed") )
+            <p class="alert alert-danger">{{ Session::get("failed") }}</p>
+        @endif 
 
         <form action="{{ route('store_biography') }}" method="POST">
             @csrf

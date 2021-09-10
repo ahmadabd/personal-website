@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\FlashMessage\Message;
 use App\Http\Requests\BiographyRequest;
 use App\Models\Bio;
-
+use App\Http\Controllers\Classes\BiographyStoreClass;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -57,20 +57,13 @@ class BiographyController extends Controller
         $biography = $request->validated()["biography"];
         $bio = Auth::user()->bio();
 
-        if ($bio->exists()){
-            // Update last biography
-            $bio->update([
-                'biography' => $biography,
-            ]);
-        }
-        else{
-            // Store new biography
-            $bio->create([
-                'biography' => $biography,
-            ]);    
-        }
+        $storedBio = ($bio->exists()) 
+        ? BiographyStoreClass::update($bio, $biography)
+        : BiographyStoreClass::create($bio, $biography);
 
-        Message::success("Biography Successfully Changed.");
+        ($storedBio)
+        ? Message::success("Biography Successfully Changed.")
+        : Message::failed("Biography cant store in DataBase.");
         
         return redirect()->route('edit_biography');
     }

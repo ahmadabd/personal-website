@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Classes;
 class ContactMeStoreClass {
     public static function Update($contact, $contactMeList)
     {
-        $updateContact = $contact->update([
+        $updatedContact = $contact->update([
             'email'     => $contactMeList['email'],
             'linkedin'  => $contactMeList['linkedin'],
             'twitter'   => $contactMeList['twitter'],
@@ -14,12 +14,12 @@ class ContactMeStoreClass {
             'telegram'  => $contactMeList['telegram']
         ]);
 
-       return $updateContact;
+       return $updatedContact;
     }
 
     public static function Create($contact, $contactMeList)
     {
-        $createContact = $contact->create([
+        $createdContact = $contact->create([
             'email'     => $contactMeList['email'],
             'linkedin'  => $contactMeList['linkedin'],
             'twitter'   => $contactMeList['twitter'],
@@ -28,6 +28,6 @@ class ContactMeStoreClass {
             'telegram'  => $contactMeList['telegram']
         ]);
 
-       return $createContact;
+       return $createdContact;
     }
 }
