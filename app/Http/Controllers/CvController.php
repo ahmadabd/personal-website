@@ -10,7 +10,6 @@ use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\isReadable;
 
 class CvController extends Controller
 {
