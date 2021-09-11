@@ -60,8 +60,11 @@ class ProfileController extends Controller
 
         if ($request->file()){
             $profilePic = $request->file('profilePic');
-            UploadManager::profile_picture($profilePic, $userId);
-            Message::success("Profile Picture Successfully Changed.");
+            $storedProfilePicture = UploadManager::profile_picture($profilePic, $userId);
+            
+            ($storedProfilePicture)
+            ? Message::success("Profile Picture Successfully Changed.")
+            : Message::failed("Cant store new profile Picture.");
         }
         return redirect()->route('change_profilePic');
     }

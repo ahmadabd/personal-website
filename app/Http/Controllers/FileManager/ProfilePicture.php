@@ -29,6 +29,8 @@ class ProfilePicture implements FileImp {
                 Storage::disk('public')->delete($oldProfilePath);
             }
         }
+
+        return true;
     }
     
 
@@ -43,11 +45,13 @@ class ProfilePicture implements FileImp {
         // Picture stores in /storage/public/profile
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
         
-        File::create([
+        $storedProfilePicture = File::create([
             'user_id' => $userId,
             'name' => $fileName,
             'file_path' => $filePath,
             'file_type' => $this->fileType
         ]);
+
+        return $storedProfilePicture;
     }
 }

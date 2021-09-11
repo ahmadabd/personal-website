@@ -14,7 +14,8 @@ class DeleteManager {
 
     public function choose_deleter_class($selectedClass, $userId)
     {
-        $removeOldFile = (new self::$deleterClasses[$selectedClass])->remove_old_file($userId);
+        $deletedFile = (new self::$deleterClasses[$selectedClass])->remove_old_file($userId);
+        return $deletedFile;
     }
 
     public static function __callStatic($name, $arguments)

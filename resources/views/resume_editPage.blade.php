@@ -7,6 +7,9 @@
     @if ( Session::get("success") )
         <p class="alert alert-success">{{ Session::get("success") }}</p>
         <hr>
+    @elseif ( Session::get("failed") )
+        <p class="alert alert-danger">{{ Session::get("failed") }}</p>
+        <hr>
     @endif
     
     <p class="content">

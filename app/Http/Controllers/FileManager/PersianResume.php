@@ -26,7 +26,11 @@ class PersianResume implements FileImp {
                 // Delete old profile picture from storage/public/profile
                 Storage::disk('public')->delete($oldProfilePath);
             }
+            
+            return true;
         }
+
+        return false;
     }
     
     
@@ -41,11 +45,13 @@ class PersianResume implements FileImp {
         // Picture stores in /storage/public/profile
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
         
-        File::create([
+        $storedResume = File::create([
             'user_id' => $userId,
             'name' => $fileName,
             'file_path' => $filePath,
             'file_type' => $this->fileType
         ]);
+
+        return $storedResume;
     }
 }

@@ -14,8 +14,10 @@ class UploadManager {
 
     public function choose_uploader_class($selectedClass, $file, $userId)
     {
-        $removeOldFile = (new self::$uploaderClasses[$selectedClass])->remove_old_file($userId);
-        $addnewFile = (new self::$uploaderClasses[$selectedClass])->add_new_file($file, $userId);
+        (new self::$uploaderClasses[$selectedClass])->remove_old_file($userId);
+        $storedFile = (new self::$uploaderClasses[$selectedClass])->add_new_file($file, $userId);
+
+        return $storedFile;
     }
 
     public static function __callStatic($name, $arguments)

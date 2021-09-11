@@ -36,8 +36,11 @@ class CvController extends Controller
          * Show resume edit page to admin.
          * if old resume exists isResume equals to true else false
          */
-        $isResume = Auth::user()->file()->exists("persian_pdf");
-
+        $files = Auth::user()->file()->get();
+        foreach ($files as $f){
+            $isResume = ($f->file_type == "persian_pdf") ? true : false; 
+        }
+        
         return view('resume_editPage', ['isResume' => $isResume]);
     }
 
@@ -51,8 +54,11 @@ class CvController extends Controller
 
         if ($request->file()){
             $resumeFile = $request->file('resumeFile');
-            UploadManager::persian_resume($resumeFile, $userId);
-            Message::success("New Resume Successfully Added.");
+            $storedResume = UploadManager::persian_resume($resumeFile, $userId);
+            
+            ($storedResume)
+            ? Message::success("New Resume Successfully Added.")
+            : Message::failed("Cant store new resume.");
         }
         
         return redirect()->route('resume_editPage');
@@ -63,8 +69,11 @@ class CvController extends Controller
     {
         $userId = auth()->user()->id;
 
-        DeleteManager::persian_resume($userId);
-        Message::success("Resume successfully deleted.");
+        $deletedResume = DeleteManager::persian_resume($userId);
+        
+        ($deletedResume)
+        ? Message::success("Resume successfully deleted.")
+        : Message::failed("Cant delete old resume.");
 
         return redirect()->route('resume_editPage');
     }
