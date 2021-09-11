@@ -7,8 +7,10 @@ use App\Http\Controllers\Cv\chooseResume;
 use App\Http\Requests\ResumeRequest;
 use App\Http\Controllers\FileManager\UploadManager;
 use App\Http\Controllers\FileManager\DeleteManager;
-use App\Http\Controllers\FlashMessage\Message;
+use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isReadable;
 
 class CvController extends Controller
 {
@@ -37,10 +39,14 @@ class CvController extends Controller
          * if old resume exists isResume equals to true else false
          */
         $files = Auth::user()->file()->get();
+        $isResume = false;
+
         foreach ($files as $f){
-            $isResume = ($f->file_type == "persian_pdf") ? true : false; 
+            if ($f->file_type == "persian_pdf") {
+                $isResume = true;
+            } 
         }
-        
+    
         return view('resume_editPage', ['isResume' => $isResume]);
     }
 
@@ -56,9 +62,8 @@ class CvController extends Controller
             $resumeFile = $request->file('resumeFile');
             $storedResume = UploadManager::persian_resume($resumeFile, $userId);
             
-            ($storedResume)
-            ? Message::success("New Resume Successfully Added.")
-            : Message::failed("Cant store new resume.");
+            // if data has successfully stored in DB Send Success else send Failed Message
+            SuccessOrFailMessage::message($storedResume);
         }
         
         return redirect()->route('resume_editPage');
@@ -71,9 +76,8 @@ class CvController extends Controller
 
         $deletedResume = DeleteManager::persian_resume($userId);
         
-        ($deletedResume)
-        ? Message::success("Resume successfully deleted.")
-        : Message::failed("Cant delete old resume.");
+        // if data has successfully stored in DB Send Success else send Failed Message
+        SuccessOrFailMessage::message($deletedResume);
 
         return redirect()->route('resume_editPage');
     }

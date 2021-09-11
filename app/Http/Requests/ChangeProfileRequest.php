@@ -25,7 +25,7 @@ class ChangeProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'profileName' => 'required|string'
+            'name' => 'required|string'
         ];
     }
 }

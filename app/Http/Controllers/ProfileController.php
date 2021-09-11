@@ -7,7 +7,7 @@ use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\ProfilePicRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FileManager\UploadManager;
-use App\Http\Controllers\FlashMessage\Message;
+use App\Http\Controllers\Classes\SuccessOrFailMessage;
 
 
 class ProfileController extends Controller
@@ -30,13 +30,11 @@ class ProfileController extends Controller
          */
 
         $userId = auth()->user()->id;
-        $profileName = $request->validated()["profileName"];
 
-        User::where('id', $userId)->update([
-            'name' => $profileName,
-        ]);
+        $storedProfileName = User::where('id', $userId)->update($request->validated());
 
-        Message::success("Profile Name Successfully Changed.");
+        // if data has successfully stored in DB Send Success else send Failed Message
+        SuccessOrFailMessage::message($storedProfileName);
 
         return redirect()->route('change_profileName');
     }
@@ -62,9 +60,7 @@ class ProfileController extends Controller
             $profilePic = $request->file('profilePic');
             $storedProfilePicture = UploadManager::profile_picture($profilePic, $userId);
             
-            ($storedProfilePicture)
-            ? Message::success("Profile Picture Successfully Changed.")
-            : Message::failed("Cant store new profile Picture.");
+            SuccessOrFailMessage::message($storedProfilePicture);
         }
         return redirect()->route('change_profilePic');
     }

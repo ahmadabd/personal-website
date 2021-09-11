@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Exceptions\WeblogException;
 use App\Http\Requests\WeblogRequest;
 use App\Models\Weblog;
-use App\Http\Controllers\FlashMessage\Message;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Classes\SuccessOrFailMessage;
 
 
 class WeblogController extends Controller
@@ -58,11 +58,9 @@ class WeblogController extends Controller
         ? $weblog->update($request->validated())
         : $weblog->create($request->validated());
 
-        // if data has successfully stored in DB Send Success else send Failed Message        
-        ($storedWeblog)
-        ? Message::success('Weblog address successfully stored in DataBase.')
-        : Message::failed('Weblog address cant store in DataBase.');
-
+        // if data has successfully stored in DB Send Success else send Failed Message
+        SuccessOrFailMessage::message($storedWeblog);        
+        
         return redirect()->route('weblog_edit');
     }
 }

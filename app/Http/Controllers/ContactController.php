@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\FlashMessage\Message;
+use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use App\Http\Requests\ContactMeRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +52,7 @@ class ContactController extends Controller
         }
         if (empty($contactMeLinks)) {
             // We want to show failed message for when null stored contactMe 
-            Message::failed("There is no Contact information.");
+            SuccessOrFailMessage::Failed();
         }
 
         return view('contactMe', ['contactLinks' => $contactMeLinks]);   
@@ -103,9 +103,7 @@ class ContactController extends Controller
             : ContactMeStoreClass::create($contact, $this->contactMeList);
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        ($storedContact) 
-        ? Message::success("Data successfully stored.")
-        : Message::failed("Cant store data.");
+        SuccessOrFailMessage::message($storedContact);
         
         return redirect()->route('show_contactMe_edit');
     }

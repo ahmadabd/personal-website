@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\FlashMessage\Message;
+use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use App\Http\Requests\BiographyRequest;
 use App\Models\Bio;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ class BiographyController extends Controller
 
         if (!Bio::exists() || !Bio::get()[0]->biography){
             // If there is no Biography stored or biography field is null make a failed message
-            Message::failed("There is no Biography information.");       
+            SuccessOrFailMessage::Failed();   
         }
         else{
             // Get biography from DataBase
@@ -61,9 +61,7 @@ class BiographyController extends Controller
         : $bio->create($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        ($storedBio)
-        ? Message::success("Biography Successfully Changed.")
-        : Message::failed("Biography cant store in DataBase.");
+        SuccessOrFailMessage::message($storedBio);
         
         return redirect()->route('edit_biography');
     }
