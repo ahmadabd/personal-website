@@ -5,7 +5,7 @@ use App\Http\Controllers\FlashMessage\Message;
 
 
 class SuccessOrFailMessage {
-    public static function message($mood)
+    public static function SuccessORFail($mood)
     {
         ($mood)
         ? self::Success()

@@ -34,7 +34,7 @@ class ProfileController extends Controller
         $storedProfileName = User::where('id', $userId)->update($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        SuccessOrFailMessage::message($storedProfileName);
+        SuccessOrFailMessage::SuccessORFail($storedProfileName);
 
         return redirect()->route('change_profileName');
     }
@@ -60,7 +60,7 @@ class ProfileController extends Controller
             $profilePic = $request->file('profilePic');
             $storedProfilePicture = UploadManager::profile_picture($profilePic, $userId);
             
-            SuccessOrFailMessage::message($storedProfilePicture);
+            SuccessOrFailMessage::SuccessORFail($storedProfilePicture);
         }
         return redirect()->route('change_profilePic');
     }

@@ -62,7 +62,7 @@ class CvController extends Controller
             $storedResume = UploadManager::persian_resume($resumeFile, $userId);
             
             // if data has successfully stored in DB Send Success else send Failed Message
-            SuccessOrFailMessage::message($storedResume);
+            SuccessOrFailMessage::SuccessORFail($storedResume);
         }
         
         return redirect()->route('resume_editPage');
@@ -76,7 +76,7 @@ class CvController extends Controller
         $deletedResume = DeleteManager::persian_resume($userId);
         
         // if data has successfully stored in DB Send Success else send Failed Message
-        SuccessOrFailMessage::message($deletedResume);
+        SuccessOrFailMessage::SuccessORFail($deletedResume);
 
         return redirect()->route('resume_editPage');
     }

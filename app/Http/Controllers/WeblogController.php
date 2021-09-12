@@ -59,7 +59,7 @@ class WeblogController extends Controller
         : $weblog->create($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        SuccessOrFailMessage::message($storedWeblog);        
+        SuccessOrFailMessage::SuccessORFail($storedWeblog);        
         
         return redirect()->route('weblog_edit');
     }

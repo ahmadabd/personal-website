@@ -103,7 +103,7 @@ class ContactController extends Controller
             : ContactMeStoreClass::create($contact, $this->contactMeList);
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        SuccessOrFailMessage::message($storedContact);
+        SuccessOrFailMessage::SuccessORFail($storedContact);
         
         return redirect()->route('show_contactMe_edit');
     }

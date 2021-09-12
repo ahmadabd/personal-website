@@ -61,7 +61,7 @@ class BiographyController extends Controller
         : $bio->create($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        SuccessOrFailMessage::message($storedBio);
+        SuccessOrFailMessage::SuccessORFail($storedBio);
         
         return redirect()->route('edit_biography');
     }
