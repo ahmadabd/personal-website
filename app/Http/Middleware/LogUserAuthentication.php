@@ -16,7 +16,7 @@ class LogUserAuthentication
             "routeName" => $request->route()->getName()
         );
 
-        AuthLog::dispatch($details);
+        AuthLog::dispatch($details)->delay(3);
      
         return $next($request); 
     }
