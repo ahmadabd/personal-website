@@ -44,6 +44,10 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link {{ (request()->routeIs('book_editPage')) ? 'active' : '' }}" aria-current="page" href="{{ route('book_editPage') }}">Books</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('logout') }}">logout</a>
                         </li>
                     @endauth

@@ -5,14 +5,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\WeblogController;
 use App\Http\Controllers\BiographyController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Book;
 
 /* Routes for show bio, weblog, resume and contactMe to client */
 Route::get('/', [BiographyController::class, 'show_biography_to_client'])->name('show_biography');
 Route::get('/weblog', [WeblogController::class, "show_weblog_to_client"])->name("show_weblog");
 Route::get('/resume', [CvController::class, 'show_resume_to_client'])->name('show_cv');
 Route::get('/contact', [ContactController::class, 'show_contactMe_to_client'])->name('show_contactMe');
+Route::get('/book', [BookController::class, 'show_books_to_client'])->name('show_books');
 
 
 Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
@@ -53,6 +56,12 @@ Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
         ->name('show_contactMe_edit');
     Route::post('/contact_edit', [ContactController::class, 'store_contactMe'])
         ->name('store_contactMe');
+    
+    /* Routes for add, delete or edit Books */
+    Route::get('/book_edit', [BookController::class, 'show_book_editPage'])
+        ->name('book_editPage');
+    Route::post('/book_store', [BookController::class, 'store_books'])
+        ->name('store_book');
 });
 
 

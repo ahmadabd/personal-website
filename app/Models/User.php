@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Contact::class);
     }
+
+    public function book()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

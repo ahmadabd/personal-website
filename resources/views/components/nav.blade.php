@@ -30,6 +30,9 @@
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="{{ route('show_weblog') }}">Weblog</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->routeIs('show_books')) ? 'active' : '' }}" href="{{ route('show_books') }}">Books</a>
+                    </li>
                 </ul>
             </div>
         </div>
