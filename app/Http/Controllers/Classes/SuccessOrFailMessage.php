@@ -5,20 +5,24 @@ use App\Http\Controllers\FlashMessage\Message;
 
 
 class SuccessOrFailMessage {
-    public static function SuccessORFail($mood)
+    public static function SuccessORFail(
+            $mood,
+            $successMsg = 'mission accomplished.',
+            $failedMsg = 'mission failed.'
+        )
     {
         ($mood)
-        ? self::Success()
-        : self::Failed();
+        ? self::Success($successMsg)
+        : self::Failed($failedMsg);
     }
 
-    public static function Success()
+    public static function Success($msg = 'mission accomplished.')
     {
-        Message::success('mission accomplished.');
+        Message::success($msg);
     }
-    
-    public static function Failed()
+
+    public static function Failed($msg = 'mission failed.')
     {
-        Message::failed('mission failed.');
+        Message::failed($msg);
     }
 }

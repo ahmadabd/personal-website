@@ -36,7 +36,7 @@ class WeblogController extends Controller
          * show weblog edit page to admin
          */
         $lastWeblogUrl = "";
-        
+
         $weblog = Auth::user()->weblog();
 
         if ($weblog->exists()){
@@ -59,8 +59,8 @@ class WeblogController extends Controller
         : $weblog->create($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message
-        SuccessOrFailMessage::SuccessORFail($storedWeblog);        
-        
+        SuccessOrFailMessage::SuccessORFail($storedWeblog, "Weblog stored Successsfully", "Failed to store new weblog address");
+
         return redirect()->route('weblog_edit');
     }
 }

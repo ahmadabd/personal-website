@@ -20,7 +20,7 @@ class BiographyController extends Controller
 
         if (!Bio::exists() || !Bio::get()[0]->biography){
             // If there is no Biography stored or biography field is null make a failed message
-            SuccessOrFailMessage::Failed();   
+            SuccessOrFailMessage::Failed("There is no available Biography to show.");
         }
         else{
             // Get biography from DataBase
@@ -38,7 +38,7 @@ class BiographyController extends Controller
          */
         $biography = "";
         $bio = Auth::user()->bio();
-        
+
         if ($bio->exists()){
             // Get biography from DB
             $biography = $bio->get()[0]->biography;
@@ -57,12 +57,12 @@ class BiographyController extends Controller
 
         // Update bio Model if there are stored value in DataBase else Create
         $storedBio = ($bio->exists())
-        ? $bio->update($request->validated()) 
+        ? $bio->update($request->validated())
         : $bio->create($request->validated());
 
         // if data has successfully stored in DB Send Success else send Failed Message
         SuccessOrFailMessage::SuccessORFail($storedBio);
-        
+
         return redirect()->route('edit_biography');
     }
 }

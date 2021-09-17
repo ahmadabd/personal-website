@@ -12,11 +12,11 @@ class ContactController extends Controller
 {
 
     private $contactMeList = [
-        'email'     => null, 
-        'linkedin'  => null, 
-        'twitter'   => null, 
-        'instagram' => null, 
-        'github'    => null, 
+        'email'     => null,
+        'linkedin'  => null,
+        'twitter'   => null,
+        'instagram' => null,
+        'github'    => null,
         'telegram'  => null
     ];
 
@@ -51,22 +51,22 @@ class ContactController extends Controller
             }
         }
         if (empty($contactMeLinks)) {
-            // We want to show failed message for when null stored contactMe 
-            SuccessOrFailMessage::Failed();
+            // We want to show failed message for when null stored contactMe
+            SuccessOrFailMessage::Failed("There are no way to Contact Me yet.");
         }
 
-        return view('contactMe', ['contactLinks' => $contactMeLinks]);   
+        return view('contactMe', ['contactLinks' => $contactMeLinks]);
     }
 
 
     public function show_contactMe_edit()
     {
         /**
-         * Get data from database to show as value in input tag if exist 
-         */ 
+         * Get data from database to show as value in input tag if exist
+         */
 
         $contacts = Auth::user()->contact();
-        
+
         if ($contacts->exists()){
             $contactMe = $contacts->get()[0];
 
@@ -83,8 +83,8 @@ class ContactController extends Controller
 
 
     public function store_contactMe(ContactMeRequest $request)
-    {   
-        /** 
+    {
+        /**
          * Value of input lists should not be same
          */
 
@@ -93,7 +93,7 @@ class ContactController extends Controller
 
         // store validated data as value in this->contactMeList array
         foreach($validated as $contactWay){
-            $validatedKey = array_keys($validated, $contactWay)[0];             
+            $validatedKey = array_keys($validated, $contactWay)[0];
             $this->contactMeList[$validatedKey] = $contactWay;
         }
 
@@ -104,7 +104,7 @@ class ContactController extends Controller
 
         // if data has successfully stored in DB Send Success else send Failed Message
         SuccessOrFailMessage::SuccessORFail($storedContact);
-        
+
         return redirect()->route('show_contactMe_edit');
     }
 }
