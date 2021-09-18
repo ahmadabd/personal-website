@@ -5,7 +5,7 @@ namespace App\Http\Controllers\FileManager;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
-
+use App\Models\Book;
 
 class BookPicture implements FileImp {
 
@@ -15,14 +15,14 @@ class BookPicture implements FileImp {
 
     public function remove_old_file($bookId){
         // delete old resume
-        $file = File::find($bookId);
+        $book = Book::where('file_id', $bookId)->with('file');
 
-        if($file->exists()){
+        if($book->exists()){
 
-            $oldProfilePath = $file->file_path;
+            $oldProfilePath = $book->file_path;
 
             // Delete old profile picture from Database
-            $file->delete();
+            $book->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 // Delete old profile picture from storage/public/profile
