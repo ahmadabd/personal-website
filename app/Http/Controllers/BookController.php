@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
-use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Http\Controllers\FileManager\UploadManager;
+use App\Http\Controllers\FileManager\BookAdd;
+use App\Http\Controllers\Classes\SuccessOrFailMessage;
+
 
 class BookController extends Controller
 {
@@ -14,14 +18,41 @@ class BookController extends Controller
 
     public function show_book_editPage()
     {
-        
+        // send a list of book id ro view
 
         return view('books_edit');
     }
 
-    public function store_books(BookRequest $reqest)
+    public function store_books(BookRequest $request)
     {
-        dd($reqest->validated());
+        $userId = auth()->user()->id;
+
+        if ($request->file()){
+            $book_picture = $request->file('book_picture');
+            $fileId = BookAdd::book_picture($book_picture, $userId);
+        }
+
+        $storedBook = Book::create([
+            'user_id'       => $userId,
+            'file_id'       => $fileId,
+            'title'         => $request->title,
+            'descriptions'  => $request->descriptions,
+            'url'           => $request->url
+        ]);
+
+        SuccessOrFailMessage::SuccessORFail($storedBook, "Successfully added new book", "Failed to add new book.");
+
         return redirect()->route('book_editPage');
+    }
+
+    public function update_books(BookRequest $request, Book $id)
+    {
+        # code...
+    }
+
+
+    public function delete_books(Book $id)
+    {
+        # code...
     }
 }

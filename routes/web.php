@@ -56,12 +56,16 @@ Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
         ->name('show_contactMe_edit');
     Route::post('/contact_edit', [ContactController::class, 'store_contactMe'])
         ->name('store_contactMe');
-    
+
     /* Routes for add, delete or edit Books */
     Route::get('/book_edit', [BookController::class, 'show_book_editPage'])
         ->name('book_editPage');
     Route::post('/book_store', [BookController::class, 'store_books'])
         ->name('store_book');
+    Route::put('/book_update/{id}', [BookController::class, 'update_books'])
+        ->name('update_book');
+    Route::delete('/book_delete/{id}', [BookController::class, 'delete_books'])
+        ->name('delete_book');
 });
 
 

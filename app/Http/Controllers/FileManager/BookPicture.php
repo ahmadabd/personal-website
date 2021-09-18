@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers\FileManager;
 
-use App\Models\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\File;
 
-class PersianResume implements FileImp {
 
-    private $FileStorePath = 'cv';
-    private $fileType = "persian_pdf";
+class BookPicture implements FileImp {
 
-    public function remove_old_file($userId){
+    private $FileStorePath = 'books';
+    private $fileType = "book_picture";
+
+
+    public function remove_old_file($bookId){
         // delete old resume
-        $file = File::where('user_id', $userId)->where('file_type', $this->fileType);
+        $file = File::find($bookId);
 
-        if($file->exists()){
+        if($file){
 
-            $oldProfilePath = $file->get()[0]->file_path;
+            $oldProfilePath = $file->file_path;
 
             // Delete old profile picture from Database
-            File::where('file_path', $oldProfilePath)->delete();
+            $file->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 // Delete old profile picture from storage/public/profile
@@ -42,7 +44,7 @@ class PersianResume implements FileImp {
         $randomFileName = Str::random(10);
         $fileName = $randomFileName.'.'.$fileFormat;
 
-        // Picture stores in /storage/public/profile
+        // Picture stores in /storage/public/book
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
         $storedResume = File::create([
@@ -52,6 +54,6 @@ class PersianResume implements FileImp {
             'file_type' => $this->fileType
         ]);
 
-        return $storedResume;
+        return $storedResume->id;
     }
 }

@@ -11,7 +11,7 @@ class Book extends Model
 
     protected $fillable = [
         'user_id',
-        'book_picture',
+        'file_id',
         'title',
         'descriptions',
         'url'
@@ -20,5 +20,10 @@ class Book extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function file()
+    {
+        return $this->hasOne(File::class);
     }
 }

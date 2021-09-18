@@ -1,4 +1,5 @@
-<form action="{{ route('store_book') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('update_book', ['book_id' => $book_id]) }}" method="POST" enctype="multipart/form-data">
+    @method('PUT')
     @csrf
     <div class="form-group">
         <label for="title">Title</label>
@@ -15,5 +16,5 @@
         <br>
     </div>
 
-    <button name="submit" class="btn btn-success">Store</button>
+    <button name="submit" class="btn btn-success">Update</button>
 </form>

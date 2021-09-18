@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers\FileManager;
 
-use App\Http\Controllers\FileManager\ProfilePicture;
-use App\Http\Controllers\FileManager\PersianResume;
 use App\Http\Controllers\FileManager\BookPicture;
 
 
-class UploadManager {
+class BookAdd {
     private static $uploaderClasses = [
-        'profile_picture' => ProfilePicture::class,
-        'persian_resume'  => PersianResume::class,
         'book_picture'    => BookPicture::class
     ];
 
     public function choose_uploader_class($selectedClass, $file, $id)
     {
-        (new self::$uploaderClasses[$selectedClass])->remove_old_file($id);
         $storedFile = (new self::$uploaderClasses[$selectedClass])->add_new_file($file, $id);
 
         return $storedFile;

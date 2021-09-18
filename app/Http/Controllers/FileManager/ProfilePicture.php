@@ -16,14 +16,14 @@ class ProfilePicture implements FileImp {
 
         // delete old profile picture
         $file = File::where('user_id', $userId)->where('file_type', $this->fileType);
-        
+
         if($file->exists()){
-            
+
             $oldProfilePath = $file->get()[0]->file_path;
-            
+
             // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();
-            
+
             if (Storage::disk('public')->exists($oldProfilePath)){
                 // Delete old profile picture from storage/public/profile
                 Storage::disk('public')->delete($oldProfilePath);
@@ -32,22 +32,22 @@ class ProfilePicture implements FileImp {
 
         return true;
     }
-    
+
 
     public function add_new_file($file, $userId){
 
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
-        
+
         $randomFileName = Str::random(10);
         $fileName = $randomFileName.'.'.$fileFormat;
 
         // Picture stores in /storage/public/profile
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
-        
+
         $storedProfilePicture = File::create([
-            'user_id' => $userId,
-            'name' => $fileName,
+            'user_id'   => $userId,
+            'name'      => $fileName,
             'file_path' => $filePath,
             'file_type' => $this->fileType
         ]);
