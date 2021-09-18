@@ -9,7 +9,7 @@ class MailSender {
         'LoginNotify' => LoginNotify::class
     ];
 
-    public function __construct(MailImp $mail, $name, $email)
+    public function mail_sender(MailImp $mail, $name, $email)
     {
         try {
             $mail->send_mail($name, $email);
@@ -27,6 +27,10 @@ class MailSender {
             dd("{$name} class dosent exists.");
         }
 
-        (new MailSender(new self::$MailClasses[$name], $arguments[0], $arguments[1]));
+        return (new MailSender)->mail_sender(
+            new self::$MailClasses[$name],
+            $arguments[0],
+            $arguments[1]
+        );
     }
 }

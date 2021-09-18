@@ -11,12 +11,10 @@ class chooseResume{
         'persian_resume' => Persian::class,
     ];
 
-    private function choose_resume_language($selectedLanguage)
+    private function choose_resume_language(Language $language)
     {
         // Call language method of the Selected Language Class
-        $resumeDirectoryAddress = (new self::$resumeLanguages[$selectedLanguage])->language();
-
-        return $resumeDirectoryAddress;
+        return $language->language();
     }
 
     public static function __callStatic($name, $arguments)
@@ -27,6 +25,6 @@ class chooseResume{
             dd("{$name} is Invalid method");
         }
 
-        return (new chooseResume)->choose_resume_language($name);
+        return (new chooseResume)->choose_resume_language(new self::$resumeLanguages[$name]);
     }
 }

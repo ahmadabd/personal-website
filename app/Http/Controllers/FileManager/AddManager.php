@@ -9,25 +9,27 @@ use App\Http\Controllers\FileManager\BookPicture;
  * its just for adding new File
  */
 class AddManager {
-    private static $uploaderClasses = [
+    private static $classes = [
         'book_picture'    => BookPicture::class
     ];
 
-    public function choose_uploader_class($selectedClass, $file, $id)
+    public function choose_uploader_class(FileImp $fileClass, $file, $id)
     {
-        $storedFile = (new self::$uploaderClasses[$selectedClass])->add_new_file($file, $id);
-
-        return $storedFile;
+        return $fileClass->add_new_file($file, $id);
     }
 
     public static function __callStatic($name, $arguments)
     {
         // Check if selected uploader class is not in $uploaderClasses return error
-        if (!array_key_exists($name, self::$uploaderClasses)){
+        if (!array_key_exists($name, self::$classes)){
 
             dd("{$name} is Invalid method");
         }
 
-        return (new AddManager)->choose_uploader_class($name, $arguments[0], $arguments[1]);
+        return (new AddManager)->choose_uploader_class(
+            new self::$classes[$name],
+            $arguments[0],
+            $arguments[1]
+        );
     }
 }
