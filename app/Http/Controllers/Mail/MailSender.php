@@ -9,10 +9,11 @@ class MailSender {
         'LoginNotify' => LoginNotify::class
     ];
 
-    public function choose_class($mailClass, $name, $email)
+
+    function __construct(MailImp $mail, $name, $email)
     {
         try {
-            return (new self::$MailClasses[$mailClass])->send_mail($name, $email);
+            return $mail->send_mail($name, $email);
         }
         catch (Exception $e){
             // Dont show error if email cant send
@@ -27,6 +28,6 @@ class MailSender {
             dd("{$name} class dosent exists.");
         }
 
-        return (new MailSender)->choose_class($name, $arguments[0], $arguments[1]);
+        return (new MailSender(new self::$MailClasses[$name], $arguments[0], $arguments[1]));
     }
 }
