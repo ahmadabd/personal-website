@@ -8,7 +8,7 @@ use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Book;
+
 
 /* Routes for show bio, weblog, resume and contactMe to client */
 Route::get('/', [BiographyController::class, 'show_biography_to_client'])->name('show_biography');
