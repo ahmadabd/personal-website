@@ -11,6 +11,6 @@ class Success implements FlashMessage{
 
     public function message($messageValueToShow)
     {
-        return session()->flash($this->messageTypeName, $messageValueToShow);
+        session()->flash($this->messageTypeName, $messageValueToShow);
     }
 }

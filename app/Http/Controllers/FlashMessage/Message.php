@@ -15,7 +15,7 @@ class Message{
 
     function __construct(FlashMessage $message, $messageValueToShow)
     {
-        return $message->message($messageValueToShow);
+        $message->message($messageValueToShow);
     }
 
     public static function __callStatic($name, $arguments)
@@ -26,6 +26,6 @@ class Message{
             dd("{$name} is Invalid method");
         }
 
-        return (new Message(new self::$messageTypeNames[$name], $arguments[0]));
+        (new Message(new self::$messageTypeNames[$name], $arguments[0]));
     }
 }

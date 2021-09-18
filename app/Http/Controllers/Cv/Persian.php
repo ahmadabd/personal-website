@@ -15,11 +15,11 @@ class Persian implements Language{
 
         // Get persian resume from File Model
         if($file->exists()){
-            
-            $profilePicturePath = $file->get()[0]->file_path;
-            $profilePicture = 'storage/'.$profilePicturePath;
-            
-            return $profilePicture;
+
+            $persian_resume_path = $file->get()[0]->file_path;
+            return 'storage/'.$persian_resume_path;
         }
+
+        return false;
     }
-}   
+}
