@@ -17,7 +17,7 @@ class BookPicture implements FileImp {
         // delete old resume
         $file = File::find($bookId);
 
-        if($file){
+        if($file->exists()){
 
             $oldProfilePath = $file->file_path;
 

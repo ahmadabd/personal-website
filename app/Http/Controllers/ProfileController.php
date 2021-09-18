@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\ProfilePicRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\FileManager\UploadManager;
+use App\Http\Controllers\FileManager\UpdateManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
 
 
@@ -58,8 +58,8 @@ class ProfileController extends Controller
 
         if ($request->file()){
             $profilePic = $request->file('profilePic');
-            $storedProfilePicture = UploadManager::profile_picture($profilePic, $userId);
-            
+            $storedProfilePicture = UpdateManager::profile_picture($profilePic, $userId);
+
             SuccessOrFailMessage::SuccessORFail($storedProfilePicture);
         }
         return redirect()->route('change_profilePic');

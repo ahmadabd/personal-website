@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\ResumeException;
 use App\Http\Controllers\Cv\chooseResume;
 use App\Http\Requests\ResumeRequest;
-use App\Http\Controllers\FileManager\UploadManager;
+use App\Http\Controllers\FileManager\UpdateManager;
 use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class CvController extends Controller
 {
     public function show_resume_to_client()
-    {   
+    {
         /**
          * Show Resume file to client
          */
@@ -26,7 +26,7 @@ class CvController extends Controller
         } catch(\Exception $exception){
             throw new ResumeException();
         }
-        
+
         return $resumeFile;
     }
 
@@ -43,9 +43,9 @@ class CvController extends Controller
         foreach ($files as $f){
             if ($f->file_type == "persian_pdf") {
                 $isResume = true;
-            } 
+            }
         }
-    
+
         return view('resume_editPage', ['isResume' => $isResume]);
     }
 
@@ -59,12 +59,12 @@ class CvController extends Controller
 
         if ($request->file()){
             $resumeFile = $request->file('resumeFile');
-            $storedResume = UploadManager::persian_resume($resumeFile, $userId);
-            
+            $storedResume = UpdateManager::persian_resume($resumeFile, $userId);
+
             // if data has successfully stored in DB Send Success else send Failed Message
             SuccessOrFailMessage::SuccessORFail($storedResume);
         }
-        
+
         return redirect()->route('resume_editPage');
     }
 
@@ -74,7 +74,7 @@ class CvController extends Controller
         $userId = auth()->user()->id;
 
         $deletedResume = DeleteManager::persian_resume($userId);
-        
+
         // if data has successfully stored in DB Send Success else send Failed Message
         SuccessOrFailMessage::SuccessORFail($deletedResume);
 

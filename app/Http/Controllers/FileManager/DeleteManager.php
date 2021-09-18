@@ -6,7 +6,9 @@ use App\Http\Controllers\FileManager\ProfilePicture;
 use App\Http\Controllers\FileManager\PersianResume;
 use App\Http\Controllers\FileManager\BookPicture;
 
-
+/*
+ * it uses for delete old file
+ */
 class DeleteManager {
     private static $deleterClasses = [
         'profile_picture' => ProfilePicture::class,

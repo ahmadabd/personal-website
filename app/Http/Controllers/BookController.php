@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
-use App\Http\Controllers\FileManager\UploadManager;
-use App\Http\Controllers\FileManager\BookAddManager;
+use App\Http\Controllers\FileManager\UpdateManager;
+use App\Http\Controllers\FileManager\AddManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
 
 
@@ -29,7 +29,7 @@ class BookController extends Controller
 
         if ($request->file()){
             $book_picture = $request->file('book_picture');
-            $fileId = BookAddManager::book_picture($book_picture, $userId);
+            $fileId = AddManager::book_picture($book_picture, $userId);
         }
 
         $storedBook = Book::create([

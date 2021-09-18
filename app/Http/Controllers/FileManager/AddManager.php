@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers\FileManager;
 
-use App\Http\Controllers\FileManager\ProfilePicture;
-use App\Http\Controllers\FileManager\PersianResume;
 use App\Http\Controllers\FileManager\BookPicture;
 
 
 /*
- * its for updating new file, means delete old file then add new file.
+ * its just for adding new File
  */
-class UploadManager {
+class AddManager {
     private static $uploaderClasses = [
-        'profile_picture' => ProfilePicture::class,
-        'persian_resume'  => PersianResume::class,
         'book_picture'    => BookPicture::class
     ];
 
     public function choose_uploader_class($selectedClass, $file, $id)
     {
-        (new self::$uploaderClasses[$selectedClass])->remove_old_file($id);
         $storedFile = (new self::$uploaderClasses[$selectedClass])->add_new_file($file, $id);
 
         return $storedFile;
@@ -33,6 +28,6 @@ class UploadManager {
             dd("{$name} is Invalid method");
         }
 
-        return (new UploadManager)->choose_uploader_class($name, $arguments[0], $arguments[1]);
+        return (new AddManager)->choose_uploader_class($name, $arguments[0], $arguments[1]);
     }
 }
