@@ -7,6 +7,9 @@ use App\Http\Controllers\FileManager\PersianResume;
 use App\Http\Controllers\FileManager\BookPicture;
 
 
+/*
+ * its for updating new file, means delete old file then add new file.
+ */
 class UploadManager {
     private static $uploaderClasses = [
         'profile_picture' => ProfilePicture::class,

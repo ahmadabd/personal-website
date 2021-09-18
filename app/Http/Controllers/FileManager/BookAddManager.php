@@ -5,7 +5,10 @@ namespace App\Http\Controllers\FileManager;
 use App\Http\Controllers\FileManager\BookPicture;
 
 
-class BookAdd {
+/*
+ * its just for adding picture of new book
+ */
+class BookAddManager {
     private static $uploaderClasses = [
         'book_picture'    => BookPicture::class
     ];
