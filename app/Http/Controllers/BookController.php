@@ -10,6 +10,8 @@ use App\Http\Controllers\FileManager\AddManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Controllers\Classes\BookStoreClass;
+
 
 class BookController extends Controller
 {
@@ -25,24 +27,17 @@ class BookController extends Controller
         return view('books_edit', ["books" => $books]);
     }
 
-    public function store_books(BookRequest $request)
+    public function store_books(BookRequest $request, BookStoreClass $store)
     {
         $userId = auth()->user()->id;
+        $validatedData = $request->validated();
 
         if ($request->file()){
             $book_picture = $request->file('book_picture');
-            $fileId = AddManager::book_picture($book_picture, $userId);
+            $fileData = AddManager::book_picture($book_picture, $userId);
         }
 
-        $storedBook = Book::create([
-            'user_id'       => $userId,
-            'file_id'       => $fileId,
-            'title'         => $request->title,
-            'descriptions'  => $request->descriptions,
-            'url'           => $request->url
-        ]);
-
-        SuccessOrFailMessage::SuccessORFail($storedBook, "Successfully added new book", "Failed to add new book.");
+        $store->create($fileData, $userId, $validatedData);
 
         return redirect()->route('book_editPage');
     }

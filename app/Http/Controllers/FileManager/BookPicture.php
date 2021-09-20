@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
 use App\Models\Book;
+use Illuminate\Support\Facades\DB;
 
 class BookPicture implements FileImp {
 
@@ -23,8 +24,16 @@ class BookPicture implements FileImp {
             $oldProfilePath = $profilePic->file_path;
 
             // Delete old profile picture from Database
-            $book->delete();
-            $profilePic->delete();
+            try {
+                DB::transaction(function () use ($book, $profilePic) {
+                    $book->delete();
+                    $profilePic->delete();
+                });
+            }
+            catch (\Exception $ex){
+                throw $ex;
+            }
+
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 // Delete old profile picture from storage/public/profile
@@ -49,13 +58,10 @@ class BookPicture implements FileImp {
         // Picture stores in /storage/public/book
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
-        $storedResume = File::create([
-            'user_id'   => $userId,
-            'name'      => $fileName,
-            'file_path' => $filePath,
-            'file_type' => $this->fileType
-        ]);
-
-        return $storedResume->id;
+        return [
+            "filePath" => $filePath,
+            "fileName" => $fileName,
+            "fileType" => $this->fileType
+        ];
     }
 }
