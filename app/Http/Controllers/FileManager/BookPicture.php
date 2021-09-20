@@ -15,14 +15,16 @@ class BookPicture implements FileImp {
 
     public function remove_old_file($bookId){
         // delete old resume
-        $book = Book::where('file_id', $bookId)->with('file');
+        $book = Book::find($bookId);
 
         if($book->exists()){
 
-            $oldProfilePath = $book->file_path;
+            $profilePic = File::find($book->file_id);
+            $oldProfilePath = $profilePic->file_path;
 
             // Delete old profile picture from Database
             $book->delete();
+            $profilePic->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 // Delete old profile picture from storage/public/profile

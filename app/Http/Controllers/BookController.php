@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use App\Http\Controllers\FileManager\UpdateManager;
+use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\FileManager\AddManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -18,9 +20,9 @@ class BookController extends Controller
 
     public function show_book_editPage()
     {
-        // send a list of book id ro view
+        $books = Auth::user()->book()->get();
 
-        return view('books_edit');
+        return view('books_edit', ["books" => $books]);
     }
 
     public function store_books(BookRequest $request)
@@ -51,8 +53,15 @@ class BookController extends Controller
     }
 
 
-    public function delete_books(Book $id)
+    public function delete_books(Book $book)
     {
-        # code...
+        if (! Gate::allows("delete", $book)){
+            abort(403);
+        }
+
+        $deletedBook = DeleteManager::book_picture($book->id);
+        SuccessOrFailMessage::SuccessORFail($deletedBook);
+
+        return redirect()->route('book_editPage');
     }
 }

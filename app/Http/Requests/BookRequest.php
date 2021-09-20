@@ -26,8 +26,8 @@ class BookRequest extends FormRequest
         return [
             'title'         => 'required|string',
             'descriptions'  => 'required|string',
-            'url'           => 'nullable|url',
-            'book_picture'  => 'nullable|image|max:10240'
+            'url'           => 'required|url',
+            'book_picture'  => 'required|image|max:10240'
         ];
 
     }
@@ -35,7 +35,7 @@ class BookRequest extends FormRequest
     public function messages()
     {
         return [
-            'book_picture.max' => 'File must not be greater than 10 MB' 
+            'book_picture.max' => 'File must not be greater than 10 MB'
         ];
     }
 }

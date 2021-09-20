@@ -64,7 +64,7 @@ Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
         ->name('store_book');
     Route::put('/book_update/{id}', [BookController::class, 'update_books'])
         ->name('update_book');
-    Route::delete('/book_delete/{id}', [BookController::class, 'delete_books'])
+    Route::delete('/book_delete/{book}', [BookController::class, 'delete_books'])
         ->name('delete_book');
 });
 
