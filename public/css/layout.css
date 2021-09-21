@@ -39,3 +39,11 @@
   display: inline-block;
   font-size: 15px;
 }
+
+.bookContainer {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: lightgray;
+}

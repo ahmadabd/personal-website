@@ -24,7 +24,7 @@
         @endif
 
         @foreach ($books as $book)
-            <div style="border: 1px solid gray; border-radius: 10px; margin-bottom: 15px; padding: 10px; background-color: lightgray">
+            <div class="bookContainer">
                 @include('Book.update', ['book' => $book])
                 @include('Book.delete', ['book' => $book])
             </div>

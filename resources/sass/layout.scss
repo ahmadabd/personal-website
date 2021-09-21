@@ -28,7 +28,7 @@ $iconUrlFontSize: 15px;
 .title {
     $title_color: #333333;
     $title_font: optima;
-    
+
     @include title_text($title_color, $title_font);
     padding-bottom: $title_paddingTop;
 }
@@ -36,7 +36,7 @@ $iconUrlFontSize: 15px;
 
 .content {
     $content_color: #463030;
-    $content_font: optima; 
+    $content_font: optima;
     $content_size: 17px;
     $align: left;
 
@@ -63,7 +63,7 @@ $iconUrlFontSize: 15px;
 
 .icons {
     display:inline-block;
-    width: $iconSize; 
+    width: $iconSize;
     height: $iconSize;
     color: $iconColor;
 }
@@ -71,4 +71,12 @@ $iconUrlFontSize: 15px;
 .iconUrl {
     display: inline-block;
     font-size: $iconUrlFontSize;
+}
+
+.bookContainer {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: lightgray;
 }
