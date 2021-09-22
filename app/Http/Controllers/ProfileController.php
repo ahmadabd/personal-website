@@ -8,8 +8,8 @@ use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\ProfilePicRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FileManager\UpdateManager;
-use App\Http\Controllers\Classes\SuccessOrFailMessage;
-use App\Http\Controllers\FileManager\ProfilePicture;
+use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
+
 
 class ProfileController extends Controller
 {

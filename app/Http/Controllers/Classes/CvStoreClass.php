@@ -13,6 +13,6 @@ class CvStoreClass {
             'file_type' => $fileData['fileType']
         ]);
 
-        return $storedResume->exists;
+        return $storedResume->exists();
     }
 }

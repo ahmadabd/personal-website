@@ -28,6 +28,6 @@ class ContactMeStoreClass {
             'telegram'  => $contactMeList['telegram']
         ]);
 
-       return $createdContact;
+       return $createdContact->exists();
     }
 }

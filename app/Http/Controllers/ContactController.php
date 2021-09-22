@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Classes\SuccessOrFailMessage;
+use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 use App\Http\Requests\ContactMeRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
@@ -84,25 +84,19 @@ class ContactController extends Controller
 
     public function store_contactMe(ContactMeRequest $request)
     {
-        /**
-         * Value of input lists should not be same
-         */
-
         $validated = $request->validated();
         $contact = Auth::user()->contact();
 
-        // store validated data as value in this->contactMeList array
+        // Fill $contactMeList values by validated Data
         foreach($validated as $contactWay){
             $validatedKey = array_keys($validated, $contactWay)[0];
             $this->contactMeList[$validatedKey] = $contactWay;
         }
 
-        // Update Contact Model if there are stored value in DataBase else Create
         $storedContact = ($contact->exists())
             ? ContactMeStoreClass::update($contact, $this->contactMeList)
             : ContactMeStoreClass::create($contact, $this->contactMeList);
 
-        // if data has successfully stored in DB Send Success else send Failed Message
         SuccessOrFailMessage::SuccessORFail($storedContact);
 
         return redirect()->route('show_contactMe_edit');

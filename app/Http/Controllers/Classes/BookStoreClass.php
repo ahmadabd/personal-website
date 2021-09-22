@@ -27,7 +27,7 @@ class BookStoreClass {
                     'url'           => $validatedData['url']
                 ]);
 
-                return $storedBook->exists;
+                return $storedBook->exists();
             });
         }
         catch (\Exception $ex){

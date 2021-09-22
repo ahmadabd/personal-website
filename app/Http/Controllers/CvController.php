@@ -7,7 +7,7 @@ use App\Http\Controllers\Cv\chooseResume;
 use App\Http\Requests\ResumeRequest;
 use App\Http\Controllers\FileManager\UpdateManager;
 use App\Http\Controllers\FileManager\DeleteManager;
-use App\Http\Controllers\Classes\SuccessOrFailMessage;
+use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Classes\CvStoreClass;
 

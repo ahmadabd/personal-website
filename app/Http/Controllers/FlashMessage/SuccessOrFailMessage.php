@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Classes;
-use App\Http\Controllers\FlashMessage\Message;
-
+namespace App\Http\Controllers\FlashMessage;
 
 class SuccessOrFailMessage {
     public static function SuccessORFail(

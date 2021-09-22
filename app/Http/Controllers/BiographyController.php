@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Classes\SuccessOrFailMessage;
+use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 use App\Http\Requests\BiographyRequest;
 use App\Models\Bio;
 use Illuminate\Support\Facades\Auth;

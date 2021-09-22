@@ -7,7 +7,7 @@ use App\Models\Book;
 use App\Http\Controllers\FileManager\UpdateManager;
 use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\FileManager\AddManager;
-use App\Http\Controllers\Classes\SuccessOrFailMessage;
+use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Classes\BookStoreClass;

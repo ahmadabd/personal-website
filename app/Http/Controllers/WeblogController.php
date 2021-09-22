@@ -6,7 +6,7 @@ use App\Exceptions\WeblogException;
 use App\Http\Requests\WeblogRequest;
 use App\Models\Weblog;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Classes\SuccessOrFailMessage;
+use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 
 
 class WeblogController extends Controller
