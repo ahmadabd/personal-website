@@ -13,11 +13,10 @@ class Persian implements Language{
     {
         $file = File::where('file_type', $this->fileType);
 
-        // Get persian resume from File Model
         if($file->exists()){
+            $persian_resume_file_path = $file->get()[0]->file_path;
 
-            $persian_resume_path = $file->get()[0]->file_path;
-            return 'storage/'.$persian_resume_path;
+            return 'storage/'.$persian_resume_file_path;
         }
 
         return false;

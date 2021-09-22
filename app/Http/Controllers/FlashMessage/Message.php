@@ -20,9 +20,7 @@ class Message{
 
     public static function __callStatic($name, $arguments)
     {
-        // Check if selected MessageType is not in $messageTypeNames return an Exception
         if (!array_key_exists($name, self::$messageTypeNames)){
-
             dd("{$name} is Invalid method");
         }
 

@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,7 +21,7 @@ class SendMail implements ShouldQueue
         $this->details = $details;
     }
 
-    
+
     public function handle()
     {
         $email = $this->details["email"];

@@ -32,14 +32,10 @@ class ContactController extends Controller
 
     public function show_contactMe_to_client()
     {
-        /**
-         * Show ContactMe data to clients
-         */
 
         $contactMeLinks = [];
 
         if (Contact::exists()){
-            // Get data from database
 
             $contact = Contact::get()[0];
 
@@ -51,7 +47,6 @@ class ContactController extends Controller
             }
         }
         if (empty($contactMeLinks)) {
-            // We want to show failed message for when null stored contactMe
             SuccessOrFailMessage::Failed("There are no way to Contact Me yet.");
         }
 
@@ -61,10 +56,6 @@ class ContactController extends Controller
 
     public function show_contactMe_edit()
     {
-        /**
-         * Get data from database to show as value in input tag if exist
-         */
-
         $contacts = Auth::user()->contact();
 
         if ($contacts->exists()){

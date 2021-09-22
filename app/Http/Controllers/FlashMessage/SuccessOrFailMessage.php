@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\FlashMessage;
 
+/**
+ * Provide default message for Fail or Success message
+ * It speeds Development time
+ */
 class SuccessOrFailMessage {
     public static function SuccessORFail(
             $mood,

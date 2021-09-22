@@ -12,18 +12,15 @@ class PersianResume implements FileImp {
     private $fileType = "persian_pdf";
 
     public function remove_old_file($userId){
-        // delete old resume
         $file = File::where('user_id', $userId)->where('file_type', $this->fileType);
 
         if($file->exists()){
 
             $oldProfilePath = $file->get()[0]->file_path;
 
-            // Delete old profile picture from Database
             File::where('file_path', $oldProfilePath)->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
-                // Delete old profile picture from storage/public/profile
                 Storage::disk('public')->delete($oldProfilePath);
             }
 
@@ -42,7 +39,7 @@ class PersianResume implements FileImp {
         $randomFileName = Str::random(10);
         $fileName = $randomFileName.'.'.$fileFormat;
 
-        // Picture stores in /storage/public/profile
+        // Picture stores in /storage/public/cv
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
         return [

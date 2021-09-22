@@ -23,9 +23,7 @@ class DeleteManager {
 
     public static function __callStatic($name, $arguments)
     {
-        // Check if selected deleter class is not in $deleterClasses return error
         if (!array_key_exists($name, self::$classes)){
-
             dd("{$name} is Invalid method");
         }
 

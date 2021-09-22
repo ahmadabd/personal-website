@@ -8,7 +8,7 @@ use App\Http\Controllers\FileManager\BookPicture;
 
 
 /*
- * its for updating new file, means delete old file then add new file.
+ * its for updating new file, First delete the old file then add new file.
  */
 class UpdateManager {
     private static $classes = [
@@ -25,9 +25,7 @@ class UpdateManager {
 
     public static function __callStatic($name, $arguments)
     {
-        // Check if selected uploader class is not in $uploaderClasses return error
         if (!array_key_exists($name, self::$classes)){
-
             dd("{$name} is Invalid method");
         }
 

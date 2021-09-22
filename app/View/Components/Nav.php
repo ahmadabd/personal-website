@@ -12,12 +12,10 @@ class Nav extends Component
     public $profilePicture;
     public function __construct()
     {
-        // Get profile Name from User.name Model
         if (User::count() > 0){
             $this->profileName = User::get()[0]->name;
         }
 
-        // Get profile Picture from File Model
         $profilePicture = File::where('file_type', 'img');
 
         if($profilePicture->exists()){
@@ -25,7 +23,7 @@ class Nav extends Component
             $this->profilePicture = '/storage/'.$profilePicturePath;
         }
     }
-    
+
     public function render()
     {
         return view('components.nav');

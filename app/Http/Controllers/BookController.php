@@ -17,20 +17,12 @@ class BookController extends Controller
 {
     public function show_books_to_client()
     {
-        /**
-         * Show users Books to Clients
-         */
-
         return view('books');
     }
 
 
     public function show_book_editPage()
     {
-        /**
-         * Show stored books for update, add and delete to admin
-         */
-
         $books = Auth::user()->book()->get();
 
         return view('books_edit', ["books" => $books]);
@@ -39,10 +31,6 @@ class BookController extends Controller
 
     public function store_books(BookRequest $request)
     {
-        /**
-         * Stores new book
-         */
-
         $userId = auth()->user()->id;
         $validatedData = $request->validated();
 
@@ -60,11 +48,6 @@ class BookController extends Controller
 
     public function update_books(BookRequest $request, Book $book)
     {
-        /**
-         * Update Old book completely (picture, url, title, descriptions)
-         * or just update (url, title, descriptions)
-         */
-
         if (! Gate::allows("update", $book)){
             abort(403);
         }
@@ -73,11 +56,21 @@ class BookController extends Controller
         $validatedData = $request->validated();
 
         if ($request->file()){
+            /**
+             * if book_picture should update:
+             * Remove old book picture and old book data from File and Book Model
+             * Then store new data by create method in File and Book model
+             */
+
             $book_picture = $request->file('book_picture');
             $fileData = UpdateManager::book_picture($book_picture, $book->id);
             $updatedBook = BookStoreClass::create($fileData, $userId, $validatedData, $book->id);
         }
         else{
+            /**
+             * if just title or url or description should update:
+             * just update them to Book Model
+             */
             $updatedBook = BookStoreClass::update($validatedData, $book->id);
         }
 
@@ -89,10 +82,6 @@ class BookController extends Controller
 
     public function delete_books(Book $book)
     {
-        /**
-         * Delete selected Book to delete
-         */
-
         if (! Gate::allows("delete", $book)){
             abort(403);
         }

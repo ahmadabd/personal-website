@@ -20,9 +20,7 @@ class AddManager {
 
     public static function __callStatic($name, $arguments)
     {
-        // Check if selected uploader class is not in $uploaderClasses return error
         if (!array_key_exists($name, self::$classes)){
-
             dd("{$name} is Invalid method");
         }
 

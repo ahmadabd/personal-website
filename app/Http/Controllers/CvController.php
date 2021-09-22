@@ -16,10 +16,6 @@ class CvController extends Controller
 {
     public function show_resume_to_client()
     {
-        /**
-         * Show Resume file to client
-         */
-
         $resumeFilePath = chooseResume::persian_resume();
 
         try{
@@ -34,11 +30,6 @@ class CvController extends Controller
 
     public function show_resume_editPage()
     {
-        /**
-         * Show resume edit page to admin.
-         * if old resume exists isResume equals to true else false
-         */
-
         $files = Auth::user()->file()->get();
         $isResume = false;
 
@@ -54,10 +45,6 @@ class CvController extends Controller
 
     public function store_new_resume(ResumeRequest $request)
     {
-        /**
-         * Store new resume file in database
-         */
-
         $userId = auth()->user()->id;
 
         if ($request->file()){
@@ -66,7 +53,6 @@ class CvController extends Controller
 
             $storedResume = CvStoreClass::create($userId, $fileData);
 
-            // if data has successfully stored in DB Send Success else send Failed Message
             SuccessOrFailMessage::SuccessORFail($storedResume);
         }
 
@@ -76,14 +62,9 @@ class CvController extends Controller
 
     public function delete_old_resume()
     {
-        /**
-         * Delete last stored Resume
-         */
         $userId = auth()->user()->id;
 
         $deletedResume = DeleteManager::persian_resume($userId);
-
-        // if data has successfully stored in DB Send Success else send Failed Message
         SuccessOrFailMessage::SuccessORFail($deletedResume);
 
         return redirect()->route('resume_editPage');

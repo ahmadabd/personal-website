@@ -8,13 +8,10 @@ use App\Models\File;
 use App\Models\Book;
 
 class BookPicture implements FileImp {
-
     private $FileStorePath = 'books';
     private $fileType = "book_picture";
 
-
     public function remove_old_file($bookId){
-        // delete old resume
         $book = Book::find($bookId);
 
         if($book->exists()){
@@ -22,12 +19,10 @@ class BookPicture implements FileImp {
             $profilePic = File::find($book->file_id);
             $oldProfilePath = $profilePic->file_path;
 
-            // Delete old profile picture from Database
             $book->delete();
             $profilePic->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
-                // Delete old profile picture from storage/public/profile
                 Storage::disk('public')->delete($oldProfilePath);
             }
 
