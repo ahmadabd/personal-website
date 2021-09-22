@@ -28,13 +28,15 @@ class ProfilePicture implements FileImp {
                 // Delete old profile picture from storage/public/profile
                 Storage::disk('public')->delete($oldProfilePath);
             }
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
 
-    public function add_new_file($file, $userId){
+    public function add_new_file($file){
 
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
@@ -45,13 +47,10 @@ class ProfilePicture implements FileImp {
         // Picture stores in /storage/public/profile
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
-        $storedProfilePicture = File::create([
-            'user_id'   => $userId,
-            'name'      => $fileName,
-            'file_path' => $filePath,
-            'file_type' => $this->fileType
-        ]);
-
-        return $storedProfilePicture;
+        return [
+            "filePath" => $filePath,
+            "fileName" => $fileName,
+            "fileType" => $this->fileType
+        ];
     }
 }

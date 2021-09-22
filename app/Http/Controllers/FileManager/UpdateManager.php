@@ -20,7 +20,7 @@ class UpdateManager {
     public function choose_uploader_class(FileImp $fileClass, $file, $id)
     {
         $fileClass->remove_old_file($id);
-        return $fileClass->add_new_file($file, $id);
+        return $fileClass->add_new_file($file);
     }
 
     public static function __callStatic($name, $arguments)

@@ -9,6 +9,7 @@ use App\Http\Controllers\FileManager\UpdateManager;
 use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Classes\CvStoreClass;
 
 
 class CvController extends Controller
@@ -59,7 +60,9 @@ class CvController extends Controller
 
         if ($request->file()){
             $resumeFile = $request->file('resumeFile');
-            $storedResume = UpdateManager::persian_resume($resumeFile, $userId);
+            $fileData = UpdateManager::persian_resume($resumeFile, $userId);
+
+            $storedResume = CvStoreClass::create($userId, $fileData);
 
             // if data has successfully stored in DB Send Success else send Failed Message
             SuccessOrFailMessage::SuccessORFail($storedResume);

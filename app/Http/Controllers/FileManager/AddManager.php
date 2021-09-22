@@ -13,9 +13,9 @@ class AddManager {
         'book_picture'    => BookPicture::class
     ];
 
-    public function choose_uploader_class(FileImp $fileClass, $file, $id)
+    public function choose_uploader_class(FileImp $fileClass, $file)
     {
-        return $fileClass->add_new_file($file, $id);
+        return $fileClass->add_new_file($file);
     }
 
     public static function __callStatic($name, $arguments)
@@ -28,8 +28,7 @@ class AddManager {
 
         return (new AddManager)->choose_uploader_class(
             new self::$classes[$name],
-            $arguments[0],
-            $arguments[1]
+            $arguments[0]
         );
     }
 }

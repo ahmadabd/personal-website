@@ -34,7 +34,7 @@ class PersianResume implements FileImp {
     }
 
 
-    public function add_new_file($file, $userId){
+    public function add_new_file($file){
 
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
@@ -45,13 +45,10 @@ class PersianResume implements FileImp {
         // Picture stores in /storage/public/profile
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
-        $storedResume = File::create([
-            'user_id'   => $userId,
-            'name'      => $fileName,
-            'file_path' => $filePath,
-            'file_type' => $this->fileType
-        ]);
-
-        return $storedResume;
+        return [
+            "filePath" => $filePath,
+            "fileName" => $fileName,
+            "fileType" => $this->fileType
+        ];
     }
 }

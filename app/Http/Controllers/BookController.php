@@ -34,7 +34,7 @@ class BookController extends Controller
 
         if ($request->file()){
             $book_picture = $request->file('book_picture');
-            $fileData = AddManager::book_picture($book_picture, $userId);
+            $fileData = AddManager::book_picture($book_picture);
         }
 
         $storedBook = BookStoreClass::create($fileData, $userId, $validatedData);

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Classes\ProfilePicStoreClass;
 use App\Models\User;
 use App\Http\Requests\ChangeProfileRequest;
 use App\Http\Requests\ProfilePicRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FileManager\UpdateManager;
 use App\Http\Controllers\Classes\SuccessOrFailMessage;
-
+use App\Http\Controllers\FileManager\ProfilePicture;
 
 class ProfileController extends Controller
 {
@@ -58,7 +59,9 @@ class ProfileController extends Controller
 
         if ($request->file()){
             $profilePic = $request->file('profilePic');
-            $storedProfilePicture = UpdateManager::profile_picture($profilePic, $userId);
+            $fileData = UpdateManager::profile_picture($profilePic, $userId);
+
+            $storedProfilePicture = ProfilePicStoreClass::create($fileData, $userId);
 
             SuccessOrFailMessage::SuccessORFail($storedProfilePicture);
         }

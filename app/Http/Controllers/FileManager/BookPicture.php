@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
 use App\Models\Book;
-use Illuminate\Support\Facades\DB;
 
 class BookPicture implements FileImp {
 
@@ -39,7 +38,7 @@ class BookPicture implements FileImp {
     }
 
 
-    public function add_new_file($file, $userId){
+    public function add_new_file($file){
 
         $spliteFile = explode(".", $file->getClientOriginalName());
         $fileFormat = end($spliteFile);
