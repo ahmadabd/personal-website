@@ -18,6 +18,7 @@ class ProfileController extends Controller
         /**
          * Show profileName edit page to admin
          */
+
         $username = Auth::user()->name;
 
         return view('profileName', ['profileName' => $username]);
@@ -46,6 +47,7 @@ class ProfileController extends Controller
         /**
          * show profile picture edit page to admin
          */
+
         return view('profilePic');
     }
 
@@ -55,6 +57,7 @@ class ProfileController extends Controller
         /**
          * store profile picture in database
          */
+
         $userId = auth()->user()->id;
 
         if ($request->file()){

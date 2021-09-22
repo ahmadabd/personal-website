@@ -38,6 +38,7 @@ class CvController extends Controller
          * Show resume edit page to admin.
          * if old resume exists isResume equals to true else false
          */
+
         $files = Auth::user()->file()->get();
         $isResume = false;
 
@@ -56,6 +57,7 @@ class CvController extends Controller
         /**
          * Store new resume file in database
          */
+
         $userId = auth()->user()->id;
 
         if ($request->file()){
@@ -74,6 +76,9 @@ class CvController extends Controller
 
     public function delete_old_resume()
     {
+        /**
+         * Delete last stored Resume
+         */
         $userId = auth()->user()->id;
 
         $deletedResume = DeleteManager::persian_resume($userId);

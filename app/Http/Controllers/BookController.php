@@ -17,18 +17,32 @@ class BookController extends Controller
 {
     public function show_books_to_client()
     {
+        /**
+         * Show users Books to Clients
+         */
+
         return view('books');
     }
 
+
     public function show_book_editPage()
     {
+        /**
+         * Show stored books for update, add and delete to admin
+         */
+
         $books = Auth::user()->book()->get();
 
         return view('books_edit', ["books" => $books]);
     }
 
+
     public function store_books(BookRequest $request)
     {
+        /**
+         * Stores new book
+         */
+
         $userId = auth()->user()->id;
         $validatedData = $request->validated();
 
@@ -43,8 +57,14 @@ class BookController extends Controller
         return redirect()->route('book_editPage');
     }
 
+
     public function update_books(BookRequest $request, Book $book)
     {
+        /**
+         * Update Old book completely (picture, url, title, descriptions)
+         * or just update (url, title, descriptions)
+         */
+
         if (! Gate::allows("update", $book)){
             abort(403);
         }
@@ -69,6 +89,10 @@ class BookController extends Controller
 
     public function delete_books(Book $book)
     {
+        /**
+         * Delete selected Book to delete
+         */
+
         if (! Gate::allows("delete", $book)){
             abort(403);
         }

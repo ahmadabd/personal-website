@@ -36,6 +36,7 @@ class BiographyController extends Controller
         /**
          * Get biography from DB and send it to dashboard view (biography_edit_page)
          */
+
         $biography = "";
         $bio = Auth::user()->bio();
 
@@ -53,6 +54,7 @@ class BiographyController extends Controller
         /**
          * Store or Update new biography
          */
+
         $bio = Auth::user()->bio();
 
         // Update bio Model if there are stored value in DataBase else Create

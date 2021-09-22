@@ -16,6 +16,7 @@ class WeblogController extends Controller
         /**
          * send client to weblog page
          */
+
         $weblogAddress = "";
 
         if (Weblog::exists() && Weblog::get()[0]->weblog_address){
@@ -35,6 +36,7 @@ class WeblogController extends Controller
         /**
          * show weblog edit page to admin
          */
+
         $lastWeblogUrl = "";
 
         $weblog = Auth::user()->weblog();
@@ -51,6 +53,7 @@ class WeblogController extends Controller
         /**
          * store new weblog url to database
          */
+
         $weblog = Auth::user()->weblog();
 
         // Update weblog Model if there are stored value in DataBase else Create
