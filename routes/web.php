@@ -62,7 +62,7 @@ Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
         ->name('book_editPage');
     Route::post('/book_store', [BookController::class, 'store_books'])
         ->name('store_book');
-    Route::put('/book_update/{id}', [BookController::class, 'update_books'])
+    Route::put('/book_update/{book}', [BookController::class, 'update_books'])
         ->name('update_book');
     Route::delete('/book_delete/{book}', [BookController::class, 'delete_books'])
         ->name('delete_book');

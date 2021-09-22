@@ -11,7 +11,7 @@ class BookStoreClass {
     public static function create($fileData, $userId, $validatedData)
     {
         try {
-            DB::transaction(function () use ($fileData, $userId, $validatedData) {
+            $storedBook = DB::transaction(function () use ($fileData, $userId, $validatedData) {
                 $storedResume = File::create([
                     'user_id'   => $userId,
                     'name'      => $fileData['fileName'],
@@ -19,19 +19,32 @@ class BookStoreClass {
                     'file_type' => $fileData["fileType"]
                 ]);
 
-                Book::create([
+                $storedBook = Book::create([
                     'user_id'       => $userId,
                     'file_id'       => $storedResume->id,
                     'title'         => $validatedData['title'],
                     'descriptions'  => $validatedData['descriptions'],
                     'url'           => $validatedData['url']
                 ]);
-            });
 
-            SuccessOrFailMessage::Success("Successfully added new book");
+                return $storedBook->exists;
+            });
         }
         catch (\Exception $ex){
             throw $ex;
         }
+
+        return $storedBook;
+    }
+
+    public static function update($validatedData, $bookId)
+    {
+        $updatedBook = Book::find($bookId)->update([
+            'title'         => $validatedData['title'],
+            'descriptions'  => $validatedData['descriptions'],
+            'url'           => $validatedData['url']
+        ]);
+
+        return $updatedBook;
     }
 }

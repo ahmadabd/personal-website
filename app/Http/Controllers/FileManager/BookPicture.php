@@ -24,16 +24,8 @@ class BookPicture implements FileImp {
             $oldProfilePath = $profilePic->file_path;
 
             // Delete old profile picture from Database
-            try {
-                DB::transaction(function () use ($book, $profilePic) {
-                    $book->delete();
-                    $profilePic->delete();
-                });
-            }
-            catch (\Exception $ex){
-                throw $ex;
-            }
-
+            $book->delete();
+            $profilePic->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 // Delete old profile picture from storage/public/profile
