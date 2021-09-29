@@ -17,7 +17,15 @@ class BookController extends Controller
 {
     public function show_books_to_client()
     {
-        return view('books');
+        $books = Book::with('file')->get();
+
+        if ($books){
+            return view('books', ['books' => $books]);
+        }
+        else{
+            SuccessOrFailMessage::Failed("There is no book stored.");
+            return view('books');
+        }
     }
 
 

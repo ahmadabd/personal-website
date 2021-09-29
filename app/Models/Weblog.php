@@ -12,10 +12,10 @@ class Weblog extends Model
     protected $fillable = [
         'user_id',
         'weblog_address'
-    ]; 
+    ];
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }
