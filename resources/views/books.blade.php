@@ -10,14 +10,16 @@
             <p class="alert alert-danger">{{ Session::get("failed") }}</p>
         @endif
 
-        @foreach ($books as $book)
-            <div class="bookContainer">
-                <img src="{{ 'storage/'.$book->file->file_path }}" class="img-fluid" alt="Book Picture">
-                <h2>{{ $book->title }}</h2>
-                <p>{!! str_replace("\\","<br>",$book->descriptions) !!}</p>
-                <a href="{{ $book->url }}" target="blank" >Click to See book page</a>
-            </div>
-        @endforeach
+        @if (isset($books))
+            @foreach ($books as $book)
+                <div class="bookContainer">
+                    <img src="{{ 'storage/'.$book->file->file_path }}" class="img-fluid" alt="Book Picture">
+                    <h2>{{ $book->title }}</h2>
+                    <p>{!! str_replace("\\","<br>",$book->descriptions) !!}</p>
+                    <a href="{{ $book->url }}" target="blank" >Click to See book page</a>
+                </div>
+            @endforeach
+        @endif
     </p>
 
 </x-Layout>

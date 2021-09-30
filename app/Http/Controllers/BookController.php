@@ -19,7 +19,7 @@ class BookController extends Controller
     {
         $books = Book::with('file')->get();
 
-        if ($books){
+        if ($books->count() > 0){
             return view('books', ['books' => $books]);
         }
         else{
