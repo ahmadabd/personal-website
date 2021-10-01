@@ -1,22 +1,22 @@
 <x-Layout>
-    
+
     <x-slot name="title">dashboard</x-slot>
     <x-slot name="page_css"></x-slot>
 
     <h1 class="title">Biography</h1>
     <hr>
     <p class="content">
-        <!-- Validation Errors --> 
+        <!-- Validation Errors -->
         @error('biography')
             <div class="alert alert-danger">{{ $message }}</div>
-            <br>       
+            <br>
         @enderror
 
         @if ( Session::get("success") )
             <p class="alert alert-success">{{ Session::get("success") }}</p>
         @elseif( Session::get("failed") )
             <p class="alert alert-danger">{{ Session::get("failed") }}</p>
-        @endif 
+        @endif
 
         <form action="{{ route('store_biography') }}" method="POST">
             @csrf
@@ -29,4 +29,4 @@
         </form>
     </p>
 
-</x-Layout>  
+</x-Layout>
