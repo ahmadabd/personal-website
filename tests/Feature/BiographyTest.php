@@ -7,10 +7,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Tests\MyPackages\AuthUser;
+
 
 class BiographyTest extends TestCase
 {
     use RefreshDatabase;
+    use AuthUser;
 
     /** @test */
     public function check_show_biography_to_client_failed_message_when_db_is_empty()
@@ -32,8 +35,7 @@ class BiographyTest extends TestCase
         $this->withoutExceptionHandling();
 
         // First make and authenticate a user
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->make_a_user_that_actAs_authenticated();
 
         // Second Store value to DB
         $this->post(route('store_biography'), [
@@ -55,9 +57,7 @@ class BiographyTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withoutMiddleware();
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-        $this->assertAuthenticatedAs($user);
+        $this->make_a_user_that_actAs_authenticated();
 
         // ?????????????????
         $response = $this->get(
@@ -74,9 +74,7 @@ class BiographyTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withoutMiddleware();
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-        $this->assertAuthenticatedAs($user);
+        $this->make_a_user_that_actAs_authenticated();
 
         $response = $this->post(route('store_biography'), [
             'biography' => 'test'
@@ -92,9 +90,7 @@ class BiographyTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withoutMiddleware();
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
-        $this->assertAuthenticatedAs($user);
+        $this->make_a_user_that_actAs_authenticated();
 
         $response = $this->post(route('store_biography'), [
             'biography' => "test"
