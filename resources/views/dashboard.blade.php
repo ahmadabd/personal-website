@@ -7,10 +7,12 @@
     <hr>
     <p class="content">
         <!-- Validation Errors -->
-        @error('biography')
-            <div class="alert alert-danger">{{ $message }}</div>
-            <br>
-        @enderror
+        @isset($errors)
+            @error('biography')
+                <div class="alert alert-danger">{{ $message }}</div>
+                <br>
+            @enderror
+        @endisset
 
         @if ( Session::get("success") )
             <p class="alert alert-success">{{ Session::get("success") }}</p>

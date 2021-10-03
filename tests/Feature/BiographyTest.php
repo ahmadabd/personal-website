@@ -35,11 +35,10 @@ class BiographyTest extends TestCase
         $this->withoutExceptionHandling();
 
         // First make and authenticate a user
-        $this->make_a_user_that_actAs_authenticated();
+        $user = $this->make_a_user_that_actAs_authenticated();
 
-        // Second Store value to DB
-        $this->post(route('store_biography'), [
-            'biography' => 'test'
+        Bio::factory()->create([
+            'user_id' => $user->id
         ]);
 
         $response = $this->get(
@@ -57,14 +56,18 @@ class BiographyTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withoutMiddleware();
 
-        $this->make_a_user_that_actAs_authenticated();
+        $user = $this->make_a_user_that_actAs_authenticated();
+
+        Bio::factory()->create([
+            'user_id' => $user->id
+        ]);
 
         // ?????????????????
         $response = $this->get(
             route('edit_biography')
         );
 
-        $response->assertOk();
+        $response->assertSee("test");
     }
 
 

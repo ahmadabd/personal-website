@@ -9,5 +9,7 @@ trait AuthUser {
         $user = User::factory()->create();
         $this->actingAs($user);
         $this->assertAuthenticatedAs($user);
+
+        return $user;
     }
 }
