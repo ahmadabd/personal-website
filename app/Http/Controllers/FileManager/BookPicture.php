@@ -41,7 +41,7 @@ class BookPicture implements FileImp {
         $randomFileName = Str::random(10);
         $fileName = $randomFileName.'.'.$fileFormat;
 
-        // Picture stores in /storage/public/book
+        // Picture stores in storage/app/public/books
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
         return [

@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Bio;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -51,10 +50,9 @@ class BiographyTest extends TestCase
 
 
     /** @test */
-    public function check_show_biography_editPage_is_available_or_not()
+    public function check_show_biography_editPage_when_db_is_not_empty()
     {
         $this->withoutExceptionHandling();
-        $this->withoutMiddleware();
 
         $user = $this->make_a_user_that_actAs_authenticated();
 
@@ -62,7 +60,6 @@ class BiographyTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        // ?????????????????
         $response = $this->get(
             route('edit_biography')
         );
@@ -72,10 +69,24 @@ class BiographyTest extends TestCase
 
 
     /** @test */
+    public function check_show_biography_editPage_when_db_is_empty()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->make_a_user_that_actAs_authenticated();
+
+        $response = $this->get(
+            route('edit_biography')
+        );
+
+        $response->assertSee("Biography");
+    }
+
+
+    /** @test */
     public function check_store_biography_validation()
     {
         $this->withoutExceptionHandling();
-        $this->withoutMiddleware();
 
         $this->make_a_user_that_actAs_authenticated();
 
@@ -91,7 +102,6 @@ class BiographyTest extends TestCase
     public function check_store_biography()
     {
         $this->withoutExceptionHandling();
-        $this->withoutMiddleware();
 
         $this->make_a_user_that_actAs_authenticated();
 
@@ -106,5 +116,4 @@ class BiographyTest extends TestCase
 
         $response->assertSessionHas('success');
     }
-
 }
