@@ -24,7 +24,7 @@ class FileFactory extends Factory
         return [
             'name' => $this->faker->randomElement(['File test']),
             'file_path' => $this->faker->randomElement(['File path test']),
-            'file_type' => $this->faker->randomElement(['png', 'jpg'])
+            'file_type' => $this->faker->randomElement(['jpg'])
         ];
     }
 }

@@ -113,9 +113,11 @@ class BookTest extends TestCase
             route('book_editPage')
         );
 
-        // Beacuse image file name change by a random name before stroing it dosent work correct.
-        // Storage::disk('public')->assertExists('books/test.jpg');
+        $fileName = File::get()[0]->name;
+        Storage::disk('public')->assertExists("books/{$fileName}");
+
         $this->assertNotNull(Storage::disk('public'));
+
         Storage::disk('public')->assertMissing('books/missing.jpg');
     }
 }
