@@ -38,20 +38,39 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
         $user = $this->make_a_user_that_actAs_authenticated();
 
-        $file = File::factory()->create([
-            'user_id' => $user->id
-        ]);
+        // $file = File::factory()->create([
+        //     'user_id' => $user->id
+        // ]);
 
-        Book::factory()->create([
-            'user_id' => $user->id,
-            'file_id' => $file->id
+        // Book::factory()->create([
+        //     'user_id' => $user->id,
+        //     'file_id' => $file->id
+        // ]);
+
+        $user = $this->make_a_user_that_actAs_authenticated();
+
+        // Store new book
+        Storage::fake('public');
+        $file = UploadedFile::fake()->image('test.jpg');
+
+        $response = $this->post(route('store_book'), [
+            'title'         => 'test title',
+            'descriptions'  => 'test description',
+            'url'           => 'http://google.com',
+            'book_picture'  => $file
         ]);
+        $response->assertSessionHas('success');
+        $this->assertEquals(1, Book::count());
+        $this->assertEquals(1, File::count());
 
         $response = $this->get(
             route('show_books')
         );
 
         $response->assertSee('test');
+
+        // Check that Book->file_id == File->id
+        $this->assertEquals(Book::get()[0]->file_id, File::get()[0]->id);
     }
 
 
@@ -95,7 +114,6 @@ class BookTest extends TestCase
     public function check_store_books()
     {
         $this->withExceptionHandling();
-
         $this->make_a_user_that_actAs_authenticated();
 
         Storage::fake('public');
@@ -107,11 +125,9 @@ class BookTest extends TestCase
             'url'           => 'http://google.com',
             'book_picture'  => $file
         ]);
-
         $response->assertSessionHas('success');
-        $response->assertRedirect(
-            route('book_editPage')
-        );
+        $this->assertEquals(1, Book::count());
+        $this->assertEquals(1, File::count());
 
         $fileName = File::get()[0]->name;
         Storage::disk('public')->assertExists("books/{$fileName}");
@@ -120,6 +136,14 @@ class BookTest extends TestCase
 
         Storage::disk('public')->assertMissing('books/missing.jpg');
     }
+
+
+    /** @test */
+    // public function check_update_books()
+    // {
+
+    // }
+
 
     /** @test */
     public function check_delete_books()
