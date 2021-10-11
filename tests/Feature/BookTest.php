@@ -3,13 +3,12 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use Tests\MyPackages\AuthUser;
 use App\Models\Book;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
+use Tests\MyPackages\AddBook;
 use Illuminate\Http\UploadedFile;
 
 
@@ -17,6 +16,7 @@ class BookTest extends TestCase
 {
     use RefreshDatabase;
     use AuthUser;
+    use AddBook;
 
     /** @test */
     public function check_show_books_to_client_failed_message_when_db_isEmpty()
@@ -38,30 +38,7 @@ class BookTest extends TestCase
         $this->withoutExceptionHandling();
         $user = $this->make_a_user_that_actAs_authenticated();
 
-        // $file = File::factory()->create([
-        //     'user_id' => $user->id
-        // ]);
-
-        // Book::factory()->create([
-        //     'user_id' => $user->id,
-        //     'file_id' => $file->id
-        // ]);
-
-        $user = $this->make_a_user_that_actAs_authenticated();
-
-        // Store new book
-        Storage::fake('public');
-        $file = UploadedFile::fake()->image('test.jpg');
-
-        $response = $this->post(route('store_book'), [
-            'title'         => 'test title',
-            'descriptions'  => 'test description',
-            'url'           => 'http://google.com',
-            'book_picture'  => $file
-        ]);
-        $response->assertSessionHas('success');
-        $this->assertEquals(1, Book::count());
-        $this->assertEquals(1, File::count());
+        $this->store_new_book_with_its_profile_picture();
 
         $response = $this->get(
             route('show_books')
@@ -78,16 +55,9 @@ class BookTest extends TestCase
     public function check_show_book_editPage_when_db_is_not_empty()
     {
         $this->withoutExceptionHandling();
-        $user = $this->make_a_user_that_actAs_authenticated();
+        $this->make_a_user_that_actAs_authenticated();
 
-        $file = File::factory()->create([
-            'user_id' => $user->id
-        ]);
-
-        Book::factory()->create([
-            'user_id' => $user->id,
-            'file_id' => $file->id
-        ]);
+        $this->store_new_book_with_its_profile_picture();
 
         $response = $this->get(
             route('book_editPage')
@@ -110,24 +80,14 @@ class BookTest extends TestCase
         $response->assertSee('Books');
     }
 
+
     /** @test */
     public function check_store_books()
     {
         $this->withExceptionHandling();
         $this->make_a_user_that_actAs_authenticated();
 
-        Storage::fake('public');
-        $file = UploadedFile::fake()->image('test.jpg');
-
-        $response = $this->post(route('store_book'), [
-            'title'         => 'test title',
-            'descriptions'  => 'test description',
-            'url'           => 'http://google.com',
-            'book_picture'  => $file
-        ]);
-        $response->assertSessionHas('success');
-        $this->assertEquals(1, Book::count());
-        $this->assertEquals(1, File::count());
+        $this->store_new_book_with_its_profile_picture();
 
         $fileName = File::get()[0]->name;
         Storage::disk('public')->assertExists("books/{$fileName}");
@@ -139,31 +99,62 @@ class BookTest extends TestCase
 
 
     /** @test */
-    // public function check_update_books()
-    // {
+    public function check_update_books_without_updating_file()
+    {
+        $this->withoutExceptionHandling();
 
-    // }
+        $this->make_a_user_that_actAs_authenticated();
+
+        $this->store_new_book_with_its_profile_picture();
+
+
+        $book = Book::get()[0];
+        $response_without_updating_file = $this->put(route('update_book', [ $book->id ]), [
+            'title' => 'updated title',
+            'descriptions' => 'updated description',
+            'url' => 'http://yahoo.com'
+        ]);
+
+        $response_without_updating_file->assertSessionHas('success');
+        $this->assertEquals('updated title', Book::get()[0]->title);
+    }
+
+
+    /** @test */
+    public function check_update_books_with_updating_file()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->make_a_user_that_actAs_authenticated();
+
+        $this->store_new_book_with_its_profile_picture();
+
+        $file = UploadedFile::fake()->image('newPicture.jpg');
+
+        $book = Book::get()[0];
+        $response_with_updating_file = $this->put(route('update_book', [ $book->id ]), [
+            'title'         => 'updated title',
+            'descriptions'  => 'updated description',
+            'url'           => 'http://yahoo.com',
+            'book_picture'  => $file
+        ]);
+
+        $response_with_updating_file->assertSessionHas('success');
+        $this->assertEquals('updated title', Book::get()[0]->title);
+
+        $fileName = File::get()[0]->name;
+        Storage::disk('public')->assertExists("books/{$fileName}");
+    }
 
 
     /** @test */
     public function check_delete_books()
     {
         $this->withExceptionHandling();
+
         $user = $this->make_a_user_that_actAs_authenticated();
 
-        // Store new book
-        Storage::fake('public');
-        $file = UploadedFile::fake()->image('test.jpg');
-
-        $response = $this->post(route('store_book'), [
-            'title'         => 'test title',
-            'descriptions'  => 'test description',
-            'url'           => 'http://google.com',
-            'book_picture'  => $file
-        ]);
-        $response->assertSessionHas('success');
-        $this->assertEquals(1, Book::count());
-        $this->assertEquals(1, File::count());
+        $this->store_new_book_with_its_profile_picture();
 
         $book = Book::get()[0];
         $fileName = File::get()[0]->name;
