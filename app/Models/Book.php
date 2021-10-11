@@ -24,6 +24,7 @@ class Book extends Model
 
     public function file()
     {
-        return $this->hasOne(File::class, 'id');
+        // foreign_key, local_key
+        return $this->hasOne(File::class, 'id', 'file_id');
     }
 }

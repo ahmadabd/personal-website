@@ -23,6 +23,7 @@ class File extends Model
 
     public function book()
     {
-        return $this->belongsTo(Book::class, 'id', 'file_id');
+        // foreign_key
+        return $this->belongsTo(Book::class, 'file_id');
     }
 }

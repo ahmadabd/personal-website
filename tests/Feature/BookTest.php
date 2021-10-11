@@ -120,4 +120,35 @@ class BookTest extends TestCase
 
         Storage::disk('public')->assertMissing('books/missing.jpg');
     }
+
+    /** @test */
+    public function check_delete_books()
+    {
+        $this->withExceptionHandling();
+        $user = $this->make_a_user_that_actAs_authenticated();
+
+        // Store new book
+        Storage::fake('public');
+        $file = UploadedFile::fake()->image('test.jpg');
+
+        $response = $this->post(route('store_book'), [
+            'title'         => 'test title',
+            'descriptions'  => 'test description',
+            'url'           => 'http://google.com',
+            'book_picture'  => $file
+        ]);
+        $response->assertSessionHas('success');
+        $this->assertEquals(1, Book::count());
+        $this->assertEquals(1, File::count());
+
+        $book = Book::get()[0];
+        $fileName = File::get()[0]->name;
+
+        $response = $this->delete(route('delete_book', [ $book->id ]));
+        $response->assertSessionHas('success');
+        $this->assertEquals(0, Book::count());
+        $this->assertEquals(0, File::count());
+
+        Storage::disk('public')->assertMissing("books/{$fileName}");
+    }
 }
