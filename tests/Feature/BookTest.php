@@ -91,10 +91,25 @@ class BookTest extends TestCase
 
         $fileName = File::get()[0]->name;
         Storage::disk('public')->assertExists("books/{$fileName}");
-
         $this->assertNotNull(Storage::disk('public'));
+    }
 
-        Storage::disk('public')->assertMissing('books/missing.jpg');
+
+    /** @test */
+    public function check_store_books_validation()
+    {
+        $this->withExceptionHandling();
+
+        $this->make_a_user_that_actAs_authenticated();
+
+        $response = $this->post(route('store_book'), [
+            'title'         => '',
+            'descriptions'  => '',
+            'url'           => 'not a url form'
+        ]);
+
+        $this->assertCount(0, Book::all());
+        $response->assertSessionHasErrors();
     }
 
 

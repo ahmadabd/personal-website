@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Bio;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\MyPackages\AuthUser;
 
@@ -33,7 +32,6 @@ class BiographyTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        // First make and authenticate a user
         $user = $this->make_a_user_that_actAs_authenticated();
 
         Bio::factory()->create([
@@ -84,21 +82,6 @@ class BiographyTest extends TestCase
 
 
     /** @test */
-    public function check_store_biography_validation()
-    {
-        $this->withoutExceptionHandling();
-
-        $this->make_a_user_that_actAs_authenticated();
-
-        $response = $this->post(route('store_biography'), [
-            'biography' => 'test'
-        ]);
-
-        $response->assertSessionHasNoErrors();
-    }
-
-
-    /** @test */
     public function check_store_biography()
     {
         $this->withoutExceptionHandling();
@@ -112,8 +95,9 @@ class BiographyTest extends TestCase
         $response->assertRedirect(
             route('edit_biography')
         );
-        $this->assertCount(1, Bio::all());
 
+        $this->assertCount(1, Bio::all());
+        $this->assertEquals('test', Bio::get()[0]->biography);
         $response->assertSessionHas('success');
     }
 }
