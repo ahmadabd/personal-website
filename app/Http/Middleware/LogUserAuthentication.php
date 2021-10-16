@@ -10,14 +10,14 @@ use App\Jobs\AuthLog;
 class LogUserAuthentication
 {
     public function handle(Request $request, Closure $next)
-    {    
+    {
         $details = array(
             "ip" => $request->ip(),
             "routeName" => $request->route()->getName()
         );
 
-        AuthLog::dispatch($details)->delay(3);
-     
-        return $next($request); 
+        AuthLog::dispatch($details);
+
+        return $next($request);
     }
 }
