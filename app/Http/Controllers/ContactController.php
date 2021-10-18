@@ -39,10 +39,9 @@ class ContactController extends Controller
 
             $contact = Contact::get()[0];
 
-            foreach ($this->icons as $icon){
-                $contactMeKey = array_keys($this->icons, $icon)[0];
-                if ($contact->$contactMeKey){
-                    $contactMeLinks[$contactMeKey] = [$icon, $contact->$contactMeKey];
+            foreach ($this->icons as $iconName => $iconModule){
+                if ($contact->$iconName){
+                    $contactMeLinks[$iconName] = [$iconModule, $contact->$iconName];
                 }
             }
         }
@@ -79,9 +78,8 @@ class ContactController extends Controller
         $contact = Auth::user()->contact();
 
         // Fill $contactMeList values by validated Data
-        foreach($validated as $contactWay){
-            $validatedKey = array_keys($validated, $contactWay)[0];
-            $this->contactMeList[$validatedKey] = $contactWay;
+        foreach($validated as $contactWay => $contactUrl){
+            $this->contactMeList[$contactWay] = $contactUrl;
         }
 
         $storedContact = ($contact->exists())
