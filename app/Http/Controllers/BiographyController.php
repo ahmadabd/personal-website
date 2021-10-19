@@ -12,15 +12,12 @@ class BiographyController extends Controller
 
     public function show_biography_to_client()
     {
-        $biography = "";
-
         if (!Bio::exists() || !Bio::get()[0]->biography){
             // If there is no Biography stored or biography field is null make a failed message
             SuccessOrFailMessage::Failed("There is no available Biography to show.");
         }
-        else{
-            $biography = Bio::get()[0]->biography;
-        }
+
+        $biography = Bio::get()[0]->biography ?? "";
 
         return view('aboutMe', ['bio' => $biography]);
     }
@@ -31,9 +28,7 @@ class BiographyController extends Controller
         $biography = "";
         $bio = Auth::user()->bio();
 
-        if ($bio->exists()){
-            $biography = $bio->get()[0]->biography;
-        }
+        $biography = $bio->get()[0]->biography ?? "";
 
         return view('dashboard', ["biography" => $biography]);
     }
