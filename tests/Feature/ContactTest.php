@@ -33,12 +33,40 @@ class ContactTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->send_data_to_contactMe_store();
+        $email = "test@gmail.com";
+        $this->send_data_to_contactMe_store($email);
 
         $response = $this->get('/contact');
 
         $response->assertOk();
-        $response->assertSee("icons");
+        $response->assertSee($email);
+    }
+
+
+    /** @test */
+    public function check_show_contactMe_edit_availibility()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->make_a_user_that_actAs_authenticated();
+
+        $response = $this->get(route('show_contactMe_edit'));
+
+        $response->assertSee("Edit Contact Me");
+    }
+
+
+    /** @test */
+    public function check_show_contactMe_edit_availibility_with_full_DB()
+    {
+        $this->withoutExceptionHandling();
+
+        $email = "testemail@gmail.com";
+        $this->send_data_to_contactMe_store($email);
+
+        $response = $this->get(route('show_contactMe_edit'));
+
+        $response->assertSee($email);
     }
 
 
