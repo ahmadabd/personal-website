@@ -11,7 +11,6 @@ class Book extends Model
 
     protected $fillable = [
         'user_id',
-        'file_id',
         'title',
         'descriptions',
         'url'
@@ -25,6 +24,6 @@ class Book extends Model
     public function file()
     {
         // foreign_key, local_key
-        return $this->hasOne(File::class, 'id', 'file_id');
+        return $this->hasOne(File::class);
     }
 }

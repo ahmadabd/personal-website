@@ -11,6 +11,7 @@ class File extends Model
 
     protected $fillable = [
         'user_id',
+        'book_id',
         'name',
         'file_path',
         'file_type'
@@ -24,6 +25,6 @@ class File extends Model
     public function book()
     {
         // foreign_key
-        return $this->belongsTo(Book::class, 'file_id');
+        return $this->belongsTo(Book::class);
     }
 }
