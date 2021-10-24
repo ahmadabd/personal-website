@@ -167,7 +167,7 @@ class BookTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $user = $this->make_a_user_that_actAs_authenticated();
+        $this->make_a_user_that_actAs_authenticated();
 
         $this->store_new_book_with_its_profile_picture();
 
