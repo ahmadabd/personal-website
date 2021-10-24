@@ -47,7 +47,7 @@ class BookTest extends TestCase
         $response->assertSee('test');
 
         // Check that Book->file_id == File->id
-        $this->assertEquals(Book::get()[0]->file_id, File::get()[0]->id);
+        $this->assertEquals(Book::get()[0]->id, File::get()[0]->book_id);
     }
 
 
