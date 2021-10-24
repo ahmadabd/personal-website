@@ -16,11 +16,10 @@ class BookPicture implements FileImp {
 
         if($book->exists()){
 
-            $profilePic = File::find($book->file_id);
+            $profilePic = File::find($book->id);
             $oldProfilePath = $profilePic->file_path;
 
             $book->delete();
-            $profilePic->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 Storage::disk('public')->delete($oldProfilePath);

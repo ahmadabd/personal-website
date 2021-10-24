@@ -12,19 +12,21 @@ class BookStoreClass {
     {
         try {
             $storedBook = DB::transaction(function () use ($fileData, $userId, $validatedData) {
-                $storedResume = File::create([
-                    'user_id'   => $userId,
-                    'name'      => $fileData['fileName'],
-                    'file_path' => $fileData['filePath'],
-                    'file_type' => $fileData["fileType"]
-                ]);
+
 
                 $storedBook = Book::create([
                     'user_id'       => $userId,
-                    'file_id'       => $storedResume->id,
                     'title'         => $validatedData['title'],
                     'descriptions'  => $validatedData['descriptions'],
                     'url'           => $validatedData['url']
+                ]);
+
+                File::create([
+                    'user_id'   => $userId,
+                    'book_id'   => $storedBook->id,
+                    'name'      => $fileData['fileName'],
+                    'file_path' => $fileData['filePath'],
+                    'file_type' => $fileData["fileType"]
                 ]);
 
                 return $storedBook->exists();
