@@ -10,7 +10,7 @@ use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Classes\CvStoreClass;
-
+use Illuminate\Support\Facades\Storage;
 
 class CvController extends Controller
 {
@@ -19,7 +19,8 @@ class CvController extends Controller
         $resumeFilePath = chooseResume::persian_resume();
 
         try{
-            $resumeFile = response()->file($resumeFilePath);
+            // $resumeFile = response()->file($resumeFilePath);
+            $resumeFile = response()->file(Storage::path($resumeFilePath));
         } catch(\Exception $exception){
             throw new ResumeException();
         }

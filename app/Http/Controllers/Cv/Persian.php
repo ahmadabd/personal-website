@@ -16,7 +16,8 @@ class Persian implements Language{
         if($file->exists()){
             $persian_resume_file_path = $file->get()[0]->file_path;
 
-            return 'storage/'.$persian_resume_file_path;
+            // return 'storage/'.$persian_resume_file_path;
+            return 'public/'.$persian_resume_file_path;
         }
 
         return false;
