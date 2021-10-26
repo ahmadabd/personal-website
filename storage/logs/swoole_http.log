@@ -63,3 +63,28 @@
 [2021-10-25 18:20:45 $32.0]	INFO	Server is reloading all workers now
 [2021-10-25 18:25:20 $32.0]	INFO	Server is reloading all workers now
 [2021-10-25 18:25:22 $32.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:15:49 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:16:05 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:16:41 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:16:49 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:18:34 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:19:08 *86.1]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1125 bytes failed, because session#4 is closed
+[2021-10-26 04:19:43 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:20:06 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:20:25 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:20:30 *110.3]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1100 bytes failed, because session#7 is closed
+[2021-10-26 04:20:30 *110.3]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1091 bytes failed, because session#7 is closed
+[2021-10-26 04:20:30 *110.3]	NOTICE	ProcessFactory::end() (ERRNO 1005): session[7] is closed
+[2021-10-26 04:20:41 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:21:22 *119.2]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1125 bytes failed, because session#5 is closed
+[2021-10-26 04:21:37 $30.0]	INFO	Server is reloading all workers now
+[2021-10-26 04:21:47 *143.1]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1081 bytes failed, because session#8 is closed
+[2021-10-26 04:21:47 *143.1]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1072 bytes failed, because session#8 is closed
+[2021-10-26 04:21:47 *143.1]	NOTICE	ProcessFactory::end() (ERRNO 1005): session[8] is closed
+[2021-10-26 04:22:27 *145.3]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1081 bytes failed, because session#11 is closed
+[2021-10-26 04:22:27 *145.3]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1072 bytes failed, because session#11 is closed
+[2021-10-26 04:22:27 *145.3]	NOTICE	ProcessFactory::end() (ERRNO 1005): session[11] is closed
+[2021-10-26 04:22:32 *146.2]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1081 bytes failed, because session#9 is closed
+[2021-10-26 04:22:32 *146.2]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 1072 bytes failed, because session#9 is closed
+[2021-10-26 04:22:32 *146.2]	NOTICE	ProcessFactory::end() (ERRNO 1005): session[9] is closed
+[2021-10-26 04:22:46 $30.0]	INFO	Server is reloading all workers now

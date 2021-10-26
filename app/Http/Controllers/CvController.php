@@ -19,8 +19,9 @@ class CvController extends Controller
         $resumeFilePath = chooseResume::persian_resume();
 
         try{
-            // $resumeFile = response()->file($resumeFilePath);
-            $resumeFile = response()->file(Storage::path($resumeFilePath));
+            $resumeFile = response()->file('storage/'.$resumeFilePath);
+        } catch(\Exception $exception){
+            $resumeFile = response()->file(Storage::path('public/'.$resumeFilePath));
         } catch(\Exception $exception){
             throw new ResumeException();
         }
