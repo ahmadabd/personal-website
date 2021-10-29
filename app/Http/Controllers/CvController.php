@@ -18,15 +18,23 @@ class CvController extends Controller
     {
         $resumeFilePath = chooseResume::persian_resume();
 
-        try{
-            $resumeFile = response()->file('storage/'.$resumeFilePath);
-        } catch(\Exception $exception){
-            $resumeFile = response()->file(Storage::path('public/'.$resumeFilePath));
-        } catch(\Exception $exception){
+        if ($resumeFilePath){
+            /**
+             * After installing Octane, Reading resume from storage/ failed
+             * So I make new way to do that by reading it from Storage::path
+             */
+            try{
+                $resumeFile = response()->file('storage/'.$resumeFilePath);
+            } catch(\Exception $exception){
+                $resumeFile = response()->file(Storage::path('public/'.$resumeFilePath));
+            } catch(\Exception $exception){
+                throw new ResumeException();
+            }
+            return $resumeFile;
+        }
+        else{
             throw new ResumeException();
         }
-
-        return $resumeFile;
     }
 
 
