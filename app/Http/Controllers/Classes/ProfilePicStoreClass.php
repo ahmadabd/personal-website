@@ -1,17 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Classes;
-use App\Models\File;
+use App\Models\User;
 
 
 class ProfilePicStoreClass {
     public static function create($fileData, $userId)
     {
-        $storedProfilePicture = File::create([
-            'user_id'   => $userId,
-            'name'      => $fileData['fileName'],
-            'file_path' => $fileData['filePath'],
-            'file_type' => $fileData['fileType']
+        $storedProfilePicture = User::find($userId)->update([
+            'profilePicture' => $fileData['filePath']
         ]);
 
         return $storedProfilePicture->exists();

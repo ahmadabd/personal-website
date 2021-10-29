@@ -14,11 +14,10 @@ class DashboardNav extends Component
     {
         $this->profileName = Auth::user()->name;
 
-        $profilePicture = Auth::user()->file()->where('file_type', 'img');
+        $profilePicture = Auth::user()->profilePicture;
 
-        if($profilePicture->exists()){
-            $profilePicturePath = $profilePicture->get()[0]->file_path;
-            $this->profilePicture = '/storage/'.$profilePicturePath;
+        if($profilePicture !== null){
+            $this->profilePicture = '/storage/'.$profilePicture;
         }
     }
 

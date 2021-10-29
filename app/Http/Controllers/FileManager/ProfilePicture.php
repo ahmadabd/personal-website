@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\FileManager;
 
-use App\Models\File;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,26 +10,25 @@ use Illuminate\Support\Facades\Storage;
 class ProfilePicture implements FileImp {
 
     private $FileStorePath = 'profile';
-    private $fileType = "img";
 
     public function remove_old_file($userId){
 
-        $file = File::where('user_id', $userId)->where('file_type', $this->fileType);
+        $user = User::find($userId);
 
-        if($file->exists()){
+        if($user->profilePicture !== null){
 
-            $oldProfilePath = $file->get()[0]->file_path;
+            $oldProfilePath = $user->profilePicture;
 
-            File::where('file_path', $oldProfilePath)->delete();
+            $user->where('profilePicture', $oldProfilePath)->update([
+                "profilePicture" => "null"
+            ]);
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 Storage::disk('public')->delete($oldProfilePath);
             }
-
-            return true;
         }
 
-        return false;
+        return true;
     }
 
 
@@ -45,9 +44,7 @@ class ProfilePicture implements FileImp {
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
         return [
-            "filePath" => $filePath,
-            "fileName" => $fileName,
-            "fileType" => $this->fileType
+            "filePath" => $filePath
         ];
     }
 }

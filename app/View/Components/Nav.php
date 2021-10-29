@@ -4,7 +4,6 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use App\Models\User;
-use App\Models\File;
 
 class Nav extends Component
 {
@@ -14,13 +13,11 @@ class Nav extends Component
     {
         if (User::count() > 0){
             $this->profileName = User::get()[0]->name;
+            $profilePicture = User::get()[0]->profilePicture;
         }
 
-        $profilePicture = File::where('file_type', 'img');
-
-        if($profilePicture->exists()){
-            $profilePicturePath = $profilePicture->get()[0]->file_path;
-            $this->profilePicture = '/storage/'.$profilePicturePath;
+        if($profilePicture !== null){
+            $this->profilePicture = '/storage/'.$profilePicture;
         }
     }
 
