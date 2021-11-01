@@ -12,13 +12,9 @@ class DashboardNav extends Component
     public $profilePicture;
     public function __construct()
     {
-        $this->profileName = Auth::user()->name;
+        $this->profileName = Auth::user()->name ?? "Profile Name";
 
-        $profilePicture = Auth::user()->profilePicture;
-
-        if($profilePicture !== null){
-            $this->profilePicture = '/storage/'.$profilePicture;
-        }
+        $this->profilePicture = '/storage/'.Auth::user()->profilePicture ?? "/pics/default_profile.jpg";
     }
 
     public function render()

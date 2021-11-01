@@ -11,6 +11,6 @@ class ProfilePicStoreClass {
             'profilePicture' => $fileData['filePath']
         ]);
 
-        return $storedProfilePicture->exists();
+        return $storedProfilePicture;
     }
 }
