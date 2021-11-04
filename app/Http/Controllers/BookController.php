@@ -56,9 +56,10 @@ class BookController extends Controller
 
     public function update_books(BookRequest $request, Book $book)
     {
-        if (! Gate::allows("update", $book)){
-            abort(403);
-        }
+        // if (! Gate::allows("update", $book)){
+        //     abort(403);
+        // }
+        $this->authorize('update', $book);
 
         $userId = auth()->user()->id;
         $validatedData = $request->validated();
@@ -90,9 +91,10 @@ class BookController extends Controller
 
     public function delete_books(Book $book)
     {
-        if (! Gate::allows("delete", $book)){
-            abort(403);
-        }
+        // if (! Gate::allows("delete", $book)){
+        //     abort(403);
+        // }
+        $this->authorize('delete', $book);
 
         $deletedBook = DeleteManager::book_picture($book->id);
         SuccessOrFailMessage::SuccessORFail($deletedBook);
