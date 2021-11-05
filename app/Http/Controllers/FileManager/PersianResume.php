@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\FileManager;
 
-use App\Models\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Resume;
 
 class PersianResume implements FileImp {
 
     private $FileStorePath = 'cv';
-    private $fileType = "persian_pdf";
+    private $resumeLang = "persian";
 
     public function remove_old_file($userId){
-        $file = File::where('user_id', $userId)->where('file_type', $this->fileType);
+        $resume = Resume::where('user_id', $userId)->where('resume_lang', $this->resumeLang);
 
-        if($file->exists()){
+        if($resume->exists()){
 
-            $oldProfilePath = $file->get()[0]->file_path;
+            $oldProfilePath = $resume->first()->file_path;
 
-            File::where('file_path', $oldProfilePath)->delete();
+            Resume::where('file_path', $oldProfilePath)->delete();
 
             if (Storage::disk('public')->exists($oldProfilePath)){
                 Storage::disk('public')->delete($oldProfilePath);
@@ -44,8 +44,7 @@ class PersianResume implements FileImp {
 
         return [
             "filePath" => $filePath,
-            "fileName" => $fileName,
-            "fileType" => $this->fileType
+            "resume_lang" => $this->resumeLang,
         ];
     }
 }

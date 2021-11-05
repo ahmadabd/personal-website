@@ -1,5 +1,5 @@
 <x-Layout>
-    
+
     <x-slot name="title">Add new resume</x-slot>
     <x-slot name="page_css"></x-slot>
 
@@ -11,12 +11,12 @@
         <p class="alert alert-danger">{{ Session::get("failed") }}</p>
         <hr>
     @endif
-    
+
     <p class="content">
         <div>
             <h1 class="title">Add your new resume</h1>
 
-            <!-- Validation Errors --> 
+            <!-- Validation Errors -->
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
             @endif
-            
+
 
             <form action="{{ route('store_resume') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -40,18 +40,19 @@
         <br>
         <hr>
         <br>
-
         @if ($isResume)
-            <div>
-                <h3 class="title">Delete old resume</h3>
-                <p>if dont want to have resume to show, press Delete.</p>
-                <form action="{{ route('delete_resume') }}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button name="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
+            @foreach ($resumes as $resume)
+                <div>
+                    <h3 class="title">Delete {{ $resume->resume_lang }}</h3>
+                    <p>if dont want to have resume to show, press Delete.</p>
+                    <form action="{{ route('delete_resume', ['resume' => $resume->id]) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button name="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            @endforeach
         @endif
     </p>
 
-</x-Layout>    
+</x-Layout>

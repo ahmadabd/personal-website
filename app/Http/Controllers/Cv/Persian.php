@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Cv;
 
 use App\Http\Controllers\Cv\Language;
-use App\Models\File;
+use App\Models\Resume;
 
 class Persian implements Language{
 
-    private $fileType = "persian_pdf";
+    private $resumeLang = "persian";
 
     public function language()
     {
-        $file = File::where('file_type', $this->fileType);
+        $resume = Resume::where('resume_lang', $this->resumeLang);
 
-        if($file->exists()){
-            $persian_resume_file_path = $file->get()[0]->file_path;
+        if($resume->exists()){
+            $persian_resume_file_path = $resume->first()->file_path;
 
             return $persian_resume_file_path;
         }

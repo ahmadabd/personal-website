@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilesTable extends Migration
+class CreateResumesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('resumes', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('book_id')->nullable();
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-
-            $table->string('name')->nullable();
             $table->string('file_path')->nullable();
-            $table->string('file_type')->nullable();
+            $table->string('resume_lang')->nullable();
+
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('resumes');
     }
 }

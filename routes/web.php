@@ -42,7 +42,7 @@ Route::group(["middleware" => "auth", "prefix" => "/admin"], function() {
         ->name('resume_editPage');
     Route::post('/resume_edit', [CvController::class, 'store_new_resume'])
         ->name('store_resume');
-    Route::delete('/delete_resume', [CvController::class, 'delete_old_resume'])
+    Route::delete('/delete_resume/{resume}', [CvController::class, 'delete_old_resume'])
         ->name('delete_resume');
 
     /* Routes for add or edit weblog url address */

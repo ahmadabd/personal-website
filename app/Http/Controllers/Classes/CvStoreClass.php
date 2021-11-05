@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Classes;
-use App\Models\File;
+use App\Models\Resume;
 
 class CvStoreClass {
     public static function create($userId, $fileData)
     {
-        $storedResume = File::create([
+        $storedResume = Resume::create([
             'user_id'   => $userId,
-            'name'      => $fileData['fileName'],
             'file_path' => $fileData['filePath'],
-            'file_type' => $fileData['fileType']
+            'resume_lang' => $fileData['resume_lang']
         ]);
 
         return $storedResume->exists();

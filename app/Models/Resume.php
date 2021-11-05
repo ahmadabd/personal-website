@@ -5,17 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Resume extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'descriptions',
-        'url',
-        'cover',
-    ];
+    protected $fillable = ['user_id', 'file_path', 'resume_lang'];
 
     public function user()
     {

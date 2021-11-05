@@ -52,9 +52,9 @@ class User extends Authenticatable
         return $this->hasOne(Weblog::class);
     }
 
-    public function file()
+    public function resumes()
     {
-        return $this->hasMany(File::class);
+        return $this->hasMany(Resume::class);
     }
 
     public function contact()

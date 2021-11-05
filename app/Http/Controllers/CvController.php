@@ -10,6 +10,7 @@ use App\Http\Controllers\FileManager\DeleteManager;
 use App\Http\Controllers\FlashMessage\SuccessOrFailMessage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Classes\CvStoreClass;
+use App\Models\Resume;
 use Illuminate\Support\Facades\Storage;
 
 class CvController extends Controller
@@ -40,16 +41,11 @@ class CvController extends Controller
 
     public function show_resume_editPage()
     {
-        $files = Auth::user()->file()->get();
-        $isResume = false;
+        $resumes = Auth::user()->resumes;
 
-        foreach ($files as $f){
-            if ($f->file_type == "persian_pdf") {
-                $isResume = true;
-            }
-        }
+        $isResume = ($resumes->count()) ? true : false;
 
-        return view('resume_editPage', ['isResume' => $isResume]);
+        return view('resume_editPage', ['isResume' => $isResume, 'resumes' => $resumes]);
     }
 
 
@@ -70,12 +66,12 @@ class CvController extends Controller
     }
 
 
-    public function delete_old_resume()
+    public function delete_old_resume(Resume $resume)
     {
-        $userId = auth()->user()->id;
+        $deletedResumeFile = DeleteManager::persian_resume($resume->user_id);
+        $deletedResume = $resume->delete();
 
-        $deletedResume = DeleteManager::persian_resume($userId);
-        SuccessOrFailMessage::SuccessORFail($deletedResume);
+        SuccessOrFailMessage::SuccessORFail($deletedResume && $deletedResumeFile);
 
         return redirect()->route('resume_editPage');
     }
