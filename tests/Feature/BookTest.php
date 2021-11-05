@@ -45,9 +45,6 @@ class BookTest extends TestCase
         );
 
         $response->assertSee('test');
-
-        // Check that Book->file_id == File->id
-        $this->assertEquals(Book::get()[0]->id, File::get()[0]->book_id);
     }
 
 
@@ -88,10 +85,6 @@ class BookTest extends TestCase
         $this->make_a_user_that_actAs_authenticated();
 
         $this->store_new_book_with_its_profile_picture();
-
-        $fileName = File::get()[0]->name;
-        Storage::disk('public')->assertExists("books/{$fileName}");
-        $this->assertNotNull(Storage::disk('public'));
     }
 
 
@@ -139,7 +132,6 @@ class BookTest extends TestCase
     public function check_update_books_with_updating_file()
     {
         $this->withoutExceptionHandling();
-
         $this->make_a_user_that_actAs_authenticated();
 
         $this->store_new_book_with_its_profile_picture();
@@ -155,10 +147,10 @@ class BookTest extends TestCase
         ]);
 
         $response_with_updating_file->assertSessionHas('success');
-        $this->assertEquals('updated title', Book::get()[0]->title);
+        $this->assertEquals('updated title', Book::first()->title);
 
-        $fileName = File::get()[0]->name;
-        Storage::disk('public')->assertExists("books/{$fileName}");
+        $fileName = Book::first()->cover;
+        Storage::disk('public')->assertExists("{$fileName}");
     }
 
 
@@ -172,13 +164,12 @@ class BookTest extends TestCase
         $this->store_new_book_with_its_profile_picture();
 
         $book = Book::get()[0];
-        $fileName = File::get()[0]->name;
+        $fileName = $book->cover;
 
         $response = $this->delete(route('delete_book', [ $book->id ]));
         $response->assertSessionHas('success');
         $this->assertEquals(0, Book::count());
-        $this->assertEquals(0, File::count());
 
-        Storage::disk('public')->assertMissing("books/{$fileName}");
+        Storage::disk('public')->assertMissing("{$fileName}");
     }
 }

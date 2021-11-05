@@ -24,7 +24,9 @@ trait AddBook
         ]);
         $response->assertSessionHas('success');
         $this->assertEquals(1, Book::count());
-        $this->assertEquals(1, File::count());
+
+        $fileName = Book::first()->cover;
+        Storage::disk('public')->assertExists("{$fileName}");
 
         return $response;
     }
