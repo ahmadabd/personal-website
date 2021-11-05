@@ -1,4 +1,4 @@
-<form action="{{ route('update_book', [ $book->id ]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('update_book', [ 'book' => $book->id ]) }}" method="POST" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <h4>Book: {{ $book->title }}</h4>

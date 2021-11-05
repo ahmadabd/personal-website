@@ -17,7 +17,7 @@ class BookController extends Controller
 {
     public function show_books_to_client()
     {
-        $books = Book::with('file')->get();
+        $books = Book::get();
 
         if ($books->count() > 0){
             return view('books', ['books' => $books]);
@@ -61,27 +61,14 @@ class BookController extends Controller
         // }
         $this->authorize('update', $book);
 
-        $userId = auth()->user()->id;
         $validatedData = $request->validated();
 
-        if ($request->file()){
-            /**
-             * if book_picture should update:
-             * Remove old book picture and old book data from File and Book Model
-             * Then store new data by create method in File and Book model
-             */
-
+        if ($request->has('book_picture')){
             $book_picture = $request->file('book_picture');
             $fileData = UpdateManager::book_picture($book_picture, $book->id);
-            $updatedBook = BookStoreClass::create($fileData, $userId, $validatedData, $book->id);
         }
-        else{
-            /**
-             * if just title or url or description should update:
-             * just update them to Book Model
-             */
-            $updatedBook = BookStoreClass::update($validatedData, $book->id);
-        }
+
+        $updatedBook = BookStoreClass::update($validatedData, $book->id, $fileData ?? null);
 
         SuccessOrFailMessage::SuccessORFail($updatedBook, "Successfully Updated new book", "Failed to update new book.");
 
@@ -96,8 +83,10 @@ class BookController extends Controller
         // }
         $this->authorize('delete', $book);
 
-        $deletedBook = DeleteManager::book_picture($book->id);
-        SuccessOrFailMessage::SuccessORFail($deletedBook);
+        $deletedBookCover = DeleteManager::book_picture($book->id);
+        $deletedBook = $book->delete();
+
+        SuccessOrFailMessage::SuccessORFail($deletedBook && $deletedBookCover);
 
         return redirect()->route('book_editPage');
     }

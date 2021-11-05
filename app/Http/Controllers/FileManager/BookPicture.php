@@ -4,33 +4,29 @@ namespace App\Http\Controllers\FileManager;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Models\File;
 use App\Models\Book;
+use Exception;
 
 class BookPicture implements FileImp {
     private $FileStorePath = 'books';
-    private $fileType = "book_picture";
 
     public function remove_old_file($bookId){
-        $book = Book::find($bookId);
 
-        if($book->exists()){
+        $cover = Book::find($bookId)->cover;
 
-            $bookProfile = File::where('book_id', $bookId)->first();
+        try {
+            Book::find($bookId)->update([
+                'cover' => null,
+            ]);
 
-            $oldProfilePath = $bookProfile->file_path;
-
-            $book->delete();
-            $bookProfile->delete();
-
-            if (Storage::disk('public')->exists($oldProfilePath)){
-                Storage::disk('public')->delete($oldProfilePath);
+            if (Storage::disk('public')->exists($cover)){
+                Storage::disk('public')->delete($cover);
             }
 
             return true;
+        } catch (Exception $e) {
+            return false;
         }
-
-        return false;
     }
 
 
@@ -46,9 +42,7 @@ class BookPicture implements FileImp {
         $filePath = $file->storeAs($this->FileStorePath, $fileName, 'public');
 
         return [
-            "filePath" => $filePath,
-            "fileName" => $fileName,
-            "fileType" => $this->fileType
+            "filePath" => $filePath
         ];
     }
 }

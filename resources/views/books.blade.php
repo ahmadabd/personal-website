@@ -13,7 +13,7 @@
         @if (isset($books))
             @foreach ($books as $book)
                 <div class="bookContainer">
-                    <img src="{{ 'storage/'.$book->file->file_path }}" class="img-fluid" alt="Book Picture">
+                    <img src="{{ 'storage/'.$book->cover }}" class="img-fluid" alt="Book Picture">
                     <h2>{{ $book->title }}</h2>
                     <p>{!! str_replace("\\","<br>",$book->descriptions) !!}</p>
                     <a href="{{ $book->url }}" target="blank" >Click to See book page</a>
