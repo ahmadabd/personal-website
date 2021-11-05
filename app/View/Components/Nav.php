@@ -11,12 +11,12 @@ class Nav extends Component
     public $profilePicture;
     public function __construct()
     {
-        $this->profileName = "Profile Name";
-        $this->profilePicture = "/pics/default_profile.jpg";
+        if (User::exists()){
+            $this->profileName = User::first()->name;
 
-        if (User::count() > 0){
-            $this->profileName = User::get()[0]->name;
-            $this->profilePicture = '/storage/'.User::get()[0]->profilePicture;
+            if (User::first()->profilePicture != null) {
+                $this->profilePicture = '/storage/'.User::get()[0]->profilePicture;
+            }
         }
     }
 

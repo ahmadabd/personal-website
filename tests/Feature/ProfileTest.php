@@ -8,15 +8,27 @@ use Tests\TestCase;
 
 class ProfileTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    /** @test */
+    public function check_profile_picture_in_client()
     {
-        $response = $this->get('/');
+        $this->assertTrue(true);
+    }
 
-        $response->assertStatus(200);
+    /** @test */
+    public function check_profile_picture_in_admin()
+    {
+        $this->assertTrue(true);
+    }
+
+    /** @test */
+    public function check_profile_name_in_client()
+    {
+        $this->assertTrue(true);
+    }
+
+    /** @test */
+    public function check_profile_name_in_admin()
+    {
+        $this->assertTrue(true);
     }
 }

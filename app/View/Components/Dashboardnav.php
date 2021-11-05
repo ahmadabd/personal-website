@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class DashboardNav extends Component
@@ -12,9 +13,11 @@ class DashboardNav extends Component
     public $profilePicture;
     public function __construct()
     {
-        $this->profileName = Auth::user()->name ?? "Profile Name";
+        $this->profileName = Auth::user()->name;
 
-        $this->profilePicture = '/storage/'.Auth::user()->profilePicture ?? "/pics/default_profile.jpg";
+        if (Auth::user()->profilePicture != null){
+            $this->profilePicture = '/storage/'.Auth::user()->profilePicture;
+        }
     }
 
     public function render()

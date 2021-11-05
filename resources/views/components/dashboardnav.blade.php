@@ -8,13 +8,13 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('change_profilePic') }}">
-                    <img class="profilePic" src="{{ $profilePicture }}" alt="" width="100" height="100">
+                    <img class="profilePic" src="{{ $profilePicture ?? "/pics/default_profile.jpg" }}" alt="" width="100" height="100">
                     <h6>Click to change</h6>
                 </a>
             </div>
         </nav>
 
-        <a class="navbar-brand profileName {{ (request()->routeIs('change_profileName')) ? 'active' : '' }}" href="{{ route('change_profileName') }}">{{ $profileName }}</a>
+        <a class="navbar-brand profileName {{ (request()->routeIs('change_profileName')) ? 'active' : '' }}" href="{{ route('change_profileName') }}">{{ $profileName ?? "Profile Name" }}</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="container">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
