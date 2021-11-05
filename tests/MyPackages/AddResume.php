@@ -4,7 +4,7 @@ namespace Tests\MyPackages;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-use App\Models\File;
+use App\Models\Resume;
 
 
 trait AddResume {
@@ -27,11 +27,11 @@ trait AddResume {
 
         $response->assertRedirect(route('resume_editPage'));
 
-        $this->assertEquals(1, File::count());
+        $this->assertEquals(1, Resume::count());
 
-        $fileName = File::get()[0]->name;
-        Storage::disk('public')->assertExists("cv/{$fileName}");
+        $file = Resume::first();
+        Storage::disk('public')->assertExists("cv/{$file->name}");
 
-        return $response;
+        return $file;
     }
 }
