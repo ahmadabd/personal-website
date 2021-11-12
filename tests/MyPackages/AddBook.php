@@ -3,7 +3,6 @@
 namespace Tests\MyPackages;
 
 use App\Models\Book;
-use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
