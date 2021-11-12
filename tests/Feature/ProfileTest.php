@@ -8,6 +8,15 @@ use Tests\TestCase;
 
 class ProfileTest extends TestCase
 {
+    use RefreshDatabase;
+
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->withExceptionHandling();
+    }
+
     /** @test */
     public function check_profile_picture_in_client()
     {

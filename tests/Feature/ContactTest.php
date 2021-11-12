@@ -16,11 +16,16 @@ class ContactTest extends TestCase
     use WithFaker;
     use ContactMePost;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->withExceptionHandling();
+    }
+
     /** @test */
     public function check_show_contactMe_to_client_failed_message_when_db_isEmpty()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->get('/contact');
 
         $response->assertOk();
@@ -31,8 +36,6 @@ class ContactTest extends TestCase
     /** @test */
     public function check_show_contactMe_to_client_when_db_is_not_empty()
     {
-        $this->withoutExceptionHandling();
-
         $email = "test@gmail.com";
         $this->send_data_to_contactMe_store($email);
 
@@ -46,8 +49,6 @@ class ContactTest extends TestCase
     /** @test */
     public function check_show_contactMe_edit_availibility()
     {
-        $this->withoutExceptionHandling();
-
         $this->make_a_user_that_actAs_authenticated();
 
         $response = $this->get(route('show_contactMe_edit'));
@@ -59,8 +60,6 @@ class ContactTest extends TestCase
     /** @test */
     public function check_show_contactMe_edit_availibility_with_full_DB()
     {
-        $this->withoutExceptionHandling();
-
         $email = "testemail@gmail.com";
         $this->send_data_to_contactMe_store($email);
 
@@ -73,8 +72,6 @@ class ContactTest extends TestCase
     /** @test */
     public function check_store_contactMe()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->send_data_to_contactMe_store();
 
         $response->assertRedirect(

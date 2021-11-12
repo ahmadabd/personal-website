@@ -15,11 +15,16 @@ class ResumeTest extends TestCase
     use AuthUser;
     use AddResume;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->withExceptionHandling();
+    }
+
     /** @test */
     public function check_show_resume_to_client_failed_message_when_db_isEmpty()
     {
-        $this->withExceptionHandling();
-
         $response = $this->get(route('show_cv'));
 
         $response->assertOk();
@@ -29,15 +34,12 @@ class ResumeTest extends TestCase
     /** @test */
     public function check_store_new_resume()
     {
-        $this->withoutExceptionHandling();
-
         $this->store_new_resume();
     }
 
     /** @test */
     public function check_show_resume_editPage()
     {
-        $this->withoutExceptionHandling();
         $this->make_a_user_that_actAs_authenticated();
 
         $response = $this->get(route('resume_editPage'));
@@ -47,8 +49,6 @@ class ResumeTest extends TestCase
     /** @test */
     public function check_show_resume_editPage_when_db_is_not_empty()
     {
-        $this->withoutExceptionHandling();
-
         $this->store_new_resume();
         $response = $this->get(route('resume_editPage'));
         $response->assertSee('Delete persian');
@@ -57,8 +57,6 @@ class ResumeTest extends TestCase
     /** @test */
     public function check_delete_old_resume()
     {
-        $this->withoutExceptionHandling();
-
         $resume = $this->store_new_resume();
         $resumeName = $resume->file_path;
 

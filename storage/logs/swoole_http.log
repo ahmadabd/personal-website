@@ -339,3 +339,8 @@
 [2021-11-05 09:13:04 $32.0]	INFO	Server is reloading all workers now
 [2021-11-05 09:13:29 $32.0]	INFO	Server is reloading all workers now
 [2021-11-05 09:13:32 $32.0]	INFO	Server is reloading all workers now
+[2021-11-12 06:48:25 *39.3]	NOTICE	ProcessFactory::finish() (ERRNO 1004): send 155 bytes failed, because session#2 is closed
+[2021-11-12 06:50:22 $27.0]	INFO	Server is reloading all workers now
+[2021-11-12 06:51:23 $27.0]	INFO	Server is reloading all workers now
+[2021-11-12 06:51:30 $27.0]	INFO	Server is reloading all workers now
+[2021-11-12 06:59:59 $27.0]	INFO	Server is reloading all workers now

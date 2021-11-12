@@ -18,11 +18,17 @@ class BookTest extends TestCase
     use AuthUser;
     use AddBook;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->withExceptionHandling();
+        $this->make_a_user_that_actAs_authenticated();
+    }
+
     /** @test */
     public function check_show_books_to_client_failed_message_when_db_isEmpty()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->get(
             route('show_books')
         );
@@ -35,9 +41,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_show_books_to_client_failed_message_when_db_is_not_empty()
     {
-        $this->withoutExceptionHandling();
-        $user = $this->make_a_user_that_actAs_authenticated();
-
         $this->store_new_book_with_its_profile_picture();
 
         $response = $this->get(
@@ -51,9 +54,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_show_book_editPage_when_db_is_not_empty()
     {
-        $this->withoutExceptionHandling();
-        $this->make_a_user_that_actAs_authenticated();
-
         $this->store_new_book_with_its_profile_picture();
 
         $response = $this->get(
@@ -67,9 +67,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_show_book_editPage_when_db_is_empty()
     {
-        $this->withoutExceptionHandling();
-        $user = $this->make_a_user_that_actAs_authenticated();
-
         $response = $this->get(
             route('book_editPage')
         );
@@ -81,9 +78,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_store_books()
     {
-        $this->withExceptionHandling();
-        $this->make_a_user_that_actAs_authenticated();
-
         $this->store_new_book_with_its_profile_picture();
     }
 
@@ -91,10 +85,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_store_books_validation()
     {
-        $this->withExceptionHandling();
-
-        $this->make_a_user_that_actAs_authenticated();
-
         $response = $this->post(route('store_book'), [
             'title'         => '',
             'descriptions'  => '',
@@ -109,10 +99,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_update_books_without_updating_file()
     {
-        $this->withoutExceptionHandling();
-
-        $this->make_a_user_that_actAs_authenticated();
-
         $this->store_new_book_with_its_profile_picture();
 
 
@@ -131,9 +117,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_update_books_with_updating_file()
     {
-        $this->withoutExceptionHandling();
-        $this->make_a_user_that_actAs_authenticated();
-
         $this->store_new_book_with_its_profile_picture();
 
         $file = UploadedFile::fake()->image('newPicture.jpg');
@@ -157,10 +140,6 @@ class BookTest extends TestCase
     /** @test */
     public function check_delete_books()
     {
-        $this->withExceptionHandling();
-
-        $this->make_a_user_that_actAs_authenticated();
-
         $this->store_new_book_with_its_profile_picture();
 
         $book = Book::get()[0];

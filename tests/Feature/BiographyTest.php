@@ -13,11 +13,16 @@ class BiographyTest extends TestCase
     use RefreshDatabase;
     use AuthUser;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->withExceptionHandling();
+    }
+
     /** @test */
     public function check_show_biography_to_client_failed_message_when_db_is_empty()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->get(
             route('show_biography')
         );
@@ -30,8 +35,6 @@ class BiographyTest extends TestCase
     /** @test */
     public function check_show_biography_to_client_when_db_is_not_Empty()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make_a_user_that_actAs_authenticated();
 
         Bio::factory()->create([
@@ -50,8 +53,6 @@ class BiographyTest extends TestCase
     /** @test */
     public function check_show_biography_editPage_when_db_is_not_empty()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make_a_user_that_actAs_authenticated();
 
         Bio::factory()->create([
@@ -69,8 +70,6 @@ class BiographyTest extends TestCase
     /** @test */
     public function check_show_biography_editPage_when_db_is_empty()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make_a_user_that_actAs_authenticated();
 
         $response = $this->get(
@@ -84,8 +83,6 @@ class BiographyTest extends TestCase
     /** @test */
     public function check_store_biography()
     {
-        $this->withoutExceptionHandling();
-
         $this->make_a_user_that_actAs_authenticated();
 
         $response = $this->post(route('store_biography'), [

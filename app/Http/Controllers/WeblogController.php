@@ -29,13 +29,10 @@ class WeblogController extends Controller
 
     public function show_weblog_editPage()
     {
-        $lastWeblogUrl = "";
-
         $weblog = Auth::user()->weblog();
 
-        if ($weblog->exists()){
-            $lastWeblogUrl = $weblog->get()[0]->weblog_address;
-        }
+        $lastWeblogUrl = $weblog->get()[0]->weblog_address ?? "";
+
         return view('weblog_edit', ['lastWeblogUrl' => $lastWeblogUrl]);
     }
 
