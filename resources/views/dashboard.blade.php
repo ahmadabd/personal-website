@@ -1,3 +1,6 @@
+<?php
+    $biography = empty($biography) ? old('biography') : $biography;
+?>
 <x-Layout>
 
     <x-slot name="title">dashboard</x-slot>

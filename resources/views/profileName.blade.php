@@ -1,3 +1,6 @@
+<?php
+    $profileName = empty($profileName) ? old('name') : $profileName;
+?>
 <x-Layout>
 
     <x-slot name="title">Change profile Name</x-slot>

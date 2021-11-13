@@ -1,3 +1,7 @@
+<?php
+    $lastWeblogUrl = empty($lastWeblogUrl) ? old('weblog_address') : $lastWeblogUrl;
+?>
+
 <x-Layout>
 
     <x-slot name="title">Change weblog</x-slot>
