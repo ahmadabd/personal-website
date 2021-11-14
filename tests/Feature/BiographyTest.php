@@ -6,18 +6,27 @@ use App\Models\Bio;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\MyPackages\AuthUser;
+use Tests\MyPackages\VacuumCleaner;
 
 
 class BiographyTest extends TestCase
 {
     use RefreshDatabase;
     use AuthUser;
+    use VacuumCleaner;
 
     public function setUp() : void
     {
         parent::setUp();
 
         $this->withExceptionHandling();
+    }
+
+    public function tearDown() : void
+    {
+        parent::tearDown();
+
+        $this->clearProperties();
     }
 
     /** @test */

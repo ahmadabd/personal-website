@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\MyPackages\AuthUser;
 use Tests\MyPackages\ContactMePost;
+use Tests\MyPackages\VacuumCleaner;
 
 class ContactTest extends TestCase
 {
@@ -15,12 +16,20 @@ class ContactTest extends TestCase
     use AuthUser;
     use WithFaker;
     use ContactMePost;
+    use VacuumCleaner;
 
     public function setUp() : void
     {
         parent::setUp();
 
         $this->withExceptionHandling();
+    }
+
+    public function tearDown() : void
+    {
+        parent::tearDown();
+
+        $this->clearProperties();
     }
 
     /** @test */

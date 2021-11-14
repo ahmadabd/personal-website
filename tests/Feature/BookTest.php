@@ -10,6 +10,7 @@ use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Tests\MyPackages\AddBook;
 use Illuminate\Http\UploadedFile;
+use Tests\MyPackages\VacuumCleaner;
 
 
 class BookTest extends TestCase
@@ -17,6 +18,7 @@ class BookTest extends TestCase
     use RefreshDatabase;
     use AuthUser;
     use AddBook;
+    use VacuumCleaner;
 
     public function setUp() : void
     {
@@ -24,6 +26,13 @@ class BookTest extends TestCase
 
         $this->withExceptionHandling();
         $this->make_a_user_that_actAs_authenticated();
+    }
+
+    public function tearDown() : void
+    {
+        parent::tearDown();
+
+        $this->clearProperties();
     }
 
     /** @test */

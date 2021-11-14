@@ -7,16 +7,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\MyPackages\AuthUser;
+use Tests\MyPackages\VacuumCleaner;
+
 
 class WeblogTest extends TestCase
 {
-    use RefreshDatabase, AuthUser;
+    use RefreshDatabase, AuthUser, VacuumCleaner;
 
     public function setUp() : void
     {
         parent::setUp();
 
         $this->withExceptionHandling();
+    }
+
+    public function tearDown() : void
+    {
+        parent::tearDown();
+
+        $this->clearProperties();
     }
 
     /** @test */

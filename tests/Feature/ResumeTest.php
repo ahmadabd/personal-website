@@ -8,18 +8,28 @@ use Tests\MyPackages\AuthUser;
 use Tests\MyPackages\AddResume;
 use App\Models\Resume;
 use Illuminate\Support\Facades\Storage;
+use Tests\MyPackages\VacuumCleaner;
+
 
 class ResumeTest extends TestCase
 {
     use RefreshDatabase;
     use AuthUser;
     use AddResume;
+    use VacuumCleaner;
 
     public function setUp() : void
     {
         parent::setUp();
 
         $this->withExceptionHandling();
+    }
+
+    public function tearDown() : void
+    {
+        parent::tearDown();
+
+        $this->clearProperties();
     }
 
     /** @test */

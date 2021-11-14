@@ -8,16 +8,25 @@ use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Tests\MyPackages\AuthUser;
 use Tests\MyPackages\AddProfilePic;
+use Tests\MyPackages\VacuumCleaner;
+
 
 class ProfileTest extends TestCase
 {
-    use RefreshDatabase, AuthUser, AddProfilePic;
+    use RefreshDatabase, AuthUser, AddProfilePic, VacuumCleaner;
 
     public function setUp() : void
     {
         parent::setUp();
 
         $this->withExceptionHandling();
+    }
+
+    public function tearDown() : void
+    {
+        parent::tearDown();
+
+        $this->clearProperties();
     }
 
 
