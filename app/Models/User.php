@@ -42,6 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+
     public function bio()
     {
         return $this->hasOne(Bio::class);
